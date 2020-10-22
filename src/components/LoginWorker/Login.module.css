@@ -1,0 +1,49 @@
+.choose {
+  justify-content: center;
+  display: flex;
+  margin: 15rem 2rem 0 2rem;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.img {
+  width: 10rem;
+  height: 10rem;
+}
+.title {
+  display: flex;
+  justify-content: center;
+}
+.form {
+  margin: 20px auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.input {
+  width: 300px;
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+
+.imageupload > input {
+  display: none;
+}
+
+.imageupload img {
+  width: 80px;
+  cursor: pointer;
+}
+
+.uploads {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

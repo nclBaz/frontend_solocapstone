@@ -1,0 +1,93 @@
+.input {
+  width: 70%;
+  height: auto;
+}
+.search {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  /* width: 100%; */
+  /* height: 50%; */
+  display: flex;
+  justify-content: space-around;
+}
+
+.company {
+  border: solid 2px grey;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 500px;
+  background-color: #fff;
+  /* max-width: 500px; */
+}
+
+.example {
+  -ms-overflow-style: none;
+}
+.example::-webkit-scrollbar {
+  display: none;
+}
+
+.container {
+  height: 50%;
+  display: flex;
+  padding: 20px;
+}
+.render {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: grey solid 3px;
+  padding: 2rem;
+}
+
+.text {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+.image {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+}
+.butt {
+  display: flex;
+  justify-content: end;
+  height: 20px;
+}
+.div {
+  display: block;
+  justify-content: space-between;
+}
+.paragraph {
+  display: flex;
+  justify-content: space-between;
+}
+.desc {
+  display: inline-block;
+  justify-content: inherit;
+  margin-top: 15px;
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal {
+  margin-top: 100px;
+}
+
+.table {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.title {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.nav {
+  text-decoration: none !important;
+}

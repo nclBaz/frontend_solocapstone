@@ -1,0 +1,23 @@
+.title {
+  text-align: center;
+  outline: 2px red solid;
+}
+.img {
+  width: 120px;
+  height: 40px;
+  margin: 0 0 5px 0;
+  display: inline-block;
+  text-align: top;
+}
+
+.navBar {
+  display: -webkit-box !important;
+  align-items: flex-end;
+}
+.navBar a {
+  margin-left: auto;
+  margin-right: auto;
+}
+.bar {
+  background-color: black !important;
+}
