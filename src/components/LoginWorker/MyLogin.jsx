@@ -22,6 +22,7 @@ function MyLogin(props) {
   console.log(props.fechWorkers);
   console.log(props.registerWorker.registerWorker, "registered worker");
   console.log(showLogin, "value");
+  
   const worker = async () => {
     const moreData = await fetch("http://localhost:4006/profile/login", {
       method: "POST",
@@ -40,8 +41,9 @@ function MyLogin(props) {
       setAlert(true);
     }
   };
+
   const company = async () => {
-    const result = await ("http://localhost:4006/login/login",
+    const result = await fetch("http://localhost:4006/login/login",
     {
       method: "POST",
       body: JSON.stringify({ email, password }),

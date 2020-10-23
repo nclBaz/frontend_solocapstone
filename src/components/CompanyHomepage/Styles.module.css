@@ -1,0 +1,30 @@
+.dropDown {
+  outline: solid 2px red;
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.text {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: coral;
+}
+.dropDown::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  display: flex !important;
+  justify-content: space-between !important;
+  height: 300px;
+}
+
+.company {
+  padding: 0 !important;
+  margin: 0 !important;
+}
