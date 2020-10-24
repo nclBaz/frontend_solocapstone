@@ -47,8 +47,8 @@ export default function AllWorkers() {
         <Col
           xs={12}
           sm={12}
-          md={3}
-          lg={3}
+          md={7}
+          lg={7}
           className={`${Styles.dropDown} , mt-5`}
         >
           <h4 className={`${Styles.text}`}>All Jobs</h4>
@@ -56,72 +56,77 @@ export default function AllWorkers() {
             {allJob &&
               allJob.map((post) => {
                 return (
-                  <Dropdown.Item
-                    style={{ display: "flex", justifyContent: "center" }}
-                    key={post._id}
-                    onClick={() => getSingleAplication(post)}
-                  >
-                    {post.jobPosition}
-                  </Dropdown.Item>
+                  <>
+                    {" "}
+                    <div
+                      className={`${Styles.card} mb-5`}
+                      style={{ outline: "2px red solid" }}
+                    >
+                      <div>
+                        <Card.Img
+                          className="mt-4"
+                          style={{
+                            height: "100px",
+                            width: "150px",
+                            outline: "2px red solid",
+                          }}
+                          src="https://www.okayapower.com/img/inner-banner/group-company.jpg"
+                          alt="Card image"
+                        />
+                      </div>
+                      <Card
+                        border="primary"
+                        style={{ width: "25rem", height: "12rem" }}
+                      >
+                        <Card.Header
+                          style={{ fontWeight: "bold", fontSize: "25px" }}
+                        >
+                          {post.jobPosition}
+                        </Card.Header>
+
+                        <Card.Body>
+                          <Card.Title>{post.salary}</Card.Title>
+                          <Card.Text className={`${Styles.about}`}>
+                            {post.jobDescription}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                    </div>
+                  </>
                 );
               })}
           </div>
         </Col>
-        <Col xs={12} sm={12} md={9} lg={9} className="mt-5">
+        <Col xs={12} sm={12} md={5} lg={5} className="mt-5">
           {singleJob && (
-            <div className={`${Styles.card}`}>
-              <Col xs={4} sm={4} md={4} lg={4}>
+            // <div className={`${Styles.card}`}>
+            <>
+              <Card style={{ height: "500px" }}>
                 {" "}
                 {singleJob.image ? (
                   <Card.Img
                     src={singleJob.image}
-                    style={{ display: "flex", height: "300px" }}
+                    style={{ display: "flex", height: "200px" }}
                     variant="top"
                   />
                 ) : (
                   <Card.Img
-                    style={{ display: "flex", height: "300px" }}
+                    style={{ display: "flex", height: "200px" }}
                     src={singleJob.image}
                     src="https://www.okayapower.com/img/inner-banner/group-company.jpg"
                     variant="top"
                   />
                 )}
-              </Col>
-              <Col xs={8} sm={8} md={8} lg={8}>
-                <Card.Body>
+                <Card.Body className="mt-0">
                   <Card.Title>{singleJob.jobPosition}</Card.Title>
-                  <Card.Title>{singleJob.description}</Card.Title>
-                  <Card.Title>{singleJob.about}</Card.Title>
                   <Card.Title>{singleJob.salary}</Card.Title>
                   <Card.Title>{singleJob.location}</Card.Title>
                 </Card.Body>
-                <ListGroup
-                  className="list-group-flush"
-                  className={`${Styles.company}`}
-                >
-                  <ListGroupItem>
-                    {singleJob.benefites &&
-                      singleJob.benefites.map((x) => {
-                        return <>{x}</>;
-                      })}
-                  </ListGroupItem>
-                </ListGroup>
-                <ListGroup
-                  className="list-group-flush"
-                  className={`${Styles.company}`}
-                >
-                  <ListGroupItem>
-                    {singleJob.requirments &&
-                      singleJob.requirments.map((x) => {
-                        return <>{x}</>;
-                      })}{" "}
-                  </ListGroupItem>
-                  <Card.Body>
-                    <Button>Show Aplication</Button>
-                  </Card.Body>
-                </ListGroup>
-              </Col>
-            </div>
+                <Card.Body>
+                  <Button>Show Aplication</Button>
+                </Card.Body>
+              </Card>
+            </>
           )}
         </Col>
       </Row>

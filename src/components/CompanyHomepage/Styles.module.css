@@ -1,6 +1,6 @@
 .dropDown {
   outline: solid 2px red;
-  height: 300px;
+  height: 500px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -13,6 +13,7 @@
   display: flex;
   justify-content: center;
   background-color: coral;
+  z-index: 100;
 }
 .dropDown::-webkit-scrollbar {
   display: none;
@@ -20,11 +21,17 @@
 
 .card {
   display: flex !important;
-  justify-content: space-between !important;
-  height: 300px;
+  justify-content: space-around !important;
 }
 
 .company {
   padding: 0 !important;
   margin: 0 !important;
+}
+.about {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
