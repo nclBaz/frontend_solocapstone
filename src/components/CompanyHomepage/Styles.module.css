@@ -37,7 +37,7 @@
 }
 .aplication {
   border: 2px grey solid;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   background-color: rgb(255, 255, 255);
 }
 
@@ -56,7 +56,7 @@
 }
 
 .description {
-  outline: 2px solid red;
+  /* outline: 2px solid red; */
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -106,7 +106,7 @@
   display: flex;
   justify-content: space-between;
   border: 2px solid grey;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   /* width: 400px; */
 }
 @media only screen and (max-width: 768px) {
@@ -132,4 +132,12 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
+}
+.imageModal {
+  width: 150px;
+  height: 150px;
+}
+.imageModal1 {
+  width: 50px;
+  height: 50px;
 }

@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 export default function AllWorkers() {
   const [allJob, setAllJob] = useState([]);
   const [singleJob, setSingelJob] = useState([]);
+  const [profile, setProfile] = useState([]);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -45,11 +46,27 @@ export default function AllWorkers() {
       console.log("there is no data ");
     }
   };
-  console.log(allJob, "what has inside");
+
   const getSingleAplication = (post) => {
     setSingelJob(post);
     console.log(singleJob);
   };
+  const fetchWorker = async (id) => {
+    const result = await fetch(
+      "http://localhost:4006/login/singleProfile/" + id,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await result.json();
+    setProfile(data);
+  };
+
   //   http://localhost:4006/login/5f7dff6aefc7f21ff84fb72b/pdf
   const getPDF = async (id) => {
     const result = await fetch(`http://localhost:4006/login/${id}/pdf`, {
@@ -106,7 +123,7 @@ export default function AllWorkers() {
                               lg={8}
                               style={{
                                 height: "135px",
-                                outline: "2px red solid",
+                                // outline: "2px red solid",
                               }}
                             >
                               <Card className={`${Styles.card2}`}>
@@ -248,18 +265,15 @@ export default function AllWorkers() {
                             backgroundColor: "#0f1f26",
                           }}
                         >
-                          <Dropdown.Item
-                            className="text-center mb-2 "
-                            style={{ height: "30px" }}
+                          <p
+                            onClick={() => {
+                              fetchWorker(aplied._id);
+                              handleShow();
+                            }}
                           >
-                            <p onClick={handleShow}>Full Profile</p>
-                            <Modal
-                              handleClose={handleClose}
-                              handleShow={handleShow}
-                              show={show}
-                              fullProfile={aplied}
-                            />
-                          </Dropdown.Item>
+                            Full Profile
+                          </p>
+
                           <Dropdown.Item
                             className="text-center"
                             style={{ height: "30px" }}
@@ -279,6 +293,12 @@ export default function AllWorkers() {
         </Col>
         <Col xs={12} sm={12} md={12} lg={1}></Col>
       </Row>
+      <Modal
+        handleClose={handleClose}
+        handleShow={handleShow}
+        show={show}
+        fullProfile={profile}
+      />
     </>
   );
 }
