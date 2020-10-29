@@ -15,7 +15,7 @@ class Headers extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className={`${Styles.navBar} , ml-auto`}>
-            <Nav.Link>
+            <Nav>
               <Link
                 to="/worker"
                 style={{
@@ -26,8 +26,8 @@ class Headers extends Component {
               >
                 Home
               </Link>
-            </Nav.Link>
-            <Nav.Link>
+            </Nav>
+            <Nav>
               {" "}
               <Link
                 to="/workerProfile"
@@ -39,8 +39,8 @@ class Headers extends Component {
               >
                 Profile
               </Link>
-            </Nav.Link>
-            <Nav.Link
+            </Nav>
+            <Nav
               style={{
                 textDecoration: "none",
                 color: "white",
@@ -48,7 +48,7 @@ class Headers extends Component {
               }}
             >
               Logout
-            </Nav.Link>
+            </Nav>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

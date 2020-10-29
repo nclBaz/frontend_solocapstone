@@ -1,0 +1,33 @@
+import React from "react";
+import { Button } from "react-bootstrap";
+import Styles from "./Styles.module.css";
+function Pagination(props) {
+  const pageNumbers = [];
+
+  for (
+    let i = 1;
+    i <= Math.ceil(props.totalAplicant / props.aplicantPerPage);
+    i++
+  ) {
+    pageNumbers.push(i);
+  }
+
+  return (
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <ul className="pagination">
+        {pageNumbers.map((number) => (
+          <li key={number} className="page-item">
+            <Button
+              className={`${Styles.btngrad} ml-1`}
+              onClick={() => props.paginate(number)}
+            >
+              {number}
+            </Button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Pagination;

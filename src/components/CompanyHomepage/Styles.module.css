@@ -1,19 +1,52 @@
+.title {
+  font-size: 25px;
+  color: rgb(247, 111, 54);
+  font-weight: 700;
+}
+.textCard {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: flex;
+}
+.titleCard {
+  font-size: 15px;
+  color: rgb(247, 111, 54);
+  font-weight: 700;
+  margin-left: 5px;
+}
+.subtitle {
+  font-size: 16px;
+  color: rgba(243, 195, 140, 0.918);
+}
+.normalText {
+  font-size: 15px;
+  color: rgb(63, 69, 95);
+  margin-left: 5px;
+}
 .dropDown {
   /* outline: solid 2px red; */
-  height: 70vh;
+  height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.dropDown123 {
+  /* outline: solid 2px red; */
+
   overflow-y: auto;
   overflow-x: hidden;
 }
 
 .text {
-  position: -webkit-sticky;
-  position: sticky;
+  position: -webkit-sticky !important;
+  position: fixed !important;
   top: 0;
   width: 100%;
   display: flex;
   justify-content: center;
   background-color: rgb(255, 255, 255);
-  z-index: 100;
+  z-index: 10000000;
 }
 .dropDown::-webkit-scrollbar {
   display: none;
@@ -31,14 +64,58 @@
   justify-content: space-around !important;
   background-color: rgb(226, 226, 226);
   height: 400px !important;
-  border: 2px grey solid;
+  border: 2px rgb(63, 69, 95) solid;
   border-radius: 20px;
   margin-top: 50px;
 }
 .aplication {
-  border: 2px grey solid;
-  /* border-radius: 20px; */
+  border: 2px rgb(63, 69, 95) solid;
+  height: 85vh;
   background-color: rgb(255, 255, 255);
+}
+
+.btngrad {
+  background-image: linear-gradient(
+    to right,
+    #fcfcfc 0%,
+    #ffffff 51%,
+    #ffffff 100%
+  );
+}
+.btngrad {
+  /* margin: 10px;
+  padding: 15px 45px; */
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: rgb(63, 69, 95);
+  font-weight: bolder;
+
+  /* border-radius: 10px; */
+  /* display: block; */
+}
+
+.btngrad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: rgb(63, 69, 95);
+  text-decoration: none;
+  font-weight: bolder;
+}
+.btngrad:focus {
+  /* background-position: right center; /* change the direction of the change here */
+  /* color: #fff;
+  text-decoration: none; */
+  border: none !important;
+  color: white;
+  font-weight: bolder;
+  background-image: linear-gradient(
+    to right,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  box-shadow: none;
 }
 
 .company {
@@ -67,7 +144,7 @@
 .img {
   height: 100px;
   width: 150px;
-  border: 2px grey solid;
+  border: 2px rgb(63, 69, 95) solid;
 }
 
 .card2 {
@@ -88,9 +165,7 @@
   text-decoration: underline;
   font-style: italic;
 }
-.next {
-  /* width: 500px; */
-}
+
 .next a > span {
   background-color: black;
 }
@@ -105,9 +180,55 @@
 .singleRow {
   display: flex;
   justify-content: space-between;
-  border: 2px solid grey;
-  /* border-radius: 20px; */
-  /* width: 400px; */
+  border: 2px solid rgb(226, 117, 15);
+  border-radius: 20px;
+  background-color: rgb(239 239 239 / 92%);
+}
+.singleRow:active {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid rgb(63, 69, 95);
+  border-radius: 20px;
+  background-color: rgb(239 239 239 / 92%);
+}
+
+.images {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.imagesCard {
+  width: auto;
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+.imageModal {
+  width: 150px;
+  height: 150px;
+}
+.imageModal1 {
+  width: 50px;
+  height: 50px;
+}
+.aply {
+  width: 150px;
+  height: 150px;
+  border: 2px rgb(226, 117, 15) solid;
+  border-radius: 10%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.textRow {
+  /* margin: 0;
+  padding: 0; */
+  width: 100%;
+  margin-left: 20px !important;
+}
+.icon {
+  margin-top: 3px;
+  margin-left: 5px;
 }
 @media only screen and (max-width: 768px) {
   .img {
@@ -124,20 +245,33 @@
   .aplication {
     width: 200px !important;
   }
-  /* .next {
-    width: 700px;
-  } */
-}
-.images {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-}
-.imageModal {
-  width: 150px;
-  height: 150px;
-}
-.imageModal1 {
-  width: 50px;
-  height: 50px;
+  .carts {
+    display: flex;
+    justify-content: space-around;
+  }
+  .imagesCard {
+    width: auto;
+    height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+  }
+  .aply {
+    width: 90px;
+    height: 130px;
+  }
+  .titleCard {
+    font-size: 10px;
+    color: rgb(247, 111, 54);
+    font-weight: 700;
+  }
+  .textRow {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+  }
+  .icon {
+    font-size: 10px;
+    margin-right: 2px;
+  }
 }

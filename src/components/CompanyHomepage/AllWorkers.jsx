@@ -13,14 +13,35 @@ import {
 } from "react-bootstrap";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Modal from "./Profile";
+import { BsFillBriefcaseFill } from "react-icons/bs";
+import { FaUserAlt } from "react-icons/fa";
+import Pagination from "./Pagination";
+
 import Styles from "./Styles.module.css";
 import { Link } from "react-router-dom";
 export default function AllWorkers() {
   const [allJob, setAllJob] = useState([]);
   const [singleJob, setSingelJob] = useState([]);
   const [profile, setProfile] = useState([]);
-  const [show, setShow] = useState(false);
+  const [aplicant, setaplicant] = useState([]);
+  const [basicData, setBasicData] = useState(true);
+  const [education, setEducation] = useState(false);
+  const [workExperience, setWorkExperience] = useState(false);
+  const [skills, setSkills] = useState(false);
 
+  // const [notes, setNotes] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [aplicantPerPage] = useState(3);
+
+  const indexOfLastPost = currentPage * aplicantPerPage;
+  const indexOfFirstPost = indexOfLastPost - aplicantPerPage;
+  const currentAplicant = aplicant.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -42,15 +63,12 @@ export default function AllWorkers() {
       setAllJob(allPost);
       setSingelJob(allPost[0]);
       console.log("fetch is ok");
+      console.log(allPost);
     } else {
       console.log("there is no data ");
     }
   };
 
-  const getSingleAplication = (post) => {
-    setSingelJob(post);
-    console.log(singleJob);
-  };
   const fetchWorker = async (id) => {
     const result = await fetch(
       "http://localhost:4006/login/singleProfile/" + id,
@@ -64,10 +82,46 @@ export default function AllWorkers() {
       }
     );
     const data = await result.json();
-    setProfile(data);
+    if (data) {
+      setProfile(data);
+    } else {
+      console.log("no data");
+    }
   };
 
-  //   http://localhost:4006/login/5f7dff6aefc7f21ff84fb72b/pdf
+  const getPosts = (allAplication) => {
+    const data = allAplication;
+    setaplicant(data);
+    setProfile([]);
+    about();
+  };
+
+  const about = (e) => {
+    setBasicData(true);
+    setEducation(false);
+    setWorkExperience(false);
+    setSkills(false);
+  };
+
+  const educationData = () => {
+    setBasicData(false);
+    setEducation(true);
+    setWorkExperience(false);
+    setSkills(false);
+  };
+  const workData = () => {
+    setBasicData(false);
+    setEducation(false);
+    setWorkExperience(true);
+    setSkills(false);
+  };
+  const skillsData = () => {
+    setBasicData(false);
+    setEducation(false);
+    setWorkExperience(false);
+    setSkills(true);
+  };
+
   const getPDF = async (id) => {
     const result = await fetch(`http://localhost:4006/login/${id}/pdf`, {
       method: "GET",
@@ -77,221 +131,360 @@ export default function AllWorkers() {
       console.log("u shakarkua");
     }
   };
-
   return (
     <>
       <Row className={`${Styles.company}`}>
-        <Col xs={12} sm={12} md={12} lg={7} className={``}>
-          <div>
-            {" "}
-            <Carousel
-              className={`${Styles.next}`}
-              interval={800000000000000000000}
+        <Col xs={12} sm={12} md={5} lg={5} className="mt-1">
+          <div
+            style={{
+              border: "solid 2px  rgb(63, 69, 95)",
+              backgroundColor: "rgb(255, 255, 255)",
+            }}
+            className={`${Styles.next} ${Styles.dropDown}  `}
+          >
+            <Col
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              // className={`${Styles.text}mt-0 mb-5`}
+              style={{
+                backgroundColor: "white",
+                zIndex: "10",
+                position: "-webkit-sticky",
+                position: "sticky",
+                top: "0",
+                height: "100px",
+              }}
             >
+              <h6>hello</h6>
+            </Col>
+            <div className="mt-3">
               {allJob &&
-                allJob.map((post) => {
+                allJob.map((data) => {
                   return (
-                    <Carousel.Item
-                      style={{ height: "500px", borderRadius: "20px" }}
-                    >
-                      <Carousel.Caption>
-                        <Row
-                          className={`${Styles.companyCard} mt-5`}
-                          style={{
-                            backgroundColor: "white",
-                          }}
-                          //   onClick={() => setSingelJob(post.allAplication)}
+                    <>
+                      <Row
+                        className={`${Styles.singleRow} mb-3 mr-2 ml-2  `}
+                        onClick={() => getPosts(data.allAplication)}
+                      >
+                        <Col
+                          xs={12}
+                          sm={12}
+                          md={6}
+                          lg={6}
+                          className={`${Styles.carts}`}
                         >
-                          <Row>
-                            <Col
-                              xs={12}
-                              sm={12}
-                              md={4}
-                              lg={4}
-                              className={`${Styles.col}`}
-                            >
-                              <Card.Img
-                                className={`${Styles.img} mt-4`}
-                                src="https://www.okayapower.com/img/inner-banner/group-company.jpg"
-                                alt="Card image"
-                              />
-                            </Col>
-                            <Col
-                              xs={12}
-                              sm={12}
-                              md={8}
-                              lg={8}
-                              style={{
-                                height: "135px",
-                                // outline: "2px red solid",
-                              }}
-                            >
-                              <Card className={`${Styles.card2}`}>
-                                <Card.Header
-                                  style={{
-                                    fontWeight: "bolder",
-                                    fontSize: "25px",
-                                    backgroundColor: "transparent",
-                                    borderBottom: "none",
-                                    color: "rgb(168, 50, 7)",
-                                  }}
-                                >
-                                  Position: {post.jobPosition}
-                                </Card.Header>
-
-                                <Card.Body
-                                  className="pt-0"
-                                  style={{ borderRadius: "20px !important" }}
-                                >
-                                  <Card.Title style={{ color: "black" }}>
-                                    Salary: {post.salary}
-                                  </Card.Title>
-                                  <Card.Title
-                                    style={{
-                                      display: "flex",
-                                      justifyContent: "space-between",
-                                    }}
-                                  >
-                                    {" "}
-                                    <p style={{ color: "black" }}>
-                                      {" "}
-                                      Total Aplicant :{" "}
-                                      {post.allAplication.length}
-                                    </p>
-                                    <Button
-                                      variant="light"
-                                      className={`${Styles.button}`}
-                                      onClick={() =>
-                                        setSingelJob(post.allAplication)
-                                      }
-                                    >
-                                      {" "}
-                                      See All
-                                    </Button>{" "}
-                                  </Card.Title>
-                                </Card.Body>
-                              </Card>
-                            </Col>
-                            <Col
-                              xs={12}
-                              sm={12}
-                              md={12}
-                              lg={12}
-                              className={`${Styles.description} mt-0`}
-                            >
-                              <Card
-                                style={{
-                                  // fontWeight: "bold",
-                                  fontSize: "25px",
-                                  backgroundColor: "transparent",
-                                  borderBottom: "none",
-                                  color: "black",
-                                  borderTop: "none",
-                                }}
-                              >
-                                <Card.Body className="pt-0">
-                                  <Card.Title>
-                                    Location:{post.location}
-                                  </Card.Title>
-                                  <Card.Text
-                                    className={`${Styles.description}`}
-                                  >
-                                    Desc: {post.jobDescription}
-                                  </Card.Text>
-                                </Card.Body>
-                              </Card>
-                            </Col>
-                          </Row>
-                        </Row>
-                      </Carousel.Caption>
-                    </Carousel.Item>
+                          <p
+                            style={{
+                              color: "   rgb(63, 69, 95)",
+                              fontWeight: "bolder",
+                            }}
+                          >
+                            Position: {data.jobPosition}
+                          </p>
+                          <p
+                            style={{
+                              color: " rgb(63, 69, 95)",
+                              fontWeight: "bolder",
+                            }}
+                          >
+                            Apliaction: {data.allAplication.length}
+                          </p>
+                        </Col>
+                        <Col
+                          xs={12}
+                          sm={12}
+                          md={6}
+                          lg={6}
+                          className={`${Styles.carts}`}
+                        >
+                          <p
+                            style={{
+                              color: " rgb(63, 69, 95)",
+                              fontWeight: "bolder",
+                            }}
+                          >
+                            Created: {data.createdAt.slice(0, 10)}
+                          </p>
+                          <p
+                            style={{
+                              color: " rgb(63, 69, 95)",
+                              fontWeight: "bolder",
+                            }}
+                          >
+                            Salary: {data.salary}
+                          </p>
+                        </Col>
+                      </Row>
+                    </>
                   );
                 })}
-            </Carousel>
+            </div>
           </div>
         </Col>
         <Col
           xs={12}
           sm={12}
-          md={12}
-          lg={4}
-          className={`${Styles.dropDown} ${Styles.aplication}  mt-5 `}
+          md={7}
+          lg={7}
+          className={` ${Styles.aplication}  mt-1 `}
         >
-          {singleJob.length > 0 &&
-            singleJob.map((aplied) => {
-              return (
-                <>
-                  <Row className={`${Styles.singleRow} mr-2 mt-4 ml-2`}>
-                    <Col
-                      xs={3}
-                      sm={3}
-                      md={3}
-                      lg={3}
-                      className=""
-                      style={{ width: "150px", textAlign: "center" }}
-                    >
-                      <img
-                        className={`${Styles.images}  mt-2`}
-                        src="https://www.okayapower.com/img/inner-banner/group-company.jpg"
-                      />
-                    </Col>
-                    <Col xs={7} sm={7} md={7} lg={7}>
-                      <h3>
-                        {aplied.name.toUpperCase()}{" "}
-                        {aplied.surname.toUpperCase()}
-                      </h3>
-                      <h4> {aplied.position}</h4>
-                      <h6>{aplied.email}</h6>
-                    </Col>
-                    <Col xs={2} sm={2} md={2} lg={2}>
-                      <Dropdown className={` ${Styles.dropdownToggle} `}>
-                        <Dropdown.Toggle
-                          style={{
-                            border: "none",
-                            boxShadow: "none",
-                            height: "50px",
-                          }}
-                          className={` ${Styles.dropdownToggle} `}
-                          variant="light"
-                          id="dropdown-basic"
-                        >
-                          {" "}
-                          <BsThreeDotsVertical />
-                          {/* <BsThreeDots style={{ fontSize: "35px" }} /> */}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu
-                          // className={`${mainStyle.bg}`}
-                          style={{
-                            backgroundColor: "#0f1f26",
+          <Col
+            xs={12}
+            sm={12}
+            md={12}
+            lg={12}
+            className="mt-1"
+            style={{
+              height: "200px",
+              borderBottom: "2px solid grey",
+            }}
+          >
+            <Row>
+              {currentAplicant &&
+                currentAplicant.map((data) => {
+                  return (
+                    <>
+                      <Col xs={4} sm={4} md={4} lg={4}>
+                        <Card
+                          className={`${Styles.aply}  `}
+                          onClick={() => {
+                            fetchWorker(data._id);
+                            about();
                           }}
                         >
-                          <p
-                            onClick={() => {
-                              fetchWorker(aplied._id);
-                              handleShow();
-                            }}
+                          {data.image ? (
+                            <Card.Img
+                              variant="top"
+                              src={data.image}
+                              className={`${Styles.imagesCard}  `}
+                            />
+                          ) : (
+                            <Card.Img
+                              variant="top"
+                              className={`${Styles.imagesCard}  `}
+                              src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                            />
+                          )}
+
+                          <Card.Text
+                            className={` ${Styles.textCard} mt-2 mb-0 text-center`}
                           >
-                            Full Profile
+                            <Row className={`${Styles.textRow}`}>
+                              {" "}
+                              <FaUserAlt className={`${Styles.icon}`} />{" "}
+                              <p
+                                className={`${Styles.titleCard} ${Styles.textCard}  `}
+                              >
+                                {data.name} {data.surname}
+                              </p>
+                            </Row>
+                          </Card.Text>
+                          <Card.Text className={` ${Styles.textCard} ml-1   `}>
+                            <Row className={`${Styles.textRow}`}>
+                              <BsFillBriefcaseFill
+                                style={{ marginTop: "3px" }}
+                                className={`${Styles.icon} ml-0`}
+                              />{" "}
+                              <p
+                                className={`${Styles.normalText} ${Styles.textCard}`}
+                              >
+                                {" "}
+                                {data.position}
+                              </p>
+                            </Row>
+                          </Card.Text>
+                          {/* </Card.Body> */}
+                        </Card>
+                      </Col>
+                    </>
+                  );
+                })}
+              <Col xs={12} sm={12} md={12} lg={12} className="mt-1 ">
+                <Pagination
+                  aplicantPerPage={aplicantPerPage}
+                  totalAplicant={aplicant.length}
+                  paginate={paginate}
+                />
+              </Col>
+            </Row>
+          </Col>
+          <Col xs={12} sm={12} md={12} lg={12} className="mt-1">
+            <Col xs={12} sm={12} md={12} lg={12}>
+              <Button
+                id="button"
+                className={`mr-1 ${Styles.btngrad}`}
+                onClick={(e) => about(e)}
+              >
+                Profile
+              </Button>
+              <Button
+                className={`mr-1 ${Styles.btngrad}`}
+                onClick={() => educationData()}
+              >
+                Education
+              </Button>
+              <Button
+                className={`mr-1 ${Styles.btngrad}`}
+                onClick={() => workData()}
+              >
+                Work Experience
+              </Button>
+              <Button
+                className={`mr-1 ${Styles.btngrad}`}
+                onClick={() => skillsData()}
+              >
+                Skills
+              </Button>
+            </Col>
+            <Col
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              className={`${Styles.dropDown123}`}
+            >
+              {profile &&
+                profile.map((data) => {
+                  return (
+                    <>
+                      <Row>
+                        <Col xs={6} sm={6} md={6} lg={6}>
+                          {data.image ? (
+                            <img
+                              src={data.image}
+                              className={`${Styles.images}`}
+                            />
+                          ) : (
+                            <img
+                              className={`${Styles.images}`}
+                              src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                            />
+                          )}
+                          <p className={`${Styles.title}`}>
+                            {data.name} {data.surname}
+                          </p>
+                          <p className={`${Styles.normalText}`}>
+                            {data.position}
                           </p>
 
-                          <Dropdown.Item
-                            className="text-center"
-                            style={{ height: "30px" }}
-                            href={`http://localhost:4006/login/${aplied._id}/pdf`}
-                          >
-                            <p onClick={() => getPDF(aplied._id)}>
-                              Download PDF
-                            </p>
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    </Col>
-                  </Row>
-                </>
-              );
-            })}
+                          <p className={`${Styles.normalText}`}>{data.email}</p>
+                          <p className={`${Styles.normalText}`}>
+                            {data.location}
+                          </p>
+                          <p className={`${Styles.normalText}`}>
+                            {data.dateOfBirth}
+                          </p>
+                        </Col>
+                        <Col xs={6} sm={6} md={6} lg={6}>
+                          {basicData && (
+                            <>
+                              <h3>About</h3>
+                              <p>{data.aboutMe}</p>
+                            </>
+                          )}
+                          {education && (
+                            <>
+                              <h3>Education History</h3>
+                              {data.education &&
+                                data.education.map((info) => {
+                                  return (
+                                    <>
+                                      {info.image ? (
+                                        <img
+                                          src={info.image}
+                                          className={`${Styles.images}`}
+                                        />
+                                      ) : (
+                                        <img
+                                          src="https://koosrajramanah.com/wp-content/uploads/2016/08/education.png"
+                                          className={`${Styles.images}`}
+                                        />
+                                      )}
+
+                                      <p>{info.schoolName}</p>
+                                      <p>{info.about}</p>
+                                      <p>{info.skillsLearned}</p>
+                                      <p>
+                                        {info.startDate} {info.endDate}{" "}
+                                      </p>
+                                    </>
+                                  );
+                                })}
+                            </>
+                          )}
+                          {workExperience && (
+                            <>
+                              <h3>Work Experience</h3>
+                              {data.workExperience &&
+                                data.workExperience.map((info) => {
+                                  return (
+                                    <>
+                                      {info.image ? (
+                                        <img
+                                          src={info.image}
+                                          className={`${Styles.images}`}
+                                        />
+                                      ) : (
+                                        <img
+                                          src="https://koosrajramanah.com/wp-content/uploads/2016/08/education.png"
+                                          className={`${Styles.images}`}
+                                        />
+                                      )}
+
+                                      <p>{info.workExperience}</p>
+                                      <p>{info.workPosition}</p>
+                                      <p>{info.description}</p>
+                                      <p>
+                                        {info.started} {info.finished}{" "}
+                                      </p>
+                                    </>
+                                  );
+                                })}
+                            </>
+                          )}
+                          {skills && (
+                            <>
+                              <h3>Skills</h3>
+                              {data.skills &&
+                                data.skills.map((info) => {
+                                  return (
+                                    <>
+                                      <Button variant="light">
+                                        {info.skillName}
+                                      </Button>
+                                    </>
+                                  );
+                                })}
+                            </>
+                          )}
+                        </Col>
+                      </Row>
+                    </>
+                  );
+                })}
+            </Col>
+          </Col>
+          <Col
+            xs={12}
+            sm={12}
+            md={12}
+            lg={12}
+            style={{
+              position: "absolute",
+              bottom: "0",
+              display: "flex",
+            }}
+          >
+            <Button className={`mr-1  ml-3  ${Styles.btngrad}`}>Get PDF</Button>
+            <Button className={` mr-1 ${Styles.btngrad}`} onClick={handleShow}>
+              Send Email
+            </Button>
+            <Button className={` mr-1 ${Styles.btngrad}`}>Accept</Button>
+            <Button className={` mr-1 ${Styles.btngrad}`}>Remove</Button>
+          </Col>
         </Col>
-        <Col xs={12} sm={12} md={12} lg={1}></Col>
       </Row>
       <Modal
         handleClose={handleClose}

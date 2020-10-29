@@ -136,7 +136,7 @@ function ProfileSectiom(props) {
                 <div>
                   <h6> Upload Image</h6>
                   <label
-                    for="file-input"
+                    htmlFor="file-input"
                     aria-required="true"
                     style={{
                       paddingLeft: "30px",
