@@ -34,7 +34,10 @@ export default function AllPost(props) {
               <>
                 <Row
                   className={`${Styles.singleRow} mb-3 mr-2 ml-2  `}
-                  onClick={() => props.getPosts(data.allAplication, data._id)}
+                  onClick={() => {
+                    props.getPosts(data.allAplication, data._id);
+                    props.hideButton();
+                  }}
                 >
                   <Col
                     xs={12}

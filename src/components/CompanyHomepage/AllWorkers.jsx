@@ -16,6 +16,14 @@ export default function AllWorkers() {
   const [education, setEducation] = useState(false);
   const [workExperience, setWorkExperience] = useState(false);
   const [skills, setSkills] = useState(false);
+  const [buttons, setButtons] = useState(false);
+
+  const showButton = () => {
+    setButtons(true);
+  };
+  const hideButton = () => {
+    setButtons(false);
+  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const [aplicantPerPage] = useState(3);
@@ -120,7 +128,11 @@ export default function AllWorkers() {
     <>
       <Row className={`${Styles.company}`}>
         <Col xs={12} sm={12} md={5} lg={5} className="mt-1">
-          <AllPost getPosts={getPosts} allJob={allJob} />
+          <AllPost
+            getPosts={getPosts}
+            allJob={allJob}
+            hideButton={hideButton}
+          />
         </Col>
         <Col
           xs={12}
@@ -145,6 +157,7 @@ export default function AllWorkers() {
                 currentAplicant={currentAplicant}
                 about={about}
                 fetchWorker={fetchWorker}
+                showButton={showButton}
               />
               <Col xs={12} sm={12} md={12} lg={12} className="mt-1 ">
                 <Pagination
@@ -155,56 +168,65 @@ export default function AllWorkers() {
               </Col>
             </Row>
           </Col>
-          <Col xs={12} sm={12} md={12} lg={12} className="mt-1">
-            <Button
-              className={`mr-1 ${Styles.btngrad}`}
-              onClick={(e) => about(e)}
-            >
-              Profile
-            </Button>
-            <Button
-              className={`mr-1 ${Styles.btngrad}`}
-              onClick={() => educationData()}
-            >
-              Education
-            </Button>
-            <Button
-              className={`mr-1 ${Styles.btngrad}`}
-              onClick={() => workData()}
-            >
-              Work Experience
-            </Button>
-            <Button
-              className={`mr-1 ${Styles.btngrad}`}
-              onClick={() => skillsData()}
-            >
-              Skills
-            </Button>
+          {buttons && (
+            <>
+              <Col xs={12} sm={12} md={12} lg={12} className="mt-1">
+                <Button
+                  className={`mr-1 ${Styles.btngrad}`}
+                  onClick={(e) => about(e)}
+                >
+                  Profile
+                </Button>
+                <Button
+                  className={`mr-1 ${Styles.btngrad}`}
+                  onClick={() => educationData()}
+                >
+                  Education
+                </Button>
+                <Button
+                  className={`mr-1 ${Styles.btngrad}`}
+                  onClick={() => workData()}
+                >
+                  Work Experience
+                </Button>
+                <Button
+                  className={`mr-1 ${Styles.btngrad}`}
+                  onClick={() => skillsData()}
+                >
+                  Skills
+                </Button>
 
-            <Col
-              xs={12}
-              sm={12}
-              md={12}
-              lg={12}
-              className={`${Styles.dropDown123}`}
-            >
-              <WorkerProfile
-                profile={profile}
-                basicData={basicData}
-                education={education}
-                workExperience={workExperience}
-                skills={skills}
-              />
-            </Col>
-          </Col>
-          <Col xs={12} sm={12} md={12} lg={12}>
-            <Button className={`mr-1  ml-3  ${Styles.btngrad}`}>Get PDF</Button>
-            <Button className={` mr-1 ${Styles.btngrad}`} onClick={handleShow}>
-              Send Email
-            </Button>
-            <Button className={` mr-1 ${Styles.btngrad}`}>Accept</Button>
-            <Button className={` mr-1 ${Styles.btngrad}`}>Remove</Button>
-          </Col>
+                <Col
+                  xs={12}
+                  sm={12}
+                  md={12}
+                  lg={12}
+                  className={`${Styles.dropDown123}`}
+                >
+                  <WorkerProfile
+                    profile={profile}
+                    basicData={basicData}
+                    education={education}
+                    workExperience={workExperience}
+                    skills={skills}
+                  />
+                </Col>
+              </Col>
+              <Col xs={12} sm={12} md={12} lg={12}>
+                <Button className={`mr-1  ml-3  ${Styles.btngrad}`}>
+                  Get PDF
+                </Button>
+                <Button
+                  className={` mr-1 ${Styles.btngrad}`}
+                  onClick={handleShow}
+                >
+                  Send Email
+                </Button>
+                <Button className={` mr-1 ${Styles.btngrad}`}>Accept</Button>
+                <Button className={` mr-1 ${Styles.btngrad}`}>Remove</Button>
+              </Col>
+            </>
+          )}
         </Col>
       </Row>
       <Modal

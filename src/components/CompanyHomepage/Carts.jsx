@@ -17,6 +17,7 @@ export default function Carts(props) {
                   onClick={() => {
                     props.fetchWorker(data._id);
                     props.about();
+                    props.showButton();
                   }}
                 >
                   {data.image ? (
