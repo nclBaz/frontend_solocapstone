@@ -19,6 +19,7 @@ function Pagination(props) {
           <li key={number} className="page-item">
             <Button
               className={`${Styles.btngrad} ml-1`}
+              style={{ width: "20px", padding: "1px", marginTop: "0px" }}
               onClick={() => props.paginate(number)}
             >
               {number}

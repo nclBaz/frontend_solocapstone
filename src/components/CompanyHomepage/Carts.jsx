@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Button } from "react-bootstrap";
 import Styles from "./Styles.module.css";
 import { BsFillBriefcaseFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
@@ -11,8 +11,46 @@ export default function Carts(props) {
         props.currentAplicant.map((data) => {
           return (
             <>
-              <Col xs={4} sm={4} md={4} lg={4}>
-                <Card
+              <Col xs={4} sm={4} md={4} lg={4} className={`${Styles.users}`}>
+                <div
+                  className={`${Styles.cartblock}`}
+                  //   style={{ height: "150px" }}
+                >
+                  {data.image ? (
+                    <img src={data.image} className="img-responsive" alt="" />
+                  ) : (
+                    <img
+                      src="http://www.webcoderskull.com/img/team1.png"
+                      className="img-responsive"
+                      alt=""
+                    />
+                  )}
+                  <h3>
+                    {data.name} {data.surname}
+                  </h3>
+                  <h6>{data.position}</h6>
+                  {/* <ul class="follow-us clearfix">
+                        <li>
+                          <a href="#">
+                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                      </ul> */}
+
+                  <Button className={`${Styles.btngrad}`}> PDF</Button>
+                </div>
+
+                {/* <Card
                   className={`${Styles.aply}  `}
                   onClick={() => {
                     props.fetchWorker(data._id);
@@ -58,7 +96,7 @@ export default function Carts(props) {
                     </Row>
                   </Card.Text>
                   {/* </Card.Body> */}
-                </Card>
+                {/* </Card>  */}
               </Col>
             </>
           );

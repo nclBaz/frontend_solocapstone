@@ -148,8 +148,7 @@ export default function AllWorkers() {
             lg={12}
             className="mt-1"
             style={{
-              height: "200px",
-              borderBottom: "2px solid grey",
+              boxShadow: "7px 7px 7px rgb(148, 148, 148)",
             }}
           >
             <Row>
@@ -159,7 +158,7 @@ export default function AllWorkers() {
                 fetchWorker={fetchWorker}
                 showButton={showButton}
               />
-              <Col xs={12} sm={12} md={12} lg={12} className="mt-1 ">
+              <Col xs={12} sm={12} md={12} lg={12} className="mt-0 ">
                 <Pagination
                   aplicantPerPage={aplicantPerPage}
                   totalAplicant={aplicant.length}
