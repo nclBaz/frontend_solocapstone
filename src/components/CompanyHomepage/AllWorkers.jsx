@@ -9,8 +9,7 @@ import Styles from "./Styles.module.css";
 
 export default function AllWorkers() {
   const [allJob, setAllJob] = useState([]);
-  const [singleJob, setSingelJob] = useState([]);
-  const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState("");
   const [aplicant, setaplicant] = useState([]);
   const [basicData, setBasicData] = useState(true);
   const [education, setEducation] = useState(false);
@@ -54,31 +53,8 @@ export default function AllWorkers() {
     const allPost = await data.json();
     if (allPost) {
       setAllJob(allPost);
-      setSingelJob(allPost[0]);
-      console.log("fetch is ok");
-      console.log(allPost);
     } else {
       console.log("there is no data ");
-    }
-  };
-
-  const fetchWorker = async (id) => {
-    const result = await fetch(
-      "http://localhost:4006/login/singleProfile/" + id,
-      {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const data = await result.json();
-    if (data) {
-      setProfile(data);
-    } else {
-      console.log("no data");
     }
   };
 
@@ -86,44 +62,8 @@ export default function AllWorkers() {
     const data = allAplication;
     setaplicant(data);
     setProfile([]);
-    about();
   };
 
-  const about = (e) => {
-    setBasicData(true);
-    setEducation(false);
-    setWorkExperience(false);
-    setSkills(false);
-  };
-
-  const educationData = () => {
-    setBasicData(false);
-    setEducation(true);
-    setWorkExperience(false);
-    setSkills(false);
-  };
-  const workData = () => {
-    setBasicData(false);
-    setEducation(false);
-    setWorkExperience(true);
-    setSkills(false);
-  };
-  const skillsData = () => {
-    setBasicData(false);
-    setEducation(false);
-    setWorkExperience(false);
-    setSkills(true);
-  };
-
-  const getPDF = async (id) => {
-    const result = await fetch(`http://localhost:4006/login/${id}/pdf`, {
-      method: "GET",
-      credentials: "include",
-    });
-    if (result.ok) {
-      console.log("u shakarkua");
-    }
-  };
   return (
     <>
       <Row className={`${Styles.company}`}>
@@ -154,8 +94,7 @@ export default function AllWorkers() {
             <Row>
               <Carts
                 currentAplicant={currentAplicant}
-                about={about}
-                fetchWorker={fetchWorker}
+                setProfile={setProfile}
                 showButton={showButton}
               />
               <Col xs={12} sm={12} md={12} lg={12} className="mt-0 ">
@@ -167,65 +106,47 @@ export default function AllWorkers() {
               </Col>
             </Row>
           </Col>
-          {buttons && (
-            <>
-              <Col xs={12} sm={12} md={12} lg={12} className="mt-1">
-                <Button
+          {/* {/* {buttons && (
+            <> */}
+          {/* <Col xs={12} sm={12} md={12} lg={12} className="mt-1 text-right"> */}
+          {/* <Button
                   className={`mr-1 ${Styles.btngrad}`}
                   onClick={(e) => about(e)}
+                  style={{ fontSize: "11px" }}
                 >
                   Profile
                 </Button>
                 <Button
                   className={`mr-1 ${Styles.btngrad}`}
                   onClick={() => educationData()}
+                  style={{ fontSize: "11px" }}
                 >
                   Education
                 </Button>
                 <Button
                   className={`mr-1 ${Styles.btngrad}`}
                   onClick={() => workData()}
+                  style={{ fontSize: "11px" }}
                 >
                   Work Experience
                 </Button>
                 <Button
                   className={`mr-1 ${Styles.btngrad}`}
                   onClick={() => skillsData()}
+                  style={{ fontSize: "11px" }}
                 >
                   Skills
-                </Button>
+                </Button> */}
 
-                <Col
-                  xs={12}
-                  sm={12}
-                  md={12}
-                  lg={12}
-                  className={`${Styles.dropDown123}`}
-                >
-                  <WorkerProfile
-                    profile={profile}
-                    basicData={basicData}
-                    education={education}
-                    workExperience={workExperience}
-                    skills={skills}
-                  />
-                </Col>
-              </Col>
-              <Col xs={12} sm={12} md={12} lg={12}>
-                <Button className={`mr-1  ml-3  ${Styles.btngrad}`}>
-                  Get PDF
-                </Button>
-                <Button
-                  className={` mr-1 ${Styles.btngrad}`}
-                  onClick={handleShow}
-                >
-                  Send Email
-                </Button>
-                <Button className={` mr-1 ${Styles.btngrad}`}>Accept</Button>
-                <Button className={` mr-1 ${Styles.btngrad}`}>Remove</Button>
-              </Col>
-            </>
-          )}
+          <Col
+            xs={12}
+            sm={12}
+            md={12}
+            lg={12}
+            className={`${Styles.dropDown123}`}
+          >
+            <WorkerProfile profile={profile} />
+          </Col>
         </Col>
       </Row>
       <Modal

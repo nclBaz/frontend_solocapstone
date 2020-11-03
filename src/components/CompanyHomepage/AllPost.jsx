@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import Styles from "./Styles.module.css";
 export default function AllPost(props) {
+  const [companyProfile, setcompanyProfile] = useState([]);
+  useEffect(() => {
+    company();
+  }, []);
+
+  const company = async () => {
+    const data = await fetch("http://localhost:4006/login/profile", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
+    const Post = await data.json();
+    if (Post) {
+      setcompanyProfile(Post);
+      console.log(Post, "why is empty");
+    } else {
+      console.log("there is no data ");
+    }
+  };
+
   return (
     <div
       style={{
@@ -27,7 +50,37 @@ export default function AllPost(props) {
           height: "150px",
         }}
       >
-        <h6>hello</h6>
+        <div
+          className={`${Styles.cartblock1} mt-2`}
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            height: "80%",
+          }}
+        >
+          {companyProfile[0] && companyProfile[0].image ? (
+            <img
+              src={companyProfile[0].image}
+              className={` mt-3`}
+              style={{
+                borderRadius: "none !important",
+              }}
+            />
+          ) : (
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9-Tom5eAUi7AaarN_g-WIkVxvRNhdHa8BrQ&usqp=CAU"
+              className={` mt-3`}
+              style={{
+                borderRadius: "none !important",
+              }}
+            />
+          )}
+          <div className="mt-4">
+            <h6>{companyProfile[0] && companyProfile[0].companyName}</h6>
+            <h6>{companyProfile[0] && companyProfile[0].email}</h6>{" "}
+            <h6>{companyProfile[0] && companyProfile[0].location}</h6>
+          </div>
+        </div>
       </Col>
 
       <Col xs={12} sm={12} md={12} lg={12}>

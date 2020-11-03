@@ -2,9 +2,31 @@ import React from "react";
 import { Row, Col, Card, Button } from "react-bootstrap";
 import Styles from "./Styles.module.css";
 import { BsFillBriefcaseFill } from "react-icons/bs";
-import { FaUserAlt } from "react-icons/fa";
+import { FaRegFilePdf } from "react-icons/fa";
 
 export default function Carts(props) {
+  const getPDF = async (data) => {
+    fetch(`http://localhost:4006/login/${data._id}/pdf`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then(function (response) {
+        return response.arrayBuffer();
+      })
+      .then(function (user) {
+        var blob = new Blob([user]);
+        var url = window.URL.createObjectURL(blob);
+        var anchor = document.createElement("a");
+        anchor.setAttribute("href", url);
+        anchor.setAttribute("download", `${data.name}CV.pdf`);
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+      });
+  };
+
   return (
     <>
       {props.currentAplicant &&
@@ -12,91 +34,51 @@ export default function Carts(props) {
           return (
             <>
               <Col xs={4} sm={4} md={4} lg={4} className={`${Styles.users}`}>
-                <div
-                  className={`${Styles.cartblock}`}
-                  //   style={{ height: "150px" }}
-                >
+                <div className={`${Styles.cartblock}`}>
                   {data.image ? (
-                    <img src={data.image} className="img-responsive" alt="" />
-                  ) : (
                     <img
-                      src="http://www.webcoderskull.com/img/team1.png"
+                      src={data.image}
                       className="img-responsive"
                       alt=""
+                      onClick={() => {
+                        props.setProfile(data._id);
+
+                        props.showButton();
+                      }}
+                    />
+                  ) : (
+                    <img
+                      src="https://w7.pngwing.com/pngs/613/636/png-transparent-computer-icons-user-profile-male-avatar-avatar-heroes-logo-black.png"
+                      className="img-responsive"
+                      alt=""
+                      onClick={() => {
+                        props.setProfile(data._id);
+
+                        props.showButton();
+                      }}
                     />
                   )}
-                  <h3>
+                  <h3
+                    onClick={() => {
+                      props.setProfile(data._id);
+
+                      props.showButton();
+                    }}
+                  >
                     {data.name} {data.surname}
                   </h3>
                   <h6>{data.position}</h6>
-                  {/* <ul class="follow-us clearfix">
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa fa-linkedin" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                      </ul> */}
 
-                  <Button className={`${Styles.btngrad}`}> PDF</Button>
-                </div>
-
-                {/* <Card
-                  className={`${Styles.aply}  `}
-                  onClick={() => {
-                    props.fetchWorker(data._id);
-                    props.about();
-                    props.showButton();
-                  }}
-                >
-                  {data.image ? (
-                    <Card.Img
-                      variant="top"
-                      src={data.image}
-                      className={`${Styles.imagesCard}  `}
-                    />
-                  ) : (
-                    <Card.Img
-                      variant="top"
-                      className={`${Styles.imagesCard}  `}
-                      src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
-                    />
-                  )}
-
-                  <Card.Text
-                    className={` ${Styles.textCard} mt-2 mb-0 text-center`}
+                  <Button
+                    className={`${Styles.pdf}`}
+                    onClick={() => {
+                      getPDF(data);
+                    }}
                   >
-                    <Row className={`${Styles.textRow}`}>
-                      {" "}
-                      <FaUserAlt className={`${Styles.icon}`} />{" "}
-                      <p className={`${Styles.titleCard} ${Styles.textCard}  `}>
-                        {data.name} {data.surname}
-                      </p>
-                    </Row>
-                  </Card.Text>
-                  <Card.Text className={` ${Styles.textCard} ml-1   `}>
-                    <Row className={`${Styles.textRow}`}>
-                      <BsFillBriefcaseFill
-                        style={{ marginTop: "3px" }}
-                        className={`${Styles.icon} ml-0`}
-                      />{" "}
-                      <p className={`${Styles.normalText} ${Styles.textCard}`}>
-                        {" "}
-                        {data.position}
-                      </p>
-                    </Row>
-                  </Card.Text>
-                  {/* </Card.Body> */}
-                {/* </Card>  */}
+                    {" "}
+                    <FaRegFilePdf style={{ fontSize: "20px" }} />
+                  </Button>
+                </div>
               </Col>
             </>
           );

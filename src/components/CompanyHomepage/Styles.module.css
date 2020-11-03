@@ -105,9 +105,15 @@
 
 .btngrad:hover {
   background-position: right center; /* change the direction of the change here */
-  color: rgb(63, 69, 95);
+  color: white;
   text-decoration: none;
   font-weight: bolder;
+  background-image: linear-gradient(
+    to right,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
 }
 .btngrad:focus {
   /* background-position: right center; /* change the direction of the change here */
@@ -233,9 +239,6 @@
 .custab:hover {
   box-shadow: 7px 7px 7px rgb(148, 148, 148);
   transition: 0.5s;
-  /* font-size: 110% !important; */
-  /* box-shadow: 3px 3px 0px transparent;
-  transition: 0.5s; */
 }
 
 .cartblock:hover {
@@ -250,6 +253,47 @@
   text-align: center;
   border: 2px solid #d5d5d5;
   margin: 0 0 28px;
+}
+.cartblock1 {
+  float: left;
+  width: 100%;
+  background: #fff;
+  /* padding: 30px 20px; */
+  text-align: center;
+
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  margin: 0 0 28px;
+}
+.cartblock1 img {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  padding-top: 0 !important;
+}
+.cartblock1 h3 {
+  color: #2a2a2a;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 6px 0;
+  text-transform: uppercase;
+}
+.cartblock1 h3 {
+  text-decoration: none;
+  overflow: hidden;
+  color: #2a2a2a;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.cartblock1 h6 {
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .cartblock img {
@@ -310,6 +354,42 @@
 
 .users {
   height: 185px;
+}
+
+.pdf {
+  text-decoration: none;
+  border: none !important;
+  color: white !important;
+  font-weight: bolder;
+  background-image: linear-gradient(
+    to right,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  box-shadow: none;
+}
+
+.pdf:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: white !important;
+  text-decoration: none;
+  font-weight: bolder;
+}
+.pdf:focus {
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: rgb(63, 69, 95) !important;
+  font-weight: bolder;
+  font-size: 15px;
+  background-image: linear-gradient(
+    to right,
+    #fcfcfc 0%,
+    #ffffff 51%,
+    #ffffff 100%
+  );
 }
 
 @media only screen and (max-width: 640px) {
