@@ -38,7 +38,7 @@ export default function Carts(props) {
                   {data.image ? (
                     <img
                       src={data.image}
-                      className="img-responsive"
+                      className="img-responsive mt-2"
                       alt=""
                       onClick={() => {
                         props.setProfile(data._id);
@@ -49,7 +49,7 @@ export default function Carts(props) {
                   ) : (
                     <img
                       src="https://w7.pngwing.com/pngs/613/636/png-transparent-computer-icons-user-profile-male-avatar-avatar-heroes-logo-black.png"
-                      className="img-responsive"
+                      className="img-responsive mt-2"
                       alt=""
                       onClick={() => {
                         props.setProfile(data._id);
@@ -67,17 +67,13 @@ export default function Carts(props) {
                   >
                     {data.name} {data.surname}
                   </h3>
-                  <h6>{data.position}</h6>
-
-                  <Button
-                    className={`${Styles.pdf}`}
+                  <h6>{data.position}</h6>{" "}
+                  <FaRegFilePdf
                     onClick={() => {
                       getPDF(data);
                     }}
-                  >
-                    {" "}
-                    <FaRegFilePdf style={{ fontSize: "20px" }} />
-                  </Button>
+                    className={`${Styles.pdf}`}
+                  />
                 </div>
               </Col>
             </>

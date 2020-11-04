@@ -76,7 +76,7 @@
 }
 .aplication {
   box-shadow: 7px 7px 7px rgb(148, 148, 148);
-  height: 85vh;
+  height: auto;
   background-color: rgb(255, 255, 255);
 }
 
@@ -94,7 +94,7 @@
   text-align: center;
   text-transform: uppercase;
   transition: 0.5s;
-  background-size: 200% auto;
+  background-size: auto;
   color: rgb(63, 69, 95);
   font-weight: bolder;
   font-size: 15px;
@@ -114,6 +114,7 @@
     #f09819 51%,
     #ff512f 100%
   );
+  cursor: pointer;
 }
 .btngrad:focus {
   /* background-position: right center; /* change the direction of the change here */
@@ -239,24 +240,13 @@
 .custab:hover {
   box-shadow: 7px 7px 7px rgb(148, 148, 148);
   transition: 0.5s;
+  cursor: pointer;
 }
 
-.cartblock:hover {
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
-  border: 0;
-}
-.cartblock {
-  float: left;
-  width: 100%;
-  background: #fff;
-  /* padding: 30px 20px; */
-  text-align: center;
-  border: 2px solid #d5d5d5;
-  margin: 0 0 28px;
-}
 .cartblock1 {
   float: left;
   width: 100%;
+
   background: #fff;
   /* padding: 30px 20px; */
   text-align: center;
@@ -269,6 +259,7 @@
   height: 80px;
   border-radius: 100%;
   padding-top: 0 !important;
+  cursor: pointer;
 }
 .cartblock1 h3 {
   color: #2a2a2a;
@@ -294,8 +285,24 @@
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  cursor: pointer;
 }
-
+.cartblock:hover {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  border: 0;
+  -webkit-box-orient: vertical;
+  cursor: pointer;
+}
+.cartblock {
+  height: 95%;
+  float: left;
+  width: 100%;
+  background: #fff;
+  /* padding: 30px 20px; */
+  text-align: center;
+  border: 2px solid #d5d5d5;
+  /* margin: 0 0 28px; */
+}
 .cartblock img {
   width: 80px;
   height: 80px;
@@ -357,22 +364,27 @@
 }
 
 .pdf {
-  text-decoration: none;
+  right: 35px;
+  top: 15px;
+  width: 28px;
+  height: auto;
+  position: absolute;
+  /* text-decoration: none; */
   border: none !important;
-  color: white !important;
+  color: #f76f36 !important;
   font-weight: bolder;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to right,
     #ff512f 0%,
     #f09819 51%,
     #ff512f 100%
-  );
-  box-shadow: none;
+  ); */
+  /* box-shadow: rgb(165, 166, 168) !important; */
 }
 
 .pdf:hover {
   background-position: right center; /* change the direction of the change here */
-  color: white !important;
+  color: rgb(180, 117, 57) !important;
   text-decoration: none;
   font-weight: bolder;
 }
@@ -390,6 +402,23 @@
     #ffffff 51%,
     #ffffff 100%
   );
+}
+.tabnav {
+  color: rgb(63, 69, 95);
+  background-color: transparent;
+}
+.tabnav a:focus {
+  color: rgb(63, 69, 95);
+  /* /* background-color: transparent; */
+}
+
+.aboutme {
+  margin-right: 0;
+  background: #fff;
+  /* padding: 30px 20px; */
+
+  height: 213px;
+  box-shadow: 3px 3px 3px 3px rgba(206, 206, 206, 0.938);
 }
 
 @media only screen and (max-width: 640px) {
@@ -472,5 +501,8 @@
   }
   .users {
     height: 130px;
+  }
+  .tabnav {
+    font-size: 10px !important;
   }
 }

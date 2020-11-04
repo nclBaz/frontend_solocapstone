@@ -11,10 +11,6 @@ export default function AllWorkers() {
   const [allJob, setAllJob] = useState([]);
   const [profile, setProfile] = useState("");
   const [aplicant, setaplicant] = useState([]);
-  const [basicData, setBasicData] = useState(true);
-  const [education, setEducation] = useState(false);
-  const [workExperience, setWorkExperience] = useState(false);
-  const [skills, setSkills] = useState(false);
   const [buttons, setButtons] = useState(false);
 
   const showButton = () => {
@@ -88,7 +84,7 @@ export default function AllWorkers() {
             lg={12}
             className="mt-1"
             style={{
-              boxShadow: "7px 7px 7px rgb(148, 148, 148)",
+              boxShadow: "0px 5px 5px  0px rgb(148, 148, 148)",
             }}
           >
             <Row>
@@ -97,7 +93,7 @@ export default function AllWorkers() {
                 setProfile={setProfile}
                 showButton={showButton}
               />
-              <Col xs={12} sm={12} md={12} lg={12} className="mt-0 ">
+              <Col xs={12} sm={12} md={12} lg={12} className="mt-1 ">
                 <Pagination
                   aplicantPerPage={aplicantPerPage}
                   totalAplicant={aplicant.length}
@@ -106,37 +102,6 @@ export default function AllWorkers() {
               </Col>
             </Row>
           </Col>
-          {/* {/* {buttons && (
-            <> */}
-          {/* <Col xs={12} sm={12} md={12} lg={12} className="mt-1 text-right"> */}
-          {/* <Button
-                  className={`mr-1 ${Styles.btngrad}`}
-                  onClick={(e) => about(e)}
-                  style={{ fontSize: "11px" }}
-                >
-                  Profile
-                </Button>
-                <Button
-                  className={`mr-1 ${Styles.btngrad}`}
-                  onClick={() => educationData()}
-                  style={{ fontSize: "11px" }}
-                >
-                  Education
-                </Button>
-                <Button
-                  className={`mr-1 ${Styles.btngrad}`}
-                  onClick={() => workData()}
-                  style={{ fontSize: "11px" }}
-                >
-                  Work Experience
-                </Button>
-                <Button
-                  className={`mr-1 ${Styles.btngrad}`}
-                  onClick={() => skillsData()}
-                  style={{ fontSize: "11px" }}
-                >
-                  Skills
-                </Button> */}
 
           <Col
             xs={12}
