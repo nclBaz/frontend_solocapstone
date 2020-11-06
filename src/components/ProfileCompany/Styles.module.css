@@ -1,0 +1,61 @@
+.profile {
+  /* outline: grey solid 2px; */
+  height: 250px !important;
+  width: 80%;
+}
+.header {
+  display: flex;
+  width: 80%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 30px !important;
+  box-shadow: 5px 5px 5px 5px rgba(206, 206, 206, 0.938);
+  background-image: url("https://res.cloudinary.com/dle6fzc1o/image/upload/v1604661577/backgroundimage/Untitled_design_1_aggaly.png");
+  background-size: cover;
+}
+.div {
+  width: 80% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  height: auto;
+  /* box-shadow: 3px 3px 3px rgba(206, 206, 206, 0.938); */
+  /* margin-left: auto !important; */
+  /* margin-right: auto !important; */
+}
+.tabs {
+  box-shadow: 5px 5px 5px rgba(206, 206, 206, 0.938);
+}
+.tabs tr:hover {
+  box-shadow: 3px 3px 3px rgba(173, 172, 172, 0.938);
+  text-align: center;
+}
+.tabs tr {
+  height: 20px !important;
+}
+
+.tabs td {
+  text-align: center;
+}
+
+.imgProfile {
+  width: 150px;
+  margin-bottom: 0 !important;
+  margin-top: 50%;
+}
+.nameProfile {
+  width: 150px;
+  margin-bottom: 0 !important;
+  margin-top: 75%;
+}
+.dataInfo {
+  box-shadow: 3px 3px 3px 3px rgba(212, 212, 212, 0.938);
+  background-color: white;
+  height: 250px;
+}
+.dataInfo h6 {
+  margin: 5px;
+}
+.dataInfo p {
+  margin: 5px;
+}

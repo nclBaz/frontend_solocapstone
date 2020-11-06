@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import AllPost from "./AllPost";
-import Modal from "./SendEmail";
+
 import Pagination from "./Pagination";
 import Carts from "./Carts";
 import WorkerProfile from "./WorkerProfile";
@@ -12,6 +12,7 @@ export default function AllWorkers() {
   const [profile, setProfile] = useState("");
   const [aplicant, setaplicant] = useState([]);
   const [buttons, setButtons] = useState(false);
+  const [Id, setId] = useState("");
 
   const showButton = () => {
     setButtons(true);
@@ -54,10 +55,27 @@ export default function AllWorkers() {
     }
   };
 
-  const getPosts = (allAplication) => {
+  const getPosts = (allAplication, id) => {
     const data = allAplication;
     setaplicant(data);
     setProfile([]);
+    setId(id);
+  };
+  const allPosts = async () => {
+    const data = await fetch("http://localhost:4006/post/singelPost/" + Id, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
+    const allPost = await data.json();
+    if (allPost) {
+      setaplicant(allPost.allAplication);
+    } else {
+      console.log("there is no data ");
+    }
   };
 
   return (
@@ -110,17 +128,15 @@ export default function AllWorkers() {
             lg={12}
             className={`${Styles.dropDown123}`}
           >
-            <WorkerProfile profile={profile} />
+            <WorkerProfile
+              profile={profile}
+              id={Id}
+              allPost={allPost}
+              allPosts={allPosts}
+            />
           </Col>
         </Col>
       </Row>
-      <Modal
-        handleClose={handleClose}
-        handleShow={handleShow}
-        show={show}
-        _id={profile[0] && profile[0]._id}
-        email={profile[0] && profile[0].email}
-      />
     </>
   );
 }

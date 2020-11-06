@@ -9,6 +9,7 @@ import LoginWorker from "./pages/LoginWorker";
 import HomePage from "./pages/HomePage";
 import ProfileWorker from "./pages/Profile";
 import Company from "./pages/HomeCompany";
+import ProfileCompany from "./pages/ProfileCompany";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/worker" exact component={HomePage} />
           <Route path="/workerProfile" exact component={ProfileWorker} />
           <Route path="/company" exact component={Company} />
+          <Route path="/companyProfile" exact component={ProfileCompany} />
         </Switch>
       </Router>
     </div>

@@ -373,13 +373,6 @@
   border: none !important;
   color: #f76f36 !important;
   font-weight: bolder;
-  /* background-image: linear-gradient(
-    to right,
-    #ff512f 0%,
-    #f09819 51%,
-    #ff512f 100%
-  ); */
-  /* box-shadow: rgb(165, 166, 168) !important; */
 }
 
 .pdf:hover {
@@ -415,7 +408,7 @@
 .aboutme {
   margin-right: 0;
   background: #fff;
-  /* padding: 30px 20px; */
+  color: rgb(63, 69, 95);
 
   height: 213px;
   box-shadow: 3px 3px 3px 3px rgba(206, 206, 206, 0.938);

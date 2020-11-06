@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Styles from "./Styles.module.css";
 function Pagination(props) {
@@ -19,7 +19,12 @@ function Pagination(props) {
           <li key={number} className="page-item">
             <Button
               className={`${Styles.btngrad} ml-1`}
-              style={{ width: "20px", padding: "1px", marginTop: "0px" }}
+              style={{
+                width: "20px",
+                padding: "1px",
+                marginTop: "0px",
+                border: 0,
+              }}
               onClick={() => props.paginate(number)}
             >
               {number}

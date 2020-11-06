@@ -1,18 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row, Button, Modal, Tab, Tabs } from "react-bootstrap";
 import WorkExperience from "./Workexperience";
+import Education from "./Education";
+import Accept from "./Accept";
+import Remove from "./Remove";
 import Styles from "./Styles.module.css";
 export default function WorkerProfile(props) {
   const [showEducation, setshowEducation] = useState(false);
   const [showWork, setshowWork] = useState(false);
   const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
   const [profile, setprofile] = useState([]);
-  const [workExperience, setworkExperience] = useState([]);
+  const [data, setData] = useState([]);
+  const [data1, setData1] = useState([]);
+  const [accept, setAccept] = useState(false);
+  const [remove, setRemove] = useState(false);
+  const [dataAccept, setdataAccept] = useState([]);
+  const [dataRemove, setdataRemove] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = (data) => {
-    setworkExperience(data);
+    setData(data);
     setShow(true);
+  };
+  const handleClose1 = () => setShow1(false);
+  const handleShow1 = (data) => {
+    console.log(data, "caka data");
+    setData1(data);
+    setShow1(true);
+  };
+
+  const closeAccept = () => setAccept(false);
+  const showAccept = (data) => {
+    console.log(data, "caka data");
+    setdataAccept(data);
+    setAccept(true);
+  };
+  const closeRemove = () => setRemove(false);
+  const showRemove = (data) => {
+    console.log(data, "caka data");
+    setdataRemove(data);
+    setRemove(true);
+  };
+
+  const emptyPorfile = () => {
+    setprofile([]);
   };
 
   useEffect(() => {
@@ -93,6 +125,7 @@ export default function WorkerProfile(props) {
                     >
                       <Row className={`${Styles.aboutme}`}>
                         <p
+                          className="m-1 p-1"
                           style={{
                             textAlign: "justify ",
                             textJustify: "inter-word",
@@ -153,8 +186,13 @@ export default function WorkerProfile(props) {
 
                               {showEducation && (
                                 <Button
-                                  style={{ position: "absolute", bottom: 2 }}
-                                  onClick={handleShow}
+                                  className={`${Styles.btngrad}`}
+                                  style={{
+                                    position: "absolute",
+                                    bottom: "5px",
+                                    border: 0,
+                                  }}
+                                  onClick={() => handleShow1(data.education)}
                                 >
                                   See All
                                 </Button>
@@ -167,10 +205,10 @@ export default function WorkerProfile(props) {
                     <Tab
                       eventKey="workExperience"
                       title="Works "
-                      className={` mt-3`}
+                      className={` mt-2`}
                     >
                       <Row
-                        className={`${Styles.aboutme} justify-content-space-bettwen text-left mt-3 `}
+                        className={`${Styles.aboutme} justify-content-space-bettwen text-left `}
                       >
                         {data.workExperience && data.workExperience.length > 0 && (
                           <>
@@ -209,8 +247,15 @@ export default function WorkerProfile(props) {
 
                               {showWork && (
                                 <Button
-                                  style={{ position: "absolute", bottom: 2 }}
-                                  onClick={handleShow(data.workExperience)}
+                                  className={`${Styles.btngrad}`}
+                                  style={{
+                                    position: "absolute",
+                                    bottom: "5px",
+                                    border: 0,
+                                  }}
+                                  onClick={() =>
+                                    handleShow(data.workExperience)
+                                  }
                                 >
                                   See All
                                 </Button>
@@ -225,7 +270,11 @@ export default function WorkerProfile(props) {
                         data.skills.map((info) => {
                           return (
                             <>
-                              <Button variant="light" className="ml-1 mt-1">
+                              <Button
+                                variant="light"
+                                className={`ml-1 mt-1 ${Styles.aboutme}`}
+                                style={{ height: "auto" }}
+                              >
                                 {info.skillName}
                               </Button>
                             </>
@@ -248,10 +297,21 @@ export default function WorkerProfile(props) {
                   }}
                   className={`mt-0`}
                 >
-                  <Button className={` ml-3 mr-2 ${Styles.btngrad}`}>
+                  <Button
+                    style={{ border: 0 }}
+                    className={` mr-2 ${Styles.btngrad}`}
+                    onClick={() => showRemove(data)}
+                  >
+                    Remove
+                  </Button>
+
+                  <Button
+                    style={{ border: 0 }}
+                    className={` ml-3 mr-2 ${Styles.btngrad}`}
+                    onClick={() => showAccept(data)}
+                  >
                     Accept
                   </Button>
-                  <Button className={` mr-2 ${Styles.btngrad}`}>Remove</Button>
                 </Col>
               </Row>
             </>
@@ -261,7 +321,33 @@ export default function WorkerProfile(props) {
         show={show}
         handleClose={handleClose}
         handleShow={handleShow}
-        workExperience={workExperience}
+        workExperience={data}
+      />
+      <Education
+        show={show1}
+        handleClose={handleClose1}
+        handleShow={handleShow1}
+        education={data1}
+      />
+      <Accept
+        show={accept}
+        handleClose={closeAccept}
+        handleShow={showAccept}
+        data={dataAccept}
+        id={props.id}
+        posts={props.allPost}
+        emptyPorfile={emptyPorfile}
+        allPosts={props.allPosts}
+      />
+      <Remove
+        show={remove}
+        handleClose={closeRemove}
+        handleShow={showRemove}
+        data={dataRemove}
+        id={props.id}
+        posts={props.allPost}
+        emptyPorfile={emptyPorfile}
+        allPosts={props.allPosts}
       />
     </>
   );

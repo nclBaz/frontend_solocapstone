@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Styles from "./Styles.module.css";
 import { Col, Row, Button, Modal } from "react-bootstrap";
-export default function Workexperience(props) {
+export default function Education(props) {
   return (
     <>
       <Modal
@@ -11,15 +11,15 @@ export default function Workexperience(props) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Work experiences</Modal.Title>
+          <Modal.Title>Education History</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row
-            className={`${Styles.aboutme} justify-content-space-bettwen text-left m-0 p-0 `}
+            className={` ${Styles.aboutme} justify-content-space-around text-left m-0 p-0`}
           >
-            {props.workExperience &&
-              props.workExperience.length > 0 &&
-              props.workExperience.map((data) => {
+            {props.education &&
+              props.education.length > 0 &&
+              props.education.map((data) => {
                 return (
                   <>
                     <Col xs={4} sm={4} md={4} lg={4}>
@@ -37,22 +37,22 @@ export default function Workexperience(props) {
                         />
                       )}
                     </Col>
-                    <Col xs={8} sm={8} md={8} lg={8}>
+                    <Col xs={8} sm={8} md={8} lg={8} style={{ height: "auto" }}>
                       <div
                         style={{
                           display: "flex",
                         }}
                       >
-                        <h5>{data.workExperience && data.workExperience}</h5>
+                        <h5>{data.schoolName}</h5>
                         <p className="ml-5 ">
                           <i>
-                            {data.started} -{data.finished}{" "}
+                            {data.startDate} -{data.endDate}{" "}
                           </i>
                         </p>
                       </div>
 
-                      <p>{data.workPosition}</p>
-                      <p>{data.description}</p>
+                      <p>{data.about}</p>
+                      <p>{data.skillsLearned}</p>
                     </Col>
                   </>
                 );
