@@ -20,6 +20,7 @@ export default function Profile() {
   const [website, setwebsite] = useState("");
   const [personel, setpersonel] = useState("");
   const [email, setEmail] = useState("");
+  const [about, setAbout] = useState("");
 
   useEffect(() => {
     fetchProfile();
@@ -42,6 +43,7 @@ export default function Profile() {
       setwebsite(data[0].website);
       setpersonel(data[0].personel);
       setEmail(data[0].email);
+      setAbout(data[0].aboutMe);
     }
   };
   const editProfile = async () => {
@@ -283,8 +285,8 @@ export default function Profile() {
                     </Col>
 
                     <Col xs={12} sm={12} md={8} lg={8}>
-                      <div className={`${Style.dataInfo}`}>
-                        <About data={data.aboutMe} />
+                      <div className={`${Style.dataAbout} m-0 p-0`}>
+                        <About />
                       </div>
                     </Col>
                   </Row>

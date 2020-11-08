@@ -1,11 +1,98 @@
 import React, { useEffect, useState } from "react";
-import { InputGroup, FormControl } from "react-bootstrap";
+import { InputGroup, FormControl, Button } from "react-bootstrap";
 import { AiOutlineEdit } from "react-icons/ai";
 import Style from "./Styles.module.css";
 
 export default function About(props) {
-  const [hide, sethide] = useState(false);
-  const [about, setabout] = useState(true);
+  const [hide, setHide] = useState(false);
+  const [about, setAbout] = useState(true);
+  const [icon, setIcon] = useState(true);
+  const [button, setButton] = useState(false);
+  const [info, setInfo] = useState("");
+  const [skip, setskip] = useState(false);
+  const [getAbout, setGetAbout] = useState("");
+  const [hideButton, sethideButton] = useState(true);
+  const [showButton, setshowButton] = useState(false);
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  const hideText = () => {
+    if (about === true) {
+      setHide(true);
+      setAbout(false);
+      setIcon(false);
+    }
+  };
+  const showText = () => {
+    if (about === false) {
+      setHide(false);
+      setAbout(true);
+      setIcon(true);
+    }
+  };
+  const fetchProfile = async () => {
+    const result = await fetch("http://localhost:4006/login/profile", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
+    if (result.ok) {
+      const data = await result.json();
+      setGetAbout(data[0].aboutMe);
+      setInfo(data[0].aboutMe.slice(0, 480));
+      if (data[0].aboutMe.length > 480) {
+        setButton(true);
+      }
+    }
+  };
+  const data = () => {
+    if (skip == true) {
+      setInfo(getAbout.slice(0, 481));
+      setskip(false);
+      sethideButton(true);
+      setshowButton(false);
+    } else if (skip == false) {
+      setInfo(getAbout);
+      setskip(true);
+      sethideButton(false);
+      setshowButton(true);
+    }
+  };
+  const editProfile = async () => {
+    const result = await fetch("http://localhost:4006/login/edit", {
+      method: "PUT",
+      credentials: "include",
+      body: JSON.stringify({ aboutMe: getAbout }),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
+    if (result) {
+      fetchProfile();
+      showText();
+    }
+  };
+  // const editProfile = async () => {
+  //   const image = new FormData();
+  //   image.append("image", this.state.image);
+  //   const uploadPhoto = await fetch(
+  //     `http://localhost:4006/education/uploadImage/` + id,
+  //     {
+  //       method: "POST",
+  //       credentials: "include",
+  //       body: image,
+  //       headers: {
+  //         "Access-Control-Allow-Origin": "*",
+  //         // "Content-Type": "application/json",
+  //       },
+  //     }
+  //   );
+  // };
 
   return (
     <>
@@ -13,29 +100,80 @@ export default function About(props) {
         <>
           <div>
             <h5>About Company</h5>
-            <AiOutlineEdit
-              className="mt-1"
-              style={{
-                marginLeft: "auto",
-                fontSize: "20px",
-              }}
-            />
+            {icon && (
+              <AiOutlineEdit
+                onClick={hideText}
+                className="mt-1"
+                style={{
+                  marginLeft: "auto",
+                  fontSize: "20px",
+                }}
+              />
+            )}
           </div>
           <div>
-            <p>{props.data}</p>
+            <p className={`${Style.aboutMe}`}>{info}</p>
+          </div>
+          <div style={{ marginRight: "auto" }}>
+            {button && (
+              <>
+                {hideButton && (
+                  <Button
+                    style={{ marginLeft: "auto" }}
+                    className={`${Style.btngrad} mr-3 mb-1`}
+                    variant="light"
+                    onClick={() => data()}
+                  >
+                    Show More
+                  </Button>
+                )}
+                {showButton && (
+                  <Button
+                    style={{ marginLeft: "auto" }}
+                    className={`${Style.btngrad}  mr-3 mb-1`}
+                    variant="light"
+                    onClick={() => data()}
+                  >
+                    Hide{" "}
+                  </Button>
+                )}
+              </>
+            )}
           </div>
         </>
       )}
       {hide && (
-        <div>
-          <h5>Edit About</h5>
-          <InputGroup>
-            <InputGroup.Prepend>
-              <InputGroup.Text>With textarea</InputGroup.Text>
-            </InputGroup.Prepend>
-            <FormControl as="textarea" aria-label="With textarea" />
-          </InputGroup>
-        </div>
+        <>
+          <div>
+            <h5>Edit About</h5>
+          </div>{" "}
+          <div>
+            <FormControl
+              as="textarea"
+              aria-label="With textarea"
+              style={{ height: "160px" }}
+              value={getAbout}
+              onChange={(e) => setGetAbout(e.currentTarget.value)}
+            />
+          </div>
+          <div>
+            <Button
+              style={{ marginLeft: "auto" }}
+              variant="light"
+              className={`${Style.btngrad} mr-2`}
+              onClick={() => editProfile()}
+            >
+              Save
+            </Button>
+            <Button
+              variant="light"
+              className={`${Style.btngrad}`}
+              onClick={showText}
+            >
+              Cancel
+            </Button>
+          </div>
+        </>
       )}
     </>
   );
