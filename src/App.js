@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage";
 import ProfileWorker from "./pages/Profile";
 import Company from "./pages/HomeCompany";
 import ProfileCompany from "./pages/ProfileCompany";
+import CompanyPosts from "./pages/CompanyPosts";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/workerProfile" exact component={ProfileWorker} />
           <Route path="/company" exact component={Company} />
           <Route path="/companyProfile" exact component={ProfileCompany} />
+          <Route path="/companyPosts" exact component={CompanyPosts} />
         </Switch>
       </Router>
     </div>

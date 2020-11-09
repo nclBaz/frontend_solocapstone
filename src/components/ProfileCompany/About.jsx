@@ -77,22 +77,6 @@ export default function About(props) {
       showText();
     }
   };
-  // const editProfile = async () => {
-  //   const image = new FormData();
-  //   image.append("image", this.state.image);
-  //   const uploadPhoto = await fetch(
-  //     `http://localhost:4006/education/uploadImage/` + id,
-  //     {
-  //       method: "POST",
-  //       credentials: "include",
-  //       body: image,
-  //       headers: {
-  //         "Access-Control-Allow-Origin": "*",
-  //         // "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  // };
 
   return (
     <>

@@ -34,9 +34,10 @@
 }
 
 .imgProfile {
-  width: 150px;
+  width: 120px;
   margin-bottom: 0 !important;
-  margin-top: 50%;
+  margin-top: 45%;
+  height: 110px;
 }
 .nameProfile {
   width: 150px;
@@ -151,6 +152,23 @@
 
 .dataAbout div > h5:hover {
   cursor: pointer;
+}
+.input {
+  display: none;
+}
+.uploadPhoto {
+  /* position: absolute; */
+  /* margin: 90% 10% 0 0; */
+  margin-top: 105%;
+  margin-left: 5%;
+  color: black;
+  z-index: 1000;
+}
+.icon {
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 5px;
 }
 
 @media only screen and (max-width: 768px) {

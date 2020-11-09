@@ -1,0 +1,9 @@
+.myPosts {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.carts {
+  box-shadow: 3px 3px 3px 3px rgba(212, 212, 212, 0.938);
+  background-color: white;
+}

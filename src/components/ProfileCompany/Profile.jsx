@@ -5,6 +5,8 @@ import { AiOutlineMail } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 import { MdWeb } from "react-icons/md";
+import { BiBorderRadius, BiUpload } from "react-icons/bi";
+
 import { GrUserWorker } from "react-icons/gr";
 import About from "./About";
 import Style from "./Styles.module.css";
@@ -77,6 +79,25 @@ export default function Profile() {
       setHideIcon(true);
     }
   };
+  const handleUpload = async (e) => {
+    const uploadImage = e.target.files[0];
+    const image = new FormData();
+    image.append("image", uploadImage);
+    const uploadPhoto = await fetch("http://localhost:4006/login/uploadImage", {
+      method: "POST",
+      body: image,
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+
+    if (uploadPhoto.ok) {
+      fetchProfile();
+    } else {
+      console.log("uploadd photo is not working");
+    }
+  };
 
   return (
     <Row className="m-0 p-0">
@@ -95,17 +116,72 @@ export default function Profile() {
                   className={`${Styles.header} `}
                   style={{ height: "200px" }}
                 >
-                  <div className="mt-3 ml-5 " style={{ height: "150px" }}>
+                  <div
+                    className="mt-3 ml-5 "
+                    style={{ height: "150px", display: "flex" }}
+                  >
                     {data.image ? (
-                      <img
-                        src={data.image}
-                        className={`${Styles.imgProfile}`}
-                      />
+                      <>
+                        <img
+                          src={data.image}
+                          className={`${Styles.imgProfile}`}
+                        />
+                        {/* <div> */}
+                        {/* <h6> Upload Image</h6> */}
+                        <label
+                          htmlFor="file-input"
+                          aria-required="true"
+                          className={`${Style.uploadPhoto}`}
+                          // style={{
+                          //   paddingLeft: "30px",
+                          //   paddingRight: "30px",
+                          // }}
+                        >
+                          <AiOutlineEdit className={`${Style.icon}`} />
+                        </label>
+                        <input
+                          className={`${Style.input}`}
+                          key="image"
+                          id="file-input"
+                          type="file"
+                          accept="image/*"
+                          profile="file"
+                          // value={this.state.image}
+                          onChange={(e) => handleUpload(e)}
+                        />
+                        {/* </div> */}
+                      </>
                     ) : (
-                      <img
-                        className={`${Styles.imgProfile}`}
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9-Tom5eAUi7AaarN_g-WIkVxvRNhdHa8BrQ&usqp=CAU"
-                      />
+                      <>
+                        <img
+                          className={`${Styles.imgProfile}`}
+                          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9-Tom5eAUi7AaarN_g-WIkVxvRNhdHa8BrQ&usqp=CAU"
+                        />
+                        {/* <div> */}
+                        {/* <h6> Upload Image</h6> */}
+                        <label
+                          htmlFor="file-input"
+                          aria-required="true"
+                          className={`${Style.uploadPhoto}`}
+                          // style={{
+                          //   paddingLeft: "30px",
+                          //   paddingRight: "30px",
+                          // }}
+                        >
+                          <AiOutlineEdit className={`${Style.icon}`} />
+                        </label>
+                        <input
+                          className={`${Style.input}`}
+                          key="image"
+                          id="file-input"
+                          type="file"
+                          accept="image/*"
+                          profile="file"
+                          // value={this.state.image}
+                          onChange={(e) => handleUpload(e)}
+                        />
+                        {/* </div> */}
+                      </>
                     )}
                   </div>
                 </div>
