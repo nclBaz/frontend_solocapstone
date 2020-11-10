@@ -5,8 +5,6 @@ import { AiOutlineMail } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import { GoLocation } from "react-icons/go";
 import { MdWeb } from "react-icons/md";
-import { BiBorderRadius, BiUpload } from "react-icons/bi";
-
 import { GrUserWorker } from "react-icons/gr";
 import About from "./About";
 import Style from "./Styles.module.css";
@@ -126,16 +124,11 @@ export default function Profile() {
                           src={data.image}
                           className={`${Styles.imgProfile}`}
                         />
-                        {/* <div> */}
-                        {/* <h6> Upload Image</h6> */}
+
                         <label
                           htmlFor="file-input"
                           aria-required="true"
                           className={`${Style.uploadPhoto}`}
-                          // style={{
-                          //   paddingLeft: "30px",
-                          //   paddingRight: "30px",
-                          // }}
                         >
                           <AiOutlineEdit className={`${Style.icon}`} />
                         </label>
@@ -146,10 +139,8 @@ export default function Profile() {
                           type="file"
                           accept="image/*"
                           profile="file"
-                          // value={this.state.image}
                           onChange={(e) => handleUpload(e)}
                         />
-                        {/* </div> */}
                       </>
                     ) : (
                       <>
@@ -157,16 +148,11 @@ export default function Profile() {
                           className={`${Styles.imgProfile}`}
                           src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9-Tom5eAUi7AaarN_g-WIkVxvRNhdHa8BrQ&usqp=CAU"
                         />
-                        {/* <div> */}
-                        {/* <h6> Upload Image</h6> */}
+
                         <label
                           htmlFor="file-input"
                           aria-required="true"
                           className={`${Style.uploadPhoto}`}
-                          // style={{
-                          //   paddingLeft: "30px",
-                          //   paddingRight: "30px",
-                          // }}
                         >
                           <AiOutlineEdit className={`${Style.icon}`} />
                         </label>

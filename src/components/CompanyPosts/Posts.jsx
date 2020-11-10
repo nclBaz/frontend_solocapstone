@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import Style from "./Style.module.css";
 import Pagination from "./Pagination";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { AiOutlineEdit } from "react-icons/ai";
 import AddPost from "./AddPost";
+import EditPost from "./EditPost";
 
 export default function Posts() {
   const [post, setPost] = useState([]);
+  const [show1, setShow1] = useState(false);
+  const [infos, setinfos] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [aplicantPerPage] = useState(3);
 
@@ -15,6 +19,12 @@ export default function Posts() {
   const currentAplicant = post.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handleClose1 = () => setShow1(false);
+  const handleShow1 = (data) => {
+    setShow1(true);
+    setinfos(data);
+  };
 
   useEffect(() => {
     fetchPost();
@@ -47,7 +57,7 @@ export default function Posts() {
       fetchPost();
     }
   };
-
+  console.log(infos);
   return (
     <>
       <Row className={`${Style.myPosts}`}>
@@ -61,7 +71,7 @@ export default function Posts() {
           sm={12}
           md={12}
           lg={12}
-          style={{ display: "flex", justifyContent: "space-around" }}
+          //   style={{ display: "flex", justifyContent: "space-around" }}
           className={`${Style.myPosts}`}
         >
           {currentAplicant &&
@@ -73,47 +83,72 @@ export default function Posts() {
                       style={{
                         display: "flex",
                         justifyContent: "space-around",
+                        boxShadow: "3px 3px 3px  rgba(212, 212, 212, 0.938)",
                       }}
                     >
                       <div>
                         {data.image ? (
                           <img
+                            className="mt-5"
                             src={data.image}
                             style={{ width: "80px", height: "80px" }}
                           />
                         ) : (
                           <img
+                            className="mt-5"
                             src="https://ianmartin.com/wp-content/uploads/2017/10/WhatE28099s20the20Best20Day20of20the20Week20to20Post20a20Job20Ad-1030x687.jpg"
                             style={{ width: "80px", height: "80px" }}
                           />
                         )}
                       </div>
-                      <div>
+                      <div className="mt-1">
                         <p>{data.companyName}</p>
                         <p>{data.jobPosition}</p>
                         <p>{data.salary}</p>
+                        <p>{data.type}</p>
                       </div>
-                      <div>
+                      <div className="mt-1">
                         <RiDeleteBinLine onClick={() => deletePost(data._id)} />
+
+                        <AiOutlineEdit
+                          className="ml-2"
+                          onClick={() => {
+                            handleShow1(data._id);
+                          }}
+                        />
                       </div>
                     </div>
-                    <div>
-                      <p>{data.jobDescription}</p>
-                      <p>
-                        {data.requirments.map((req) => {
-                          return <>{req},</>;
-                        })}
-                      </p>
-                      <p>
-                        {data.benefites.map((req) => {
-                          return <>{req}</>;
-                        })}
-                      </p>
+                    <div className={`${Style.about} ml-1 mr-1`}>
+                      <div>
+                        <h6>Job Description</h6>
+                        {data.jobDescription ? (
+                          <p>{data.jobDescription}</p>
+                        ) : (
+                          <p>No Description Detail . </p>
+                        )}
+                      </div>
+                      <div>
+                        <h6>Job Requirments</h6>
+                        {data.requirments ? (
+                          <p>{data.requirments}</p>
+                        ) : (
+                          <p>No Requirments Detail </p>
+                        )}
+                      </div>
+                      <div>
+                        <h6>Job Benefites</h6>
+                        {data.benefites ? (
+                          <p>{data.benefites}</p>
+                        ) : (
+                          <p>No Befenefites Detail</p>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </Col>
               );
             })}
+
           {currentAplicant.length === 0 && (
             <>
               <div className="mt-5">
@@ -135,6 +170,13 @@ export default function Posts() {
           />
         </Col>
       </Row>
+      <EditPost
+        show={show1}
+        handleClose={handleClose1}
+        handleShow={handleShow1}
+        data={infos}
+        fetchPost={fetchPost}
+      />
     </>
   );
 }
