@@ -8,6 +8,7 @@ import WorkerProfile from "./WorkerProfile";
 import Styles from "./Styles.module.css";
 
 export default function AllWorkers() {
+  const url = process.env.REACT_APP_URL;
   const [allJob, setAllJob] = useState([]);
   const [profile, setProfile] = useState("");
   const [aplicant, setaplicant] = useState([]);
@@ -39,7 +40,7 @@ export default function AllWorkers() {
   }, []);
 
   const allPost = async () => {
-    const data = await fetch("http://localhost:4006/post/", {
+    const data = await fetch(url + "post/", {
       method: "GET",
       credentials: "include",
       headers: {
@@ -62,7 +63,7 @@ export default function AllWorkers() {
     setId(id);
   };
   const allPosts = async () => {
-    const data = await fetch("http://localhost:4006/post/singelPost/" + Id, {
+    const data = await fetch(url + "post/singelPost/" + Id, {
       method: "GET",
       credentials: "include",
       headers: {

@@ -17,6 +17,7 @@ export default function WorkerProfile(props) {
   const [remove, setRemove] = useState(false);
   const [dataAccept, setdataAccept] = useState([]);
   const [dataRemove, setdataRemove] = useState([]);
+  const url = process.env.REACT_APP_URL;
 
   const handleClose = () => setShow(false);
   const handleShow = (data) => {
@@ -51,17 +52,14 @@ export default function WorkerProfile(props) {
     fetchWorker();
   }, [props.profile]);
   const fetchWorker = async () => {
-    const result = await fetch(
-      "http://localhost:4006/login/singleProfile/" + props.profile,
-      {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const result = await fetch(url + "login/singleProfile/" + props.profile, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
     const data = await result.json();
     if (data) {
       setprofile(data);

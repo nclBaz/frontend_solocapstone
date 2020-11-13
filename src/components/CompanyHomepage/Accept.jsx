@@ -7,12 +7,13 @@ export default function Accept(props) {
   const [text, setText] = useState("");
   const [alert, setAlert] = useState(false);
   const [alert2, setAlert2] = useState(false);
+  const url = process.env.REACT_APP_URL;
   const showFields = () => {
     setShow(!show);
   };
   const sendEmail = async () => {
     const result = await fetch(
-      "http://localhost:4006/aplicationn/sendEmail/" + props.data._id,
+      url + "aplicationn/sendEmail/" + props.data._id,
       {
         method: "POST",
         body: JSON.stringify({ subject, text }),
@@ -34,10 +35,7 @@ export default function Accept(props) {
 
   const acceptAplication = async () => {
     const result = await fetch(
-      "http://localhost:4006/aplicationn/" +
-        props.id +
-        "/accept/" +
-        props.data._id,
+      url + "aplicationn/" + props.id + "/accept/" + props.data._id,
       {
         method: "GET",
         credentials: "include",

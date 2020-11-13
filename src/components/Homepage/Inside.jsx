@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import {
-  Row,
-  Col,
-  Container,
-  Button,
-  Table,
-  InputGroup,
-  FormControl,
-  Modal,
-} from "react-bootstrap";
+import { Row, Col, Tab, Tabs, Button, Modal } from "react-bootstrap";
 import Styles from "./Styles.module.css";
-import AllAplication from "./AllAplication";
+import { MdWork } from "react-icons/md";
+import { MdAttachMoney } from "react-icons/md";
+import { HiOfficeBuilding } from "react-icons/hi";
+import { CgWebsite } from "react-icons/cg";
+import { AiOutlineMail } from "react-icons/ai";
+import { GrUserWorker } from "react-icons/gr";
+
+import { TiLocation } from "react-icons/ti";
 import { connect } from "react-redux";
 const mapStateToProps = (state) => state;
+const url = process.env.REACT_APP_URL;
 class Inside extends Component {
   state = {
     allPost: [],
@@ -27,10 +26,11 @@ class Inside extends Component {
     allJobPost: [],
     showButton: true,
     hideButton: false,
+    myProfile: {},
   };
 
   componentDidMount = async () => {
-    const response = await fetch("http://localhost:4006/profile/allCompanies", {
+    const response = await fetch(url + "profile/allCompanies", {
       method: "GET",
       credentials: "include",
       headers: {
@@ -42,9 +42,8 @@ class Inside extends Component {
     console.log(fetchedUsers, "users");
     this.setState({ comp: fetchedUsers });
     this.setState({ companie: fetchedUsers[0] });
-    // 11111111111111
 
-    const result = await fetch(`http://localhost:4006/profile/allPostJobs`, {
+    const result = await fetch(url + `profile/allPostJobs`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -58,7 +57,26 @@ class Inside extends Component {
     this.setState({ allJobPost: fetchedPost });
     this.setState({ filter: fetchedPost[0] });
     console.log(this.state.project);
+
+    this.fetchProfile();
   };
+
+  fetchProfile = async () => {
+    const result = await fetch(url + "profile/profile", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
+    if (result.ok) {
+      const data = await result.json();
+      this.setState({ myProfile: data });
+      console.log(data);
+    }
+  };
+
   showCompanies = (e) => {
     const userId = e.userID;
     const postId = e._id;
@@ -71,6 +89,7 @@ class Inside extends Component {
     this.setState({ companie: findCompani });
     this.checkAply(userId, postId);
   };
+
   filterPost = (e) => {
     console.log(e);
     const text = e;
@@ -85,6 +104,7 @@ class Inside extends Component {
       this.setState({ allPost: this.state.allJobPost });
     }
   };
+
   toogle = () => {
     if (this.state.companies === false) {
       this.setState({ companies: true });
@@ -92,16 +112,20 @@ class Inside extends Component {
       this.setState({ companies: false });
     }
   };
+
   showModal = () => {
     this.setState({ showModal: true });
   };
+
   closeModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
+
   checkAply = (userId, postId) => {
     if (
+      this.props.allAplication.allAplication &&
       this.props.allAplication.allAplication.find(
-        (x) => x.postId[0]._id === postId
+        (x) => x.postId._id === postId
       )
     ) {
       this.setState({ hideButton: true });
@@ -111,7 +135,7 @@ class Inside extends Component {
       this.setState({ hideButton: false });
       this.setState({ showButton: true });
       console.log(
-        this.props.allAplication.allAplication.length > 0 &&
+        this.props.allAplication.allAplication &&
           this.props.allAplication.allAplication.userID === userId &&
           this.props.allAplication.allAplication.postId &&
           this.props.allAplication.allAplication.postId.map(
@@ -122,17 +146,14 @@ class Inside extends Component {
     }
   };
   aplyForJob = async () => {
-    const aply = await fetch(
-      `http://localhost:4006/aplication/aply/` + this.state.filter._id,
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const aply = await fetch(url + `aplication/aply/` + this.state.filter._id, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
     if (aply.ok) {
       alert("Your Aplication  Was Ok");
       console.log("u kry me sukses");
@@ -146,179 +167,365 @@ class Inside extends Component {
           <Col
             xs={12}
             sm={12}
-            md={8}
-            lg={8}
-            className={`${Styles.company} ${Styles.example} `}
-            style={{ maxWidth: "800px" }}
+            md={12}
+            lg={5}
+            className={`${Styles.company} mt-3 `}
           >
-            <input
-              type="text"
-              className={`${Styles.text}`}
-              placeholder="Search by job position"
-              onChange={(e) => this.filterPost(e.currentTarget.value)}
-            />
-            <div className="mt-3">
-              {this.state.allPost &&
-                this.state.allPost.map((data, i) => (
-                  <>
-                    <div className={`${Styles.render}`}>
-                      {data.Image ? (
-                        <div key={data._id}>
-                          <img
-                            src={data.Image}
-                            className={`${Styles.image}`}
-                          ></img>
-                          hello
-                        </div>
-                      ) : (
-                        <div key={data._id}>
-                          <img
-                            src="https://www.flaticon.com/svg/static/icons/svg/52/52782.svg"
-                            className={`${Styles.image}`}
-                          />
-                        </div>
-                      )}
-                      <div>
-                        <p>{data.companyName}</p>
-                        <p>{data.jobPosition}</p>
-                        <p>{data.location}</p>
-                        <p>{data.jobDescription.slice(0, 30)}</p>
-                      </div>
-                      <div className={`${Styles.div} pt-3`}>
-                        <Button
-                          type="button"
-                          variant="primary"
-                          style={{
-                            width: "100%",
-                            height: "40%",
-                            textAlign: "center",
-                          }}
-                          onClick={() => this.showCompanies(data)}
-                        >
-                          View Job
-                        </Button>
-                      </div>
+            <Row className={`  ${Styles.row1}`}>
+              <Col xs={12} sm={12} md={12} lg={12} className="mt-2">
+                <div
+                  style={{
+                    backgroundColor: "white",
+                    zIndex: "10",
+                    position: "-webkit-sticky",
+                    position: "sticky",
+                    top: "0",
+                    height: "150px",
+                  }}
+                >
+                  <div
+                    className={`${Styles.cartblock1} `}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      // height: "80%",
+                    }}
+                  >
+                    {this.state.myProfile && this.state.myProfile.image ? (
+                      <img
+                        src={this.state.myProfile.image}
+                        className={` mt-1 mb-2`}
+                        style={{
+                          borderRadius: "none !important",
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9-Tom5eAUi7AaarN_g-WIkVxvRNhdHa8BrQ&usqp=CAU"
+                        className={` mt-1 mb-2`}
+                        style={{
+                          borderRadius: "none !important",
+                        }}
+                      />
+                    )}
+                    <div
+                      className="mt-3"
+                      style={{
+                        height: "auto",
+                      }}
+                    >
+                      <h5>
+                        {this.state.myProfile && this.state.myProfile.name}{" "}
+                        {this.state.myProfile && this.state.myProfile.surname}
+                      </h5>
+                      <h6>
+                        {this.state.myProfile && this.state.myProfile.position}
+                      </h6>
+                      <h6>
+                        {this.state.myProfile && this.state.myProfile.email}
+                      </h6>
                     </div>
-                  </>
-                ))}
-            </div>
+                  </div>
+
+                  <input
+                    type="text"
+                    className={`${Styles.text}`}
+                    placeholder="Search by job position"
+                    onChange={(e) => this.filterPost(e.currentTarget.value)}
+                  />
+                </div>
+
+                <div className={`mt-5 ${Styles.about}`}>
+                  {this.state.allPost &&
+                    this.state.allPost.map((data, i) => (
+                      <>
+                        <div>
+                          <div
+                            className={`${Styles.cards} e-card e-card-horizontal mt-2`}
+                            onClick={() => this.showCompanies(data)}
+                          >
+                            {data.image ? (
+                              <img
+                                className={`${Styles.img} ml-1 mt-1 mb-1`}
+                                src={data.image}
+                                alt="Sample"
+                              />
+                            ) : (
+                              <img
+                                className="ml-1"
+                                src="https://www.flaticon.com/svg/static/icons/svg/52/52782.svg"
+                                alt="Sample"
+                                style={{ height: `145px`, width: `150px` }}
+                              />
+                            )}
+                            <div
+                              className="e-card-stacked "
+                              style={{ width: "300px", textAlign: "left" }}
+                            >
+                              <div className="e-card-header mt-2 ml-2">
+                                <div className="e-card-header-caption">
+                                  <div className="e-card-header-title">
+                                    <div style={{ display: "flex" }}>
+                                      <HiOfficeBuilding
+                                        className={`${Styles.icons}`}
+                                      />
+                                      <h6>{data.companyName}</h6>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="e-card-content ml-2">
+                                <div style={{ display: "flex" }}>
+                                  {" "}
+                                  <MdWork className={`${Styles.icons}`} />{" "}
+                                  <h5 className="ml-1">{data.jobPosition}</h5>
+                                </div>
+
+                                <div style={{ display: "flex" }}>
+                                  <TiLocation className={`${Styles.icons}`} />{" "}
+                                  <p>{data.location}</p>
+                                </div>
+                                <div style={{ display: "flex" }}>
+                                  <MdAttachMoney
+                                    className={`${Styles.icons}`}
+                                  />
+                                  <p>{data.salary}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    ))}
+                </div>
+              </Col>
+            </Row>
           </Col>
           <Col
             xs={12}
             sm={12}
-            md={4}
-            lg={4}
-            className={`${Styles.company}`}
-            style={{ maxWidth: "400px" }}
+            md={12}
+            lg={7}
+            className={`${Styles.company} mt-3`}
           >
-            <div>
-              {this.state.filter && (
-                <div key={this.state.filter._id}>
-                  <div className={`${Styles.paragraph}`}>
-                    {this.state.filter.Image ? (
-                      <img
-                        src={this.state.filter.Image}
-                        className={`${Styles.image}`}
-                        style={{ marginLeft: "30px" }}
-                      />
-                    ) : (
-                      <img
-                        src={
-                          "https://www.flaticon.com/svg/static/icons/svg/52/52782.svg"
-                        }
-                        style={{ marginLeft: "30px" }}
-                        className={`${Styles.image}`}
-                      />
-                    )}
-                    <p>{this.state.filter.companyName}</p>
-                    <p>{this.state.filter.jobPosition}</p>
-                    <p>{this.state.filter.location}</p>
-                  </div>
-                  <div className={`${Styles.desc}`}>
-                    <div>
-                      <p>{this.state.filter.about}</p>
-                      <p>{this.state.filter.jobDescription}</p>
-                    </div>
-                    <div className={`${Styles.list}`}>
-                      <div>
-                        {this.state.filter.requirments &&
-                          this.state.filter.requirments.map((req, i) => {
-                            return (
-                              <p>
-                                {i + 1} - {req}
-                              </p>
-                            );
-                          })}{" "}
-                      </div>
-
-                      <div>
-                        {" "}
-                        {this.state.filter.benefites &&
-                          this.state.filter.benefites.map((benefites, i) => {
-                            return (
-                              <p>
-                                {i + 1} - {benefites}
-                              </p>
-                            );
-                          })}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-              {this.state.showButton && (
-                <Button
-                  type="button"
-                  variant="success"
-                  onClick={() => {
-                    this.showModal();
-                  }}
-                >
-                  Apply for Job
-                </Button>
-              )}
-              {this.state.hideButton && (
-                <Button type="button" variant="danger">
-                  You have applyed
-                </Button>
-              )}
-              <Button
-                type="button"
-                variant="success"
-                onClick={() => {
-                  this.toogle();
-                }}
-              >
-                See the company
-              </Button>
-
-              {this.state.companies && (
+            <Row className={`${Styles.row2}`}>
+              <Col xs={12} sm={12} md={12} lg={12}>
                 <div>
-                  {this.state.companie && (
-                    <div
-                      className={`${Styles.list}`}
-                      style={{ height: "auto" }}
-                    >
-                      <div>
-                        {this.state.companie.Image ? (
-                          <img
-                            src={this.state.companie.Image}
-                            className={`${Styles.image}`}
-                          />
-                        ) : (
-                          <img
-                            src="https://www.flaticon.com/svg/static/icons/svg/52/52782.svg"
-                            className={`${Styles.image}`}
-                          />
-                        )}
+                  {this.state.filter && (
+                    <div key={this.state.filter._id}>
+                      <div
+                        style={{ display: "flex" }}
+                        className={`${Styles.infoCards}`}
+                      >
+                        <div
+                          className="e-card-stacked "
+                          style={{ width: "300px", textAlign: "left" }}
+                        >
+                          <div className="e-card-header mt-2 ml-2">
+                            <div className="e-card-header-caption">
+                              <div className="e-card-header-title"></div>
+                            </div>
+                          </div>
+                          <div className="e-card-content ml-2">
+                            <div style={{ display: "flex" }}>
+                              {" "}
+                              <MdWork className={`${Styles.icons}`} />{" "}
+                              <h5 className="ml-1">
+                                {this.state.filter.jobPosition}
+                              </h5>
+                            </div>
+
+                            <div style={{ display: "flex" }}>
+                              <TiLocation className={`${Styles.icons}`} />{" "}
+                              <p>{this.state.filter.location}</p>
+                            </div>
+                            <div style={{ display: "flex" }}>
+                              <MdAttachMoney className={`${Styles.icons}`} />
+                              <p>{this.state.filter.salary}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            marginLeft: "auto",
+                            marginTop: "35px",
+                            marginRight: "15px",
+                          }}
+                        >
+                          {this.state.showButton && (
+                            <Button
+                              type="button"
+                              variant="light"
+                              onClick={() => {
+                                this.showModal();
+                              }}
+                              className={`${Styles.btngrad}`}
+                            >
+                              Apply for Job
+                            </Button>
+                          )}
+                          {this.state.hideButton && (
+                            <Button
+                              type="button"
+                              variant="light"
+                              className={`${Styles.btngrad}`}
+                            >
+                              You have applyed
+                            </Button>
+                          )}
+                        </div>
                       </div>
-                      <p>{this.state.companie.companyName}</p>
-                      <p>{this.state.companie.location}</p>
+
+                      <div className={`${Styles.desc}`}>
+                        <Tabs
+                          defaultActiveKey="company"
+                          id="uncontrolled-tab-example"
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
+                          <Tab
+                            eventKey="company"
+                            title="Company"
+                            className="m-0 p-0"
+                          >
+                            {this.state.companie && (
+                              <>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    margin: 0,
+                                    padding: 0,
+                                  }}
+                                  className={`${Styles.example}`}
+                                >
+                                  <div
+                                    className={` e-card e-card-horizontal mt-4`}
+                                    style={{
+                                      height: "auto",
+                                    }}
+                                  >
+                                    {this.state.companie.image ? (
+                                      <img
+                                        className={`${Styles.img}  mt-1 mb-1`}
+                                        src={this.state.companie.image}
+                                        alt="Sample"
+                                      />
+                                    ) : (
+                                      <img
+                                        src="https://www.flaticon.com/svg/static/icons/svg/52/52782.svg"
+                                        alt="Sample"
+                                        style={{
+                                          height: `145px`,
+                                          width: `150px`,
+                                        }}
+                                      />
+                                    )}
+                                    <div
+                                      className="e-card-stacked "
+                                      style={{
+                                        width: "300px",
+                                        // textAlign: "left",
+                                      }}
+                                    >
+                                      <div className="e-card-header mt-2 ml-2">
+                                        <div className="e-card-header-caption">
+                                          <div className="e-card-header-title">
+                                            <div style={{ display: "flex" }}>
+                                              <HiOfficeBuilding
+                                                className={`${Styles.icons} mr-1`}
+                                              />
+                                              <h6>
+                                                {
+                                                  this.state.companie
+                                                    .companyName
+                                                }
+                                              </h6>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="e-card-content ml-2">
+                                        <div style={{ display: "flex" }}>
+                                          {" "}
+                                          <CgWebsite
+                                            className={`${Styles.icons} mr-1`}
+                                          />{" "}
+                                          <h6 className="ml-1">
+                                            {this.state.companie.website}
+                                          </h6>
+                                        </div>
+
+                                        <div style={{ display: "flex" }}>
+                                          <TiLocation
+                                            className={`${Styles.icons} mr-1`}
+                                          />{" "}
+                                          <h6>
+                                            {this.state.companie.location}
+                                          </h6>
+                                        </div>
+                                        <div style={{ display: "flex" }}>
+                                          <AiOutlineMail
+                                            className={`${Styles.icons} mr-1`}
+                                          />{" "}
+                                          <h6>{this.state.companie.email}</h6>
+                                        </div>
+                                        <div style={{ display: "flex" }}>
+                                          <GrUserWorker
+                                            className={`${Styles.icons} mr-1`}
+                                          />
+                                          <h6>
+                                            {this.state.companie.personel}-Hired
+                                          </h6>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className={`${Styles.about} mt-4`}>
+                                    {" "}
+                                    <p>{this.state.companie.aboutMe}</p>
+                                  </div>
+                                </div>
+                              </>
+                            )}
+                          </Tab>
+                          <Tab
+                            eventKey="jobDescription"
+                            title="Job Description"
+                          >
+                            <div className={`${Styles.about} mt-4`}>
+                              {this.state.filter.jobDescription ? (
+                                <p>{this.state.filter.jobDescription}</p>
+                              ) : (
+                                <p>No Job Description</p>
+                              )}
+                            </div>
+                          </Tab>
+                          <Tab eventKey="requirments" title="Job Requirments">
+                            <div className={`${Styles.about} mt-4`}>
+                              {this.state.filter.requirments ? (
+                                <p>{this.state.filter.requirments}</p>
+                              ) : (
+                                <p>No requirments</p>
+                              )}
+                            </div>
+                          </Tab>
+                          <Tab eventKey="benefites" title="Job Benefites">
+                            <div className={`${Styles.about} mt-4`}>
+                              {" "}
+                              {this.state.filter.benefites ? (
+                                <p>{this.state.filter.benefites}</p>
+                              ) : (
+                                <p>No Benefites</p>
+                              )}
+                            </div>
+                          </Tab>
+                        </Tabs>
+                      </div>
                     </div>
                   )}
                 </div>
-              )}
-            </div>
+              </Col>
+            </Row>
           </Col>
         </Row>
         <Modal
@@ -337,11 +544,16 @@ class Inside extends Component {
             Need To Add Something{" "}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.closeModal}>
+            <Button
+              variant="light"
+              className={`${Styles.btngrad}`}
+              onClick={this.closeModal}
+            >
               Close
             </Button>
             <Button
-              variant="primary"
+              variant="light"
+              className={`${Styles.btngrad}`}
               onClick={() => {
                 this.aplyForJob();
                 this.closeModal();
@@ -351,8 +563,6 @@ class Inside extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-
-        <AllAplication postJobs={this.state.allPost} />
       </>
     );
   }

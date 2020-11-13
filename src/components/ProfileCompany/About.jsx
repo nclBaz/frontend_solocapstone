@@ -13,6 +13,7 @@ export default function About(props) {
   const [getAbout, setGetAbout] = useState("");
   const [hideButton, sethideButton] = useState(true);
   const [showButton, setshowButton] = useState(false);
+  const url = process.env.REACT_APP_URL;
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -32,7 +33,7 @@ export default function About(props) {
     }
   };
   const fetchProfile = async () => {
-    const result = await fetch("http://localhost:4006/login/profile", {
+    const result = await fetch(url + "login/profile", {
       method: "GET",
       credentials: "include",
       headers: {
@@ -63,7 +64,7 @@ export default function About(props) {
     }
   };
   const editProfile = async () => {
-    const result = await fetch("http://localhost:4006/login/edit", {
+    const result = await fetch(url + "login/edit", {
       method: "PUT",
       credentials: "include",
       body: JSON.stringify({ aboutMe: getAbout }),

@@ -4,19 +4,19 @@ import {
   Button,
   InputGroup,
   FormControl,
-  Form,
   Row,
   Col,
-  Dropdown,
-  DropdownButton,
 } from "react-bootstrap";
 import { BiAddToQueue } from "react-icons/bi";
 import { BiUpload } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { AiOutlineEdit } from "react-icons/ai";
 
 import Styles from "./Styles.module.css";
+const url = process.env.REACT_APP_URL;
 export default class Workexperience extends Component {
   state = {
     experiences: [],
@@ -70,35 +70,29 @@ export default class Workexperience extends Component {
     this.fetchData();
   };
   fetchData = async () => {
-    const getExperience = await fetch(
-      `http://localhost:4006/workExperience/workExperience`,
-      {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const getExperience = await fetch(url + `workExperience/workExperience`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
     const data = await getExperience.json();
     this.setState({ experiences: data });
     console.log(data, "where are the data");
   };
 
   postExperience = async () => {
-    const getExperience = await fetch(
-      `http://localhost:4006/workExperience/postWork`,
-      {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({ ...this.state.postExperience }),
-        headers: new Headers({
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        }),
-      }
-    );
+    const getExperience = await fetch(url + `workExperience/postWork`, {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify({ ...this.state.postExperience }),
+      headers: new Headers({
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      }),
+    });
 
     const id = await getExperience.json();
     console.log(id, "what have inside");
@@ -106,7 +100,7 @@ export default class Workexperience extends Component {
       const image = new FormData();
       image.append("image", this.state.image);
       const uploadPhoto = await fetch(
-        `http://localhost:4006/workExperience/uploadImage/` + id._id,
+        url + `workExperience/uploadImage/` + id._id,
         {
           method: "POST",
           credentials: "include",
@@ -151,7 +145,7 @@ export default class Workexperience extends Component {
     console.log(this.state.postId, "kosdvsdojmsdm");
     console.log(this.state.ex, "kosdvsdojmsdm");
     const getExperience = await fetch(
-      `http://localhost:4006/workExperience/edit/` + this.state.postId,
+      url + `workExperience/edit/` + this.state.postId,
       {
         method: "PUT",
         credentials: "include",
@@ -168,7 +162,7 @@ export default class Workexperience extends Component {
       const image = new FormData();
       image.append("image", this.state.image);
       const uploadPhoto = await fetch(
-        `http://localhost:4006/workExperience/uploadImage/` + data._id,
+        url + `workExperience/uploadImage/` + data._id,
         {
           method: "POST",
           credentials: "include",
@@ -200,14 +194,11 @@ export default class Workexperience extends Component {
   };
 
   deleteExperience = async (id) => {
-    const getExperience = await fetch(
-      `http://localhost:4006/workExperience/delete/` + id,
-      {
-        method: "DELETE",
-        credentials: "include",
-        headers: { "Access-Control-Allow-Origin": "*" },
-      }
-    );
+    const getExperience = await fetch(url + `workExperience/delete/` + id, {
+      method: "DELETE",
+      credentials: "include",
+      headers: { "Access-Control-Allow-Origin": "*" },
+    });
 
     if (getExperience.ok) {
       console.log("is deleted");
@@ -220,87 +211,104 @@ export default class Workexperience extends Component {
     console.log(this.state.image, "ca ka mrena");
     return (
       <>
-        <div style={{ backgroundColor: "white" }}>
-          <Row>
-            <Col xs={8} sm={7} md={7} lg={7}>
-              <h4 className="ml-auto">Work Experiences</h4>
-            </Col>
-            <Col xs={3} sm={4} md={4} lg={4} className="text-right mr-4 ">
-              <BiAddToQueue
-                style={{ fontSize: "25px", paddingTop: "5px" }}
-                onClick={this.handleShow}
-              />
-            </Col>
-          </Row>
-          <div>
-            {this.state.experiences && this.state.experiences.length > 0 ? (
-              <>
-                {this.state.experiences &&
-                  this.state.experiences.map((data) => {
-                    return (
-                      <>
-                        <Row>
-                          <Col xs={4} sm={4} md={4} lg={4} className="mb-1">
-                            {data.image ? (
-                              <img
-                                src={data.image}
-                                className={`${Styles.img}`}
-                              />
-                            ) : (
-                              <img
-                                src="https://images.idgesg.net/images/article/2019/05/cso_best_security_software_best_ideas_best_technology_lightbulb_on_horizon_of_circuit_board_landscape_with_abstract_digital_connective_technology_atmosphere_ideas_innovation_creativity_by_peshkov_gettyimages-965785212_3x2_2400x1600-100797318-large.jpg"
-                                className={`${Styles.img}`}
-                              />
-                            )}
-                          </Col>
-                          <Col xs={6} sm={6} md={6} lg={6}>
-                            <p>{data.workExperience}</p>
-                            <p>{data.workPosition}</p>
-                            <p>
-                              {" "}
-                              {data.started} {data.finished}
-                            </p>
-                          </Col>
+        <Row>
+          <Col xs={12} sm={12} md={12} lg={12} className="text-center ">
+            <Button
+              style={{
+                fontSize: "15px",
+                marginTop: "10px",
+                marginBottom: "10px",
+              }}
+              variant="light"
+              className={`${Styles.btngrad}`}
+              onClick={this.handleShow}
+            >
+              Add Experiences
+            </Button>
+          </Col>
 
-                          {/* <Col xs={2} sm={2} md={2} lg={2}> */}
-                          {/* <h6 onClick={() => this.editShow(data)}>Edit</h6>
-                            <p onClick={() => this.deleteExperience(data._id)}>
-                              Delete
-                            </p> */}
+          {this.state.experiences && this.state.experiences.length > 0 ? (
+            <>
+              {this.state.experiences &&
+                this.state.experiences.map((data) => {
+                  return (
+                    <>
+                      <Col xs={12} sm={12} md={6} lg={6}>
+                        <div className={`${Styles.carts} mt-1`}>
                           <div
                             style={{
                               display: "flex",
-                              justifyContent: "space-between",
+                              justifyContent: "space-around",
+                              boxShadow:
+                                "3px 3px 3px  rgba(212, 212, 212, 0.938)",
                             }}
                           >
-                            <FiEdit onClick={() => this.editShow(data)} />
-                            <AiFillDelete
-                              onClick={() => this.deleteExperience(data._id)}
-                            />
+                            <div>
+                              {data.image ? (
+                                <img
+                                  className="mt-"
+                                  src={data.image}
+                                  style={{ width: "80px", height: "80px" }}
+                                />
+                              ) : (
+                                <img
+                                  className="mt-3"
+                                  src="https://ianmartin.com/wp-content/uploads/2017/10/WhatE28099s20the20Best20Day20of20the20Week20to20Post20a20Job20Ad-1030x687.jpg"
+                                  style={{ width: "80px", height: "80px" }}
+                                />
+                              )}
+                            </div>
+                            <div className="mt-1">
+                              <p>{data.workExperience}</p>
+                              <p>{data.workPosition}</p>
+                              <p>
+                                {data.started}-{data.finished}
+                              </p>
+                            </div>
+                            <div className="mt-1">
+                              <RiDeleteBinLine
+                                onClick={() => this.deleteExperience(data._id)}
+                              />
 
-                            {/* </Col> */}
+                              <AiOutlineEdit
+                                className="ml-2"
+                                onClick={() => this.editShow(data)}
+                              />
+                            </div>
                           </div>
-                          <Row className={`${Styles.experience} ml-1 mt-0`}>
-                            <Col xs={12} sm={12} md={12} lg={12}>
+                          <div className={`${Styles.aboutCarts} ml-1 mr-1`}>
+                            <h6>Experience Description</h6>
+                            {data.description ? (
                               <p>{data.description}</p>
-                            </Col>
-                          </Row>
-                        </Row>
-                      </>
-                    );
-                  })}{" "}
-              </>
-            ) : (
-              <Row>
-                <Col>
-                  <div>
-                    <p> Please add Experiences!!!!!!</p>
-                  </div>
-                </Col>{" "}
-              </Row>
-            )}
-          </div>
-        </div>
+                            ) : (
+                              <p>No Description Detail . </p>
+                            )}
+                          </div>
+                        </div>
+                      </Col>
+                    </>
+                  );
+                })}{" "}
+            </>
+          ) : (
+            <Col
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              style={{ alignItems: "center", textAlign: "center" }}
+            >
+              <div className="mt-5">
+                <h6>You have no Experiences</h6>
+                <img
+                  className="mt-0"
+                  src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814051_1280.png"
+                  style={{ width: "250px", height: "250px" }}
+                />
+              </div>
+            </Col>
+          )}
+        </Row>
         <Modal
           show={this.state.show}
           onHide={this.handleClose}

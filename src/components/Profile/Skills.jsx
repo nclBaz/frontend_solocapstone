@@ -12,6 +12,7 @@ import Styles from "./Styles.module.css";
 import { TiDelete } from "react-icons/ti";
 import { BiUpload } from "react-icons/bi";
 export default function Skills() {
+  const url = process.env.REACT_APP_URL;
   const [skills, setSkills] = useState([]);
   const [postSkill, setPostSkill] = useState("");
   const [show, setShow] = useState(false);
@@ -23,7 +24,7 @@ export default function Skills() {
     getSkills();
   }, []);
   const getSkills = async () => {
-    const skills = await fetch("http://localhost:4006/skills/skill", {
+    const skills = await fetch(url + "skills/skill", {
       method: "GET",
       credentilas: "include",
       headers: {
@@ -38,7 +39,7 @@ export default function Skills() {
   };
 
   const postskill = async () => {
-    const post = await fetch("http://localhost:4006/skills/postSkill", {
+    const post = await fetch(url + "skills/postSkill", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ skillName: postSkill }),
@@ -56,7 +57,7 @@ export default function Skills() {
   };
 
   const deleteSkill = async (id) => {
-    const post = await fetch("http://localhost:4006/skills/delete/" + id, {
+    const post = await fetch(url + "skills/delete/" + id, {
       method: "DELETE",
       credentials: "include",
       headers: {
@@ -74,28 +75,39 @@ export default function Skills() {
   return (
     <>
       <Row>
-        <Col xs={8} sm={7} md={7} lg={7}>
-          <h4 className="ml-auto">Skills</h4>
-        </Col>
-        <Col xs={3} sm={4} md={4} lg={4} className="text-right mr-4 ">
-          <BiUpload
-            style={{ fontSize: "25px", paddingTop: "5px" }}
+        <Col xs={12} sm={12} md={12} lg={12} className="text-center ">
+          <Button
+            style={{
+              fontSize: "15px",
+              marginTop: "10px",
+              marginBottom: "10px",
+            }}
+            variant="light"
+            className={`${Styles.btngrad}`}
             onClick={handleShow}
-          />
+          >
+            Add Skills
+          </Button>
         </Col>
-      </Row>
-      <Row className={`${Styles.skills}`}>
-        {skills &&
-          skills.map((skill) => {
-            return (
-              <Col xs={4} sm={4} md={4} lg={2}>
-                <p style={{ marginLeft: "10px" }}>
+
+        <Col
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          className={`${Styles.carts} mt-1`}
+          style={{ display: "flex" }}
+        >
+          {skills &&
+            skills.map((skill) => {
+              return (
+                <Button variant="light" style={{ marginLeft: "10px" }}>
                   {skill.skillName}
                   <TiDelete onClick={() => deleteSkill(skill._id)} />
-                </p>
-              </Col>
-            );
-          })}
+                </Button>
+              );
+            })}{" "}
+        </Col>
       </Row>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

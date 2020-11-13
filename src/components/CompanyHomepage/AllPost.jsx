@@ -4,13 +4,14 @@ import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import "react-super-responsive-table/dist/SuperResponsiveTableStyle.css";
 import Styles from "./Styles.module.css";
 export default function AllPost(props) {
+  const url = process.env.REACT_APP_URL;
   const [companyProfile, setcompanyProfile] = useState([]);
   useEffect(() => {
     company();
   }, []);
 
   const company = async () => {
-    const data = await fetch("http://localhost:4006/login/profile", {
+    const data = await fetch(url + "login/profile", {
       method: "GET",
       credentials: "include",
       headers: {
@@ -118,6 +119,26 @@ export default function AllPost(props) {
               );
             })}
         </Table>
+        {props.allJob.length === 0 && (
+          <>
+            <Col
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              style={{ alignItems: "center", textAlign: "center" }}
+            >
+              <div className="mt-2">
+                <h6>You have no Post.Add A Post. </h6>
+                <img
+                  className="mt-0"
+                  src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814051_1280.png"
+                  style={{ width: "250px", height: "250px" }}
+                />
+              </div>
+            </Col>
+          </>
+        )}
       </Col>
     </div>
   );

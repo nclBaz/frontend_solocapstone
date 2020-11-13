@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Table, Row, Container } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import Styles from "./Styles.module.css";
+
+import { RiDeleteBin5Fill } from "react-icons/ri";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => state;
@@ -15,70 +18,167 @@ const mapDispatchToProps = (dispatch) => ({
 
 function AllAplication(props) {
   const [aplication, setAplication] = useState([]);
+  const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
-    const fetchData = async () => {
-      const aplication = await fetch(
-        `http://localhost:4006/aplication/getAllAplication`,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      const getAllAplication = await aplication.json();
-      setAplication(getAllAplication);
-      props.log(getAllAplication);
-    };
     fetchData();
   }, []);
+  const fetchData = async () => {
+    const aplication = await fetch(url + `aplication/getAllAplication`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
+    const getAllAplication = await aplication.json();
+    setAplication(getAllAplication);
+    props.log(getAllAplication);
+    console.log(getAllAplication, "show post");
+  };
 
-  //  componentDidUpdate(prevProps) {
-  //     if (  prevProps.allAplication.allAplication!== this.props.allAplication.allAplication) {
-  //      this.setState({allAplication:this.props.allAplication.allAplication});
-  //      console.log(this.props.allAplication.allAplication,"si eshte")
-  //      console.log(prevProps.allAplication.allAplication,"si ishte")
-  //    }
-  //  }
+  const deleteAplication = async (id) => {
+    const aplication = await fetch(url + `getAplication/` + id, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
+    if (aplication.ok) {
+      fetchData();
+    }
+  };
 
   return (
-    <div className={`${Styles.table}`}>
-      <Container>
-        <h3 className={`${Styles.title}`}>This are All Your Job Aplication</h3>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th></th>
-              <th>CompanyName</th>
-              <th>Position</th>
-              <th>Answer</th>
-            </tr>
-          </thead>
-          <tbody>
+    <Row className={`${Styles.table} `} style={{ marginTop: "10px" }}>
+      <Col xs={12} sm={12} md={12} lg={12}>
+        <div style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}>
+          <h3 className={`${Styles.title}`}>
+            This are All Your Job Aplication
+          </h3>
+          <Table style={{ outline: "solid 3px red" }}>
+            <Thead>
+              <Tr>
+                <Th
+                  style={{
+                    textAlign: "center",
+                    borderRight: "solid grey 2px",
+                  }}
+                >
+                  Nr
+                </Th>
+                <Th
+                  style={{
+                    textAlign: "center",
+                    borderRight: "solid grey 2px",
+                  }}
+                >
+                  Company
+                </Th>
+                <Th
+                  style={{
+                    textAlign: "center",
+                    borderRight: "solid grey 2px",
+                  }}
+                >
+                  Position
+                </Th>
+                <Th
+                  style={{ textAlign: "center", borderRight: "solid grey 2px" }}
+                >
+                  {" "}
+                  Answer
+                </Th>
+                <Th style={{ textAlign: "center" }}> Remove </Th>
+              </Tr>
+            </Thead>
+
             {aplication &&
               aplication.map((x, i) => {
                 return (
-                  <tr>
-                    <td>{i + 1}</td>
-                    <td>{x.postId[0].companyName}</td>
-                    <td>{x.postId[0].jobPosition}</td>
-                    {x.answer && x.answer === "no answer" ? (
-                      <td>JOB Is Still In Review</td>
-                    ) : x.answer === "accepted" ? (
-                      <td>Accepted. Check Email </td>
-                    ) : (
-                      <td>Denied.Check Email</td>
-                    )}
-                  </tr>
+                  <Tbody className={`${Styles.rows}`}>
+                    {" "}
+                    <Tr
+                      style={{
+                        textAlign: "center",
+                        borderTop: "solid grey 2px",
+                      }}
+                    >
+                      <Td
+                        style={{
+                          borderRight: "solid grey 2px",
+                          borderTop: "solid grey 2px",
+                        }}
+                      >
+                        {i + 1}
+                      </Td>
+                      <Td
+                        style={{
+                          borderRight: "solid grey 2px",
+                          borderTop: "solid grey 2px",
+                        }}
+                      >
+                        {x.postId[0] && x.postId[0].companyName}
+                      </Td>
+                      <Td
+                        style={{
+                          borderRight: "solid grey 2px",
+                          borderTop: "solid grey 2px",
+                        }}
+                      >
+                        {x.postId[0] && x.postId[0].jobPosition}
+                      </Td>
+
+                      {x.answer && x.answer === "no answer" ? (
+                        <Td
+                          style={{
+                            borderTop: "solid grey 2px",
+                            borderRight: "solid grey 2px",
+                          }}
+                        >
+                          JOB Is Still In Review
+                        </Td>
+                      ) : x.answer === "accepted" ? (
+                        <Td
+                          style={{
+                            borderTop: "solid grey 2px",
+                            borderRight: "solid grey 2px",
+                          }}
+                        >
+                          Accepted. Check Email{" "}
+                        </Td>
+                      ) : (
+                        <Td
+                          style={{
+                            borderTop: "solid grey 2px",
+                            borderRight: "solid grey 2px",
+                          }}
+                        >
+                          Denied.Check Email
+                        </Td>
+                      )}
+                      <Td
+                        style={{
+                          borderTop: "solid grey 2px",
+                        }}
+                      >
+                        {x.postId[0] && (
+                          <RiDeleteBin5Fill
+                            onClick={() => deleteAplication(x.postId[0]._id)}
+                          />
+                        )}
+                      </Td>
+                    </Tr>{" "}
+                  </Tbody>
                 );
               })}
-          </tbody>
-        </Table>
-      </Container>
-    </div>
+          </Table>
+        </div>
+      </Col>
+    </Row>
   );
 }
 

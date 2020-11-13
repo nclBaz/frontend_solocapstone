@@ -1,3 +1,8 @@
+.myTabs {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 .profile {
   margin: 0 !important;
   padding: 0 !important;
@@ -74,7 +79,7 @@
   display: flex;
 }
 
-.uploadPhoto {
+/* .uploadPhoto {
   opacity: 0;
   font-size: 300%;
   position: absolute;
@@ -87,4 +92,209 @@
   position: absolute;
   margin: 25% 0 0 10%;
   color: white;
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.profile {
+  /* outline: grey solid 2px; */
+  height: 250px !important;
+  width: 80%;
+}
+.header {
+  display: flex;
+  width: 80%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 20px !important;
+  box-shadow: 5px 5px 5px 5px rgba(206, 206, 206, 0.938);
+  background-image: url("https://res.cloudinary.com/dle6fzc1o/image/upload/v1604661577/backgroundimage/Untitled_design_1_aggaly.png");
+  background-size: cover;
+}
+.div {
+  width: 80% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  height: auto;
+}
+.about {
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  outline: 2px solid red;
+  height: auto;
+}
+
+.imgProfile {
+  width: 120px;
+  margin-bottom: 0 !important;
+  margin-top: 45%;
+  height: 110px;
+}
+.nameProfile {
+  width: 150px;
+  margin-bottom: 0 !important;
+  margin-top: 75%;
+}
+.dataInfo {
+  box-shadow: 3px 3px 3px 3px rgba(212, 212, 212, 0.938);
+  background-color: white;
+  height: 260px;
+  color: rgb(63, 69, 95);
+}
+.dataInfo div {
+  display: flex;
+  margin-left: 15px;
+  margin-top: 15px;
+  margin-right: 15px;
+  color: rgb(63, 69, 95);
+  /* box-shadow: 3px 3px 3px 3px rgba(212, 212, 212, 0.938); */
+}
+
+.dataInfo div > h6 {
+  margin-left: 10px;
+}
+.dataInfo div > svg {
+  font-size: 18px;
+}
+.dataInfo div > svg:hover {
+  cursor: pointer;
+}
+.dataInfo div > h6:hover {
+  cursor: pointer;
+}
+
+.dataInfo div > h5:hover {
+  cursor: pointer;
+}
+
+.btngrad {
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: auto;
+  color: rgb(63, 69, 95);
+  font-weight: bolder;
+  font-size: 15px;
+
+  border: none;
+}
+
+.btngrad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: white;
+  text-decoration: none;
+  font-weight: bolder;
+  background-image: linear-gradient(
+    to right,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  cursor: pointer;
+}
+.btngrad:focus {
+  /* background-position: right center; /* change the direction of the change here */
+  /* color: #fff;
+    text-decoration: none; */
+  border: none !important;
+  color: white;
+  font-weight: bolder;
+  background-image: linear-gradient(
+    to right,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  box-shadow: none;
+}
+
+.aboutMe {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /* -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical; */
+}
+.dataAbout {
+  box-shadow: 3px 3px 3px 3px rgba(212, 212, 212, 0.938);
+  background-color: white;
+  height: auto;
+  color: rgb(63, 69, 95);
+}
+.dataAbout div {
+  display: flex;
+  margin-left: 15px;
+  margin-top: 15px;
+  margin-right: 15px;
+  /* box-shadow: 3px 3px 3px 3px rgba(212, 212, 212, 0.938); */
+}
+
+.dataAbout div > h6 {
+  margin-left: 10px;
+}
+.dataAbout div > svg {
+  font-size: 18px;
+}
+.dataAbout div > svg:hover {
+  cursor: pointer;
+}
+.dataAbout div > h6:hover {
+  cursor: pointer;
+}
+
+.dataAbout div > h5:hover {
+  cursor: pointer;
+}
+.input {
+  display: none;
+}
+.uploadPhoto {
+  /* margin-top: 105%; */
+  /* margin-left: 5%; */
+  color: black;
+  margin-left: 5px;
+}
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-top: 140px;
+  background-color: white;
+  border-radius: 5px;
+}
+.myPosts {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.carts {
+  box-shadow: 3px 3px 3px 3px rgba(212, 212, 212, 0.938);
+  background-color: white;
+}
+.aboutCarts {
+  /* outline: solid 2px red; */
+  height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: block;
+}
+.aboutCarts::-webkit-scrollbar {
+  display: none;
+}
+.aboutCarts h6 {
+  text-align: center;
+}
+.aboutCarts p {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+  .dataInfo {
+    height: auto;
+  }
 }

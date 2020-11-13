@@ -10,10 +10,9 @@ export default function AddPost(props) {
   const [imagePost, setImage] = useState("");
   const [requirments, setRequirments] = useState([]);
   const [benefites, setBenefites] = useState([]);
-
   const [showButton, setshowButton] = useState(true);
-
   const [show, setShow] = useState(false);
+  const url = process.env.REACT_APP_URL;
 
   const handleClose = () => {
     setShow(false);
@@ -35,7 +34,7 @@ export default function AddPost(props) {
   };
 
   const AddNewPost = async () => {
-    const result = await fetch("http://localhost:4006/post/newPost", {
+    const result = await fetch(url + "post/newPost", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(newPost),
@@ -51,17 +50,14 @@ export default function AddPost(props) {
       const uploadImage = imagePost;
       const image = new FormData();
       image.append("image", uploadImage);
-      const uploadPhoto = await fetch(
-        "http://localhost:4006/post/uploadImage/" + data._id,
-        {
-          method: "POST",
-          body: image,
-          credentials: "include",
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
+      const uploadPhoto = await fetch(url + "post/uploadImage/" + data._id, {
+        method: "POST",
+        body: image,
+        credentials: "include",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
 
       if (uploadPhoto.ok) {
         console.log("uploaded");
@@ -241,10 +237,10 @@ export default function AddPost(props) {
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
-                Close
+                Cancel
               </Button>
               <Button variant="primary" onClick={() => AddNewPost()}>
-                Edit Data
+                Post
               </Button>
             </Modal.Footer>
           </Modal>

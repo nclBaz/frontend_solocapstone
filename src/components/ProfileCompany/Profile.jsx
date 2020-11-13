@@ -21,13 +21,14 @@ export default function Profile() {
   const [personel, setpersonel] = useState("");
   const [email, setEmail] = useState("");
   const [about, setAbout] = useState("");
+  const url = process.env.REACT_APP_URL;
 
   useEffect(() => {
     fetchProfile();
   }, []);
 
   const fetchProfile = async () => {
-    const result = await fetch("http://localhost:4006/login/profile", {
+    const result = await fetch(url + "login/profile", {
       method: "GET",
       credentials: "include",
       headers: {
@@ -47,7 +48,7 @@ export default function Profile() {
     }
   };
   const editProfile = async () => {
-    const result = await fetch("http://localhost:4006/login/edit", {
+    const result = await fetch(url + "login/edit", {
       method: "PUT",
       credentials: "include",
       body: JSON.stringify({ companyName, location, personel, website, email }),
@@ -81,7 +82,7 @@ export default function Profile() {
     const uploadImage = e.target.files[0];
     const image = new FormData();
     image.append("image", uploadImage);
-    const uploadPhoto = await fetch("http://localhost:4006/login/uploadImage", {
+    const uploadPhoto = await fetch(url + "login/uploadImage", {
       method: "POST",
       body: image,
       credentials: "include",
@@ -145,7 +146,7 @@ export default function Profile() {
                     ) : (
                       <>
                         <img
-                          className={`${Styles.imgProfile}`}
+                          className={`${Style.imgProfile}`}
                           src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9-Tom5eAUi7AaarN_g-WIkVxvRNhdHa8BrQ&usqp=CAU"
                         />
 

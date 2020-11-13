@@ -9,8 +9,6 @@ export default function ProfileCompany() {
         <Col xs={12} sm={12} md={12} lg={12}>
           <Profile />
         </Col>
-
-        <Col xs={12} sm={12} md={12} lg={12}></Col>
       </Row>
     </>
   );

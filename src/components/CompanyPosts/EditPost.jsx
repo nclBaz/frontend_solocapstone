@@ -9,19 +9,17 @@ export default function EditPost(props) {
   const [benefites, setBenefites] = useState("");
   const [type, settype] = useState("");
   const [imagePost, setImage] = useState("");
+  const url = process.env.REACT_APP_URL;
 
   const getSingelPost = async () => {
-    const data = await fetch(
-      "http://localhost:4006/post/singelPost/" + props.data,
-      {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const data = await fetch(url + "post/singelPost/" + props.data, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
     const post = await data.json();
 
     setjobPosition(post.jobPosition);
@@ -45,18 +43,15 @@ export default function EditPost(props) {
     type,
   };
   const AddNewPost = async () => {
-    const result = await fetch(
-      "http://localhost:4006/post/editPost/" + props.data,
-      {
-        method: "PUT",
-        credentials: "include",
-        body: JSON.stringify(edited),
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const result = await fetch(url + "post/editPost/" + props.data, {
+      method: "PUT",
+      credentials: "include",
+      body: JSON.stringify(edited),
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
     const data = await result.json();
     if (data) {
       console.log(data);
@@ -64,17 +59,14 @@ export default function EditPost(props) {
       const uploadImage = imagePost;
       const image = new FormData();
       image.append("image", uploadImage);
-      const uploadPhoto = await fetch(
-        "http://localhost:4006/post/uploadImage/" + props.data,
-        {
-          method: "POST",
-          body: image,
-          credentials: "include",
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
+      const uploadPhoto = await fetch(url + "post/uploadImage/" + props.data, {
+        method: "POST",
+        body: image,
+        credentials: "include",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
 
       if (uploadPhoto.ok) {
         console.log("uploaded");
@@ -100,7 +92,7 @@ export default function EditPost(props) {
       keyboard={false}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Modal title</Modal.Title>
+        <Modal.Title>Edit Post</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form style={{ textAlign: "center" }}>
@@ -216,10 +208,10 @@ export default function EditPost(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={props.handleClose}>
-          Close
+          Cancel
         </Button>
         <Button variant="primary" onClick={() => AddNewPost()}>
-          Understood
+          Save Changes
         </Button>
       </Modal.Footer>
     </Modal>

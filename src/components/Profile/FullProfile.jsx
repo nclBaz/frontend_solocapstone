@@ -1,28 +1,41 @@
 import React from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Tabs, Tab } from "react-bootstrap";
 import Styles from "./Styles.module.css";
-import About from "./About";
+
 import WorkExperience from "./Workexperience";
 import Education from "./Education";
 import Skills from "./Skills";
 
 export default function FullProfile() {
   return (
-    <Container>
-      <Row className={`${Styles.fullProfile}`}>
-        <Col xs={12} sm={12} md={12} lg={12}>
-          <About />
-        </Col>
-        <Col xs={12} sm={12} md={12} lg={12}>
+    <div className={`${Styles.myTabs} mt-5`}>
+      <Tabs
+        defaultActiveKey="workexperiences"
+        id="uncontrolled-tab-example"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <Tab
+          eventKey="workexperiences"
+          title="Work Experiences"
+          style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}
+        >
           <WorkExperience />
-        </Col>
-        <Col xs={12} sm={12} md={12} lg={12}>
+        </Tab>
+        <Tab
+          eventKey="education"
+          title="Education"
+          style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}
+        >
           <Education />
-        </Col>
-        <Col xs={12} sm={12} md={12} lg={12}>
+        </Tab>
+        <Tab
+          eventKey="skills"
+          title="Skills"
+          style={{ width: "60%", marginLeft: "auto", marginRight: "auto" }}
+        >
           <Skills />
-        </Col>
-      </Row>
-    </Container>
+        </Tab>
+      </Tabs>
+    </div>
   );
 }

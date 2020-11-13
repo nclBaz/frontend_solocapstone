@@ -15,6 +15,7 @@ import { BiImageAdd } from "react-icons/bi";
 import Upload from "./uplad.png";
 const mapStateToProps = (state) => state;
 function MyRegister(props) {
+  const url = process.env.REACT_APP_URL;
   const [registerWorker, setregisterWorker] = useState(
     props.registerWorker.registerWorker === "worker" ? true : false
   );
@@ -51,11 +52,8 @@ function MyRegister(props) {
     password,
   };
 
-  const url = process.env.URL;
-  console.log(url);
-
   const workerRegister = async () => {
-    const register = await fetch("http://localhost:4006/profile/register", {
+    const register = await fetch(url + "profile/register", {
       method: "POST",
       body: JSON.stringify(workerData),
       // credentials: 'include',
@@ -64,7 +62,7 @@ function MyRegister(props) {
       }),
     });
 
-    const uploadPhoto = await ("http://localhost:4006/profile/workerImage",
+    const uploadPhoto = await (url + "profile/workerImage",
     {
       method: "POST",
       body: JSON.stringify(image),
@@ -82,7 +80,7 @@ function MyRegister(props) {
   };
 
   const companyRegister = async () => {
-    const register = await fetch("http://localhost:4006/login/register", {
+    const register = await fetch(url + "login/register", {
       method: "POST",
       body: JSON.stringify(companyData),
       // credentials: 'include',
@@ -90,7 +88,7 @@ function MyRegister(props) {
         "Content-Type": "application/json",
       }),
     });
-    const uploadPhoto = await ("http://localhost:4006/login/companyImage",
+    const uploadPhoto = await (url + "login/companyImage",
     {
       method: "POST",
       body: JSON.stringify(image),

@@ -4,8 +4,11 @@ import { connect } from "react-redux";
 import { Form, Col, Button, InputGroup, Row, Alert } from "react-bootstrap";
 
 import Styles from "./Login.module.css";
+
 const mapStateToProps = (state) => state;
 function MyLogin(props) {
+  const url = process.env.REACT_APP_URL;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginWorker, setLoginWorker] = useState(
@@ -16,15 +19,10 @@ function MyLogin(props) {
   );
   const [alert, setAlert] = useState(false);
 
-  // const url = process.env.URL
-  // console.log(url)
   const showLogin = props.registerWorker;
-  console.log(props.fechWorkers);
-  console.log(props.registerWorker.registerWorker, "registered worker");
-  console.log(showLogin, "value");
-  
+
   const worker = async () => {
-    const moreData = await fetch("http://localhost:4006/profile/login", {
+    const moreData = await fetch(url + "profile/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       credential: "include",
@@ -33,9 +31,9 @@ function MyLogin(props) {
       }),
     });
     if (moreData.ok) {
+      props.UserProfile();
+      props.logInWorker();
       props.history.push("/worker");
-      console.log("loged in as company");
-
       setAlert(false);
     } else {
       setAlert(true);
@@ -43,8 +41,7 @@ function MyLogin(props) {
   };
 
   const company = async () => {
-    const result = await fetch("http://localhost:4006/login/login",
-    {
+    const result = await fetch(url + "login/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       credential: "include",
@@ -53,8 +50,9 @@ function MyLogin(props) {
       }),
     });
     if (result.ok) {
-      console.log("tou are loged in as user");
       setAlert(false);
+      props.CompanyProfile();
+      props.loginCompany();
       props.history.push("/company");
     } else {
       setAlert(true);

@@ -49,7 +49,6 @@ class Buttons extends Component {
           <Button
             variant="primary"
             value="Worker"
-            onC
             onClick={(e) => {
               this.props.sendTo();
               this.addToReducer();

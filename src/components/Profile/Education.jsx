@@ -12,7 +12,10 @@ import { BiAddToQueue } from "react-icons/bi";
 import { BiUpload } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { AiOutlineEdit } from "react-icons/ai";
 import Styles from "./Styles.module.css";
+const url = process.env.REACT_APP_URL;
 export default class Education extends Component {
   state = {
     education: [],
@@ -67,53 +70,44 @@ export default class Education extends Component {
     this.fetchData();
   };
   fetchData = async () => {
-    const getEducation = await fetch(
-      `http://localhost:4006/education/allEducation`,
-      {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const getEducation = await fetch(url + `education/allEducation`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
     const data = await getEducation.json();
     this.setState({ education: data });
     console.log(data, "where are the data");
   };
 
   postEducation = async () => {
-    const getEducation = await fetch(
-      `http://localhost:4006/education/postEducation`,
-      {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify(this.state.postEducation),
-        headers: new Headers({
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        }),
-      }
-    );
+    const getEducation = await fetch(url + `education/postEducation`, {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(this.state.postEducation),
+      headers: new Headers({
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      }),
+    });
 
     const id = await getEducation.json();
     console.log(id, "what have inside");
     if (id) {
       const image = new FormData();
       image.append("image", this.state.image);
-      const uploadPhoto = await fetch(
-        `http://localhost:4006/education/uploadImage/` + id,
-        {
-          method: "POST",
-          credentials: "include",
-          body: image,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            // "Content-Type": "application/json",
-          },
-        }
-      );
+      const uploadPhoto = await fetch(url + `education/uploadImage/` + id, {
+        method: "POST",
+        credentials: "include",
+        body: image,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          // "Content-Type": "application/json",
+        },
+      });
 
       if (uploadPhoto.ok) {
         const data = await uploadPhoto.json();
@@ -142,7 +136,7 @@ export default class Education extends Component {
     console.log(this.state.postId, "kosdvsdojmsdm");
     console.log(this.state.ex, "kosdvsdojmsdm");
     const getEducation = await fetch(
-      `http://localhost:4006/education/edit/` + this.state.postId,
+      url + `education/edit/` + this.state.postId,
       {
         method: "PUT",
         credentials: "include",
@@ -159,7 +153,7 @@ export default class Education extends Component {
       const image = new FormData();
       image.append("image", this.state.image);
       const uploadPhoto = await fetch(
-        `http://localhost:4006/education/uploadImage/` + data._id,
+        url + `education/uploadImage/` + data._id,
         {
           method: "POST",
           credentials: "include",
@@ -193,14 +187,11 @@ export default class Education extends Component {
   };
 
   deleteEducation = async (id) => {
-    const getEducation = await fetch(
-      `http://localhost:4006/education/delete/` + id,
-      {
-        method: "DELETE",
-        credentials: "include",
-        headers: { "Access-Control-Allow-Origin": "*" },
-      }
-    );
+    const getEducation = await fetch(url + `education/delete/` + id, {
+      method: "DELETE",
+      credentials: "include",
+      headers: { "Access-Control-Allow-Origin": "*" },
+    });
 
     if (getEducation.ok) {
       console.log("is deleted");
@@ -213,79 +204,118 @@ export default class Education extends Component {
     console.log(this.state.image, "ca ka mrena");
     return (
       <>
-        <div>
-          <Row>
-            <Col xs={8} sm={7} md={7} lg={7}>
-              <h4>Education History</h4>
-            </Col>
-            <Col xs={3} sm={4} md={4} lg={4} className="text-right mr-4 ">
-              <BiAddToQueue
-                onClick={this.handleShow}
-                style={{ fontSize: "25px", paddingTop: "5px" }}
-              />
-            </Col>
-          </Row>
-          <div>
+        <Row>
+          <Col xs={12} sm={12} md={12} lg={12} className="text-center ">
+            <Button
+              style={{
+                fontSize: "15px",
+                marginTop: "10px",
+                marginBottom: "10px",
+              }}
+              variant="light"
+              className={`${Styles.btngrad}`}
+              onClick={this.handleShow}
+            >
+              Add Education
+            </Button>
+          </Col>
+
+          {this.state.education && this.state.education.length > 0 ? (
             <>
-              {this.state.education && this.state.education.length > 0 ? (
+              {this.state.education &&
                 this.state.education.map((data) => {
                   return (
                     <>
-                      <Row>
-                        <Col xs={4} sm={4} md={4} lg={4} className="mb-1">
-                          {data.image ? (
-                            <img src={data.image} className={`${Styles.img}`} />
-                          ) : (
-                            <img
-                              src="https://images.idgesg.net/images/article/2019/05/cso_best_security_software_best_ideas_best_technology_lightbulb_on_horizon_of_circuit_board_landscape_with_abstract_digital_connective_technology_atmosphere_ideas_innovation_creativity_by_peshkov_gettyimages-965785212_3x2_2400x1600-100797318-large.jpg"
-                              className={`${Styles.img}`}
-                            />
-                          )}
-                        </Col>
-                        <Col xs={6} sm={6} md={6} lg={6}>
-                          <p>{data.schoolName}</p>
-                          <p>{data.skillsLearned}</p>
-                          <p>
-                            {data.startDate} {data.endDate}
-                          </p>
-                        </Col>
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                          }}
-                        >
-                          <FiEdit onClick={() => this.editShow(data)} />
-                          <AiFillDelete
-                            onClick={() => this.deleteEducation(data._id)}
-                          />
-                        </div>
-                      </Row>
+                      <Col xs={12} sm={12} md={6} lg={6}>
+                        <div className={`${Styles.carts} mt-1`}>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-around",
+                              boxShadow:
+                                "3px 3px 3px  rgba(212, 212, 212, 0.938)",
+                            }}
+                          >
+                            <div>
+                              {data.image ? (
+                                <img
+                                  className="mt-3 mb-3"
+                                  src={data.image}
+                                  style={{ width: "80px", height: "80px" }}
+                                />
+                              ) : (
+                                <img
+                                  className="mt-3 mb-3"
+                                  src="https://ianmartin.com/wp-content/uploads/2017/10/WhatE28099s20the20Best20Day20of20the20Week20to20Post20a20Job20Ad-1030x687.jpg"
+                                  style={{ width: "80px", height: "80px" }}
+                                />
+                              )}
+                            </div>
+                            <div className="mt-1">
+                              <p>{data.schoolName}</p>
 
-                      <Col
-                        xs={12}
-                        sm={12}
-                        md={12}
-                        lg={12}
-                        className={`${Styles.experience} ml-1 mt-0`}
-                      >
-                        <p>{data.about}</p>
+                              <p>
+                                {data.startDate}-{data.endDate}
+                              </p>
+                            </div>
+                            <div className="mt-1">
+                              <RiDeleteBinLine
+                                onClick={() => this.deleteExperience(data._id)}
+                              />
+
+                              <AiOutlineEdit
+                                className="ml-2"
+                                onClick={() => this.editShow(data)}
+                              />
+                            </div>
+                          </div>
+                          <div className={`${Styles.aboutCarts} ml-1 mr-1`}>
+                            <div>
+                              {data.about ? (
+                                <>
+                                  <h6>Education Description</h6>
+                                  <p>{data.about}</p>
+                                </>
+                              ) : (
+                                <h6>No Description Detail . </h6>
+                              )}
+                            </div>
+                            <div>
+                              {data.skillsLearned ? (
+                                <>
+                                  <h6>Skills Learned</h6>
+                                  <p>{data.skillsLearned}</p>
+                                </>
+                              ) : (
+                                <h6>No Skill Detail . </h6>
+                              )}
+                            </div>
+                          </div>
+                        </div>
                       </Col>
                     </>
                   );
-                })
-              ) : (
-                <Row>
-                  <Col>
-                    <div>
-                      <p> Please add Education!!!!!!</p>
-                    </div>
-                  </Col>{" "}
-                </Row>
-              )}
+                })}{" "}
             </>
-          </div>
-        </div>
+          ) : (
+            <Col
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              style={{ alignItems: "center", textAlign: "center" }}
+            >
+              <div className="mt-5">
+                <h6>You have no Experiences</h6>
+                <img
+                  className="mt-0"
+                  src="https://cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814051_1280.png"
+                  style={{ width: "250px", height: "250px" }}
+                />
+              </div>
+            </Col>
+          )}
+        </Row>
         <Modal
           show={this.state.show}
           onHide={this.handleClose}

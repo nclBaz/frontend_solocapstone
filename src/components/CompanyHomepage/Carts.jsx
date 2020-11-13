@@ -5,8 +5,9 @@ import { BsFillBriefcaseFill } from "react-icons/bs";
 import { FaRegFilePdf } from "react-icons/fa";
 
 export default function Carts(props) {
+  const url = process.env.REACT_APP_URL;
   const getPDF = async (data) => {
-    fetch(`http://localhost:4006/login/${data._id}/pdf`, {
+    fetch(url + `login/${data._id}/pdf`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -80,6 +81,26 @@ export default function Carts(props) {
             </>
           );
         })}
+      {props.currentAplicant.length === 0 && (
+        <>
+          <Col
+            xs={12}
+            sm={12}
+            md={12}
+            lg={12}
+            style={{ alignItems: "center", textAlign: "center" }}
+          >
+            <div className="mt-2">
+              <h6>No Applicants. </h6>
+              <img
+                className="mt-0"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQB7MbKExx-gXWGSlkmjXpGnbOgDUm8dTWPw&usqp=CAU"
+                style={{ width: "180px", height: "180px" }}
+              />
+            </div>
+          </Col>
+        </>
+      )}
     </>
   );
 }
