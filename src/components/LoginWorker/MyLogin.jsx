@@ -2,11 +2,23 @@ import React, { useState } from "react";
 import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Form, Col, Button, InputGroup, Row, Alert } from "react-bootstrap";
-
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import Styles from "./Login.module.css";
+import Logo from "./Logo.png";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
+}));
 
 const mapStateToProps = (state) => state;
 function MyLogin(props) {
+  const classes = useStyles();
   const url = process.env.REACT_APP_URL;
 
   const [email, setEmail] = useState("");
@@ -63,90 +75,198 @@ function MyLogin(props) {
     <>
       {console.log(loginWorker)}
       {console.log(loginCompany)}
-      <div>
+      <Row
+        style={{
+          width: "80%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: "5%",
+        }}
+      >
         {alert && (
           <Alert variant="danger" className={`${Styles.input}`}>
             Check again Your Login credentials
           </Alert>
         )}
         {loginWorker && (
-          <Form className={`${Styles.form}`}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                className={`${Styles.input}`}
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                required
-                onChange={(e) => setEmail(e.currentTarget.value)}
-              />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                className={`${Styles.input}`}
-                type="password"
-                required
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.currentTarget.value)}
-              />
-            </Form.Group>
-            <Button variant="primary" onClick={() => worker()}>
-              <Link to="/home" style={{ textDecoration: "none" }}>
-                {" "}
-                Login
-              </Link>
-            </Button>
-            <br></br>
-            <br></br>
-            You are new .... ?{" "}
-            <Button variant="success" onClick={() => props.register()}>
-              Register here
-            </Button>
-          </Form>
+          <>
+            <Col xs={12} sm={12} md={5} lg={5} className="mt-5">
+              <div className={`${Styles.title}`}>
+                <img src={Logo} style={{ width: "70%" }} />
+                <h6>Find your future job in TECH JOBS</h6>
+              </div>
+            </Col>
+            <Col xs={12} sm={12} md={7} lg={7} className="mt-4">
+              <div
+                style={{
+                  height: "100%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+                className="mt-4 mb-4"
+              >
+                <form
+                  className={`${Styles.form} `}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <div className="mt-2 mb-4">
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="Email"
+                      defaultValue="Hello World"
+                      variant="outlined"
+                      value={email}
+                      style={{
+                        width: "90%",
+                      }}
+                      onChange={(e) => setEmail(e.currentTarget.value)}
+                    />
+                  </div>
+                  <div className="mt-2 mb-4">
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="Password"
+                      type="password"
+                      defaultValue="Hello World"
+                      variant="outlined"
+                      style={{
+                        width: "90%",
+                      }}
+                      value={password}
+                      onChange={(e) => setPassword(e.currentTarget.value)}
+                    />
+                  </div>
+                  <Button
+                    variant="light"
+                    className={`${Styles.btngrad}`}
+                    style={{ width: "100px" }}
+                    onClick={() => worker()}
+                  >
+                    Login
+                  </Button>
+                  <br></br>
+                  <br></br>
+                  You are new .... ?{" "}
+                  <Button
+                    variant="light"
+                    className={`${Styles.btngrad} mb-2`}
+                    onClick={() => props.register()}
+                  >
+                    Register
+                  </Button>
+                </form>{" "}
+              </div>
+            </Col>
+          </>
         )}
         {loginCompany && (
-          <Form className={`${Styles.form}`}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                className={`${Styles.input}`}
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.currentTarget.value)}
-              />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                className={`${Styles.input}`}
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.currentTarget.value)}
-              />
-            </Form.Group>
-            <Button variant="primary" onClick={() => company()}>
-              Login
-            </Button>
-            <br></br>
-            <br></br>
-            You are new .... ?{" "}
-            <Button variant="success" onClick={() => props.register()}>
-              Register here
-            </Button>
-          </Form>
+          // <Form className={`${Styles.form}`}>
+          //   <Form.Group controlId="formBasicEmail">
+          //     <Form.Label>Email address</Form.Label>
+          //     <Form.Control
+          //       className={`${Styles.input}`}
+          //       type="email"
+          //       placeholder="Enter email"
+          //       value={email}
+          //       onChange={(e) => setEmail(e.currentTarget.value)}
+          //     />
+          //     <Form.Text className="text-muted">
+          //       We'll never share your email with anyone else.
+          //     </Form.Text>
+          //   </Form.Group>
+          //   <Form.Group controlId="formBasicPassword">
+          //     <Form.Label>Password</Form.Label>
+          //     <Form.Control
+          //       className={`${Styles.input}`}
+          //       type="password"
+          //       placeholder="Password"
+          //       value={password}
+          //       onChange={(e) => setPassword(e.currentTarget.value)}
+          //     />
+          //   </Form.Group>
+          //   <Button variant="light" onClick={() => company()}>
+          //     Login
+          //   </Button>
+          //   <br></br>
+          //   <br></br>
+          //   You are new .... ?{" "}
+          //   <Button variant="light" onClick={() => props.register()}>
+          //     Register here
+          //   </Button>
+          // </Form>
+          <>
+            <Col xs={12} sm={12} md={5} lg={5} className="mt-5">
+              <div className={`${Styles.title}`}>
+                <img src={Logo} style={{ width: "70%" }} />
+                <h6>Find your future job in TECH JOBS</h6>
+              </div>
+            </Col>
+            <Col xs={12} sm={12} md={7} lg={7} className="mt-4">
+              <div
+                style={{
+                  height: "100%",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+                className="mt-4 mb-4"
+              >
+                <form
+                  className={`${Styles.form} `}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <div className="mt-2 mb-4">
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="Email"
+                      defaultValue="Hello World"
+                      variant="outlined"
+                      value={email}
+                      style={{
+                        width: "90%",
+                      }}
+                      onChange={(e) => setEmail(e.currentTarget.value)}
+                    />
+                  </div>
+                  <div className="mt-2 mb-4">
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="Password"
+                      type="password"
+                      defaultValue="Hello World"
+                      variant="outlined"
+                      style={{
+                        width: "90%",
+                      }}
+                      value={password}
+                      onChange={(e) => setPassword(e.currentTarget.value)}
+                    />
+                  </div>
+                  <Button
+                    variant="light"
+                    className={`${Styles.btngrad}`}
+                    style={{ width: "100px" }}
+                    onClick={() => company()}
+                  >
+                    Login
+                  </Button>
+                  <br></br>
+                  <br></br>
+                  You are new .... ?{" "}
+                  <Button
+                    variant="light"
+                    className={`${Styles.btngrad} mb-2`}
+                    onClick={() => props.register()}
+                  >
+                    Register
+                  </Button>
+                </form>{" "}
+              </div>
+            </Col>
+          </>
         )}
-      </div>
+      </Row>
     </>
   );
 }

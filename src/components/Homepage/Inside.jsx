@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Tab, Tabs, Button, Modal } from "react-bootstrap";
+
 import Styles from "./Styles.module.css";
 import { MdWork } from "react-icons/md";
 import { MdAttachMoney } from "react-icons/md";
@@ -27,6 +28,7 @@ class Inside extends Component {
     showButton: true,
     hideButton: false,
     myProfile: {},
+    aplication: [],
   };
 
   componentDidMount = async () => {
@@ -59,6 +61,7 @@ class Inside extends Component {
     console.log(this.state.project);
 
     this.fetchProfile();
+    this.fetchData();
   };
 
   fetchProfile = async () => {
@@ -87,7 +90,7 @@ class Inside extends Component {
     console.log(findCompani, "thisis company");
     this.setState({ filter: findPost });
     this.setState({ companie: findCompani });
-    this.checkAply(userId, postId);
+    this.checkAply(e);
   };
 
   filterPost = (e) => {
@@ -120,33 +123,50 @@ class Inside extends Component {
   closeModal = () => {
     this.setState({ showModal: !this.state.showModal });
   };
-
-  checkAply = (userId, postId) => {
+  fetchData = async () => {
+    const aplication = await fetch(url + `aplication/getAllAplication`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
+    const getAllAplication = await aplication.json();
+    this.setState({ aplication: getAllAplication });
+  };
+  checkAply = (e) => {
+    console.log(this.state.aplication);
     if (
-      this.props.allAplication.allAplication &&
-      this.props.allAplication.allAplication.find(
-        (x) => x.postId._id === postId
-      )
+      this.state.aplication &&
+      this.state.aplication.find((x) => x.postId[0]._id === e._id)
     ) {
+      console.log(
+        this.state.aplication &&
+          this.state.aplication.find((x) => x.postId[0]._id === e._id),
+        "what has inside   "
+      );
+      console.log(e._id, "what has inside   ");
       this.setState({ hideButton: true });
       this.setState({ showButton: false });
       console.log(" u bo , u kry");
     } else {
       this.setState({ hideButton: false });
       this.setState({ showButton: true });
-      console.log(
-        this.props.allAplication.allAplication &&
-          this.props.allAplication.allAplication.userID === userId &&
-          this.props.allAplication.allAplication.postId &&
-          this.props.allAplication.allAplication.postId.map(
-            (x) => x.userID === postId
-          ),
-        "helllo"
-      );
+      console.log(" nuk bohe ,nuk kry");
+      // console.log(
+      //   this.props.allAplication.allAplication &&
+      //     this.props.allAplication.allAplication.userID === userId &&
+      //     this.props.allAplication.allAplication.postId &&
+      //     this.props.allAplication.allAplication.postId.map(
+      //       (x) => x.psotId[0]._id === postId
+      //     ),
+      //   "helllo"
+      // );
     }
   };
   aplyForJob = async () => {
-    const aply = await fetch(url + `aplication/aply/` + this.state.filter._id, {
+    const aply = await fetch(url + "aplication/aply/" + this.state.filter._id, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -157,6 +177,8 @@ class Inside extends Component {
     if (aply.ok) {
       alert("Your Aplication  Was Ok");
       console.log("u kry me sukses");
+      this.fetchData();
+    } else {
     }
   };
 
@@ -389,7 +411,7 @@ class Inside extends Component {
                           >
                             {this.state.companie && (
                               <>
-                                <div
+                                <Row
                                   style={{
                                     display: "flex",
                                     justifyContent: "center",
@@ -398,7 +420,11 @@ class Inside extends Component {
                                   }}
                                   className={`${Styles.example}`}
                                 >
-                                  <div
+                                  <Col
+                                    xs={12}
+                                    md={12}
+                                    sm={5}
+                                    lg={5}
                                     className={` e-card e-card-horizontal mt-4`}
                                     style={{
                                       height: "auto",
@@ -479,12 +505,18 @@ class Inside extends Component {
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
-                                  <div className={`${Styles.about} mt-4`}>
+                                  </Col>
+                                  <Col
+                                    xs={12}
+                                    md={12}
+                                    sm={7}
+                                    lg={7}
+                                    className={`${Styles.about} mt-4`}
+                                  >
                                     {" "}
                                     <p>{this.state.companie.aboutMe}</p>
-                                  </div>
-                                </div>
+                                  </Col>
+                                </Row>
                               </>
                             )}
                           </Tab>

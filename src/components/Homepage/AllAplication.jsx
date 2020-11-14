@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Table, Thead, Tbody, Tr, Th, Td } from "react-super-responsive-table";
 import Styles from "./Styles.module.css";
-
+import Pagination from "./Pagination";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { connect } from "react-redux";
 
@@ -19,6 +19,14 @@ const mapDispatchToProps = (dispatch) => ({
 function AllAplication(props) {
   const [aplication, setAplication] = useState([]);
   const url = process.env.REACT_APP_URL;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [aplicantPerPage] = useState(30);
+
+  const indexOfLastPost = currentPage * aplicantPerPage;
+  const indexOfFirstPost = indexOfLastPost - aplicantPerPage;
+  const currentAplicant = aplication.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     fetchData();
@@ -39,7 +47,7 @@ function AllAplication(props) {
   };
 
   const deleteAplication = async (id) => {
-    const aplication = await fetch(url + `getAplication/` + id, {
+    const aplication = await fetch(url + `aplication/getAplication/` + id, {
       method: "DELETE",
       credentials: "include",
       headers: {
@@ -55,11 +63,32 @@ function AllAplication(props) {
   return (
     <Row className={`${Styles.table} `} style={{ marginTop: "10px" }}>
       <Col xs={12} sm={12} md={12} lg={12}>
-        <div style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}>
-          <h3 className={`${Styles.title}`}>
+        <div
+          style={{
+            width: "90%",
+            marginLeft: "auto",
+            marginRight: "auto",
+            backgroundColor: "white",
+            boxShadow: "2px 2px 2px 2px rgba(212, 212, 212, 0.938)",
+          }}
+        >
+          <h3
+            className={`${Styles.title}`}
+            style={{
+              color: "rgb(63, 69, 95)",
+            }}
+          >
             This are All Your Job Aplication
           </h3>
-          <Table style={{ outline: "solid 3px red" }}>
+          <Table
+            style={{
+              width: "90%",
+              color: "rgb(63, 69, 95)",
+              marginLeft: "auto",
+              marginRight: "auto",
+              boxShadow: "2px 2px 2px rgba(212, 212, 212, 0.938)",
+            }}
+          >
             <Thead>
               <Tr>
                 <Th
@@ -165,17 +194,22 @@ function AllAplication(props) {
                           borderTop: "solid grey 2px",
                         }}
                       >
-                        {x.postId[0] && (
-                          <RiDeleteBin5Fill
-                            onClick={() => deleteAplication(x.postId[0]._id)}
-                          />
-                        )}
+                        <RiDeleteBin5Fill
+                          onClick={() => deleteAplication(x._id)}
+                        />
                       </Td>
                     </Tr>{" "}
                   </Tbody>
                 );
               })}
           </Table>
+
+          <Pagination
+            className="mt-5"
+            aplicantPerPage={aplicantPerPage}
+            totalAplicant={aplication.length}
+            paginate={paginate}
+          />
         </div>
       </Col>
     </Row>

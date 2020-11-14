@@ -16,7 +16,16 @@ export default function LoginWorker(props) {
     // setShowRegister(!showRegister)
     setHideButtons(!hideButtons);
   };
+  const back = () => {
+    setShowLogin(!showLogin);
+    // setShowRegister(!showRegister)
+    setHideButtons(!hideButtons);
+  };
   const Register = () => {
+    setShowLogin(!showLogin);
+    setShowRegister(!showRegister);
+  };
+  const back1 = () => {
     setShowLogin(!showLogin);
     setShowRegister(!showRegister);
   };
@@ -25,15 +34,14 @@ export default function LoginWorker(props) {
     setShowRegister(!showRegister);
     setShowLogin(!showLogin);
   };
+  const back2 = () => {
+    setShowRegister(!showRegister);
+    setShowLogin(!showLogin);
+  };
   return (
     <>
-      <Container>
-        <div className={`${Styles.title}`}>
-          <h3 style={{ marginTop: "70px" }}> Welcome to TECH JOBS </h3>
-          <h6>Find your future job in TECH JOBS</h6>
-        </div>
-
-        {hideButtons && <Buttons sendTo={() => sendTo()} />}
+      <Row className="m-0 p-0">
+        {hideButtons && <Buttons sendTo={sendTo} />}
 
         {showLogin && (
           <MyLogin
@@ -41,12 +49,12 @@ export default function LoginWorker(props) {
             UserProfile={props.UserProfile}
             loginCompany={props.loginCompany}
             logInWorker={props.logInWorker}
-            register={() => Register()}
+            register={Register}
           />
         )}
 
-        {showRegister && <MyRegister login={() => Login()} />}
-      </Container>
+        {showRegister && <MyRegister login={Login} />}
+      </Row>
     </>
   );
 }
