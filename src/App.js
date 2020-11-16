@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import logo from "./logo.svg";
-import Image from "./bgimage.jpg";
+
 import "./App.css";
 import Navbar from "./components/Header/Headers";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -12,6 +11,7 @@ import Company from "./pages/HomeCompany";
 import ProfileCompany from "./pages/ProfileCompany";
 import CompanyPosts from "./pages/CompanyPosts";
 import AllAplication from "./components/Homepage/AllAplication";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [companyNavBar, setcompanyNavBar] = useState(false);
