@@ -40,21 +40,21 @@ export default function LoginWorker(props) {
   };
   return (
     <>
-      <Row className="m-0 p-0">
-        {hideButtons && <Buttons sendTo={sendTo} />}
+      {/* <Row className="m-0 p-0"> */}
+      {hideButtons && <Buttons sendTo={sendTo} />}
 
-        {showLogin && (
-          <MyLogin
-            CompanyProfile={props.CompanyProfile}
-            UserProfile={props.UserProfile}
-            loginCompany={props.loginCompany}
-            logInWorker={props.logInWorker}
-            register={Register}
-          />
-        )}
+      {showLogin && (
+        <MyLogin
+          CompanyProfile={props.CompanyProfile}
+          UserProfile={props.UserProfile}
+          loginCompany={props.loginCompany}
+          logInWorker={props.logInWorker}
+          register={Register}
+        />
+      )}
 
-        {showRegister && <MyRegister login={Login} />}
-      </Row>
+      {showRegister && <MyRegister login={Login} />}
+      {/* </Row> */}
     </>
   );
 }

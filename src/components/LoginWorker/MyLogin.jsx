@@ -75,35 +75,23 @@ function MyLogin(props) {
     <>
       {console.log(loginWorker)}
       {console.log(loginCompany)}
-      <Row
-        style={{
-          width: "80%",
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop: "5%",
-        }}
-      >
-        {alert && (
-          <Alert variant="danger" className={`${Styles.input}`}>
-            Check again Your Login credentials
-          </Alert>
-        )}
+      <Row className={`${Styles.rows}`}>
         {loginWorker && (
           <>
             <Col xs={12} sm={12} md={5} lg={5} className="mt-5">
               <div className={`${Styles.title}`}>
                 <img src={Logo} style={{ width: "70%" }} />
-                <h6>Find your future job in TECH JOBS</h6>
+                <h4>Find your future job in TECH JOBS</h4>
               </div>
             </Col>
-            <Col xs={12} sm={12} md={7} lg={7} className="mt-4">
+            <Col xs={12} sm={12} md={7} lg={7} className="mt-5">
               <div
                 style={{
                   height: "100%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
-                className="mt-4 mb-4"
+                className="mt-5 mb-4"
               >
                 <form
                   className={`${Styles.form} `}
@@ -157,59 +145,32 @@ function MyLogin(props) {
                   </Button>
                 </form>{" "}
               </div>
+              <div>
+                {alert && (
+                  <Alert variant="danger" className={`${Styles.input}`}>
+                    Check again Your Login credentials
+                  </Alert>
+                )}
+              </div>
             </Col>
           </>
         )}
         {loginCompany && (
-          // <Form className={`${Styles.form}`}>
-          //   <Form.Group controlId="formBasicEmail">
-          //     <Form.Label>Email address</Form.Label>
-          //     <Form.Control
-          //       className={`${Styles.input}`}
-          //       type="email"
-          //       placeholder="Enter email"
-          //       value={email}
-          //       onChange={(e) => setEmail(e.currentTarget.value)}
-          //     />
-          //     <Form.Text className="text-muted">
-          //       We'll never share your email with anyone else.
-          //     </Form.Text>
-          //   </Form.Group>
-          //   <Form.Group controlId="formBasicPassword">
-          //     <Form.Label>Password</Form.Label>
-          //     <Form.Control
-          //       className={`${Styles.input}`}
-          //       type="password"
-          //       placeholder="Password"
-          //       value={password}
-          //       onChange={(e) => setPassword(e.currentTarget.value)}
-          //     />
-          //   </Form.Group>
-          //   <Button variant="light" onClick={() => company()}>
-          //     Login
-          //   </Button>
-          //   <br></br>
-          //   <br></br>
-          //   You are new .... ?{" "}
-          //   <Button variant="light" onClick={() => props.register()}>
-          //     Register here
-          //   </Button>
-          // </Form>
           <>
             <Col xs={12} sm={12} md={5} lg={5} className="mt-5">
               <div className={`${Styles.title}`}>
                 <img src={Logo} style={{ width: "70%" }} />
-                <h6>Find your future job in TECH JOBS</h6>
+                <h4>Find your future job in TECH JOBS</h4>
               </div>
             </Col>
-            <Col xs={12} sm={12} md={7} lg={7} className="mt-4">
+            <Col xs={12} sm={12} md={7} lg={7} className="mt-5">
               <div
                 style={{
                   height: "100%",
                   marginLeft: "auto",
                   marginRight: "auto",
                 }}
-                className="mt-4 mb-4"
+                className="mt-5 mb-4"
               >
                 <form
                   className={`${Styles.form} `}
@@ -262,6 +223,13 @@ function MyLogin(props) {
                     Register
                   </Button>
                 </form>{" "}
+              </div>
+              <div>
+                {alert && (
+                  <Alert variant="danger" className={`${Styles.input}`}>
+                    Check again Your Login credentials
+                  </Alert>
+                )}
               </div>
             </Col>
           </>

@@ -6,8 +6,8 @@
 
 .button {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+
+  justify-content: space-around;
   align-items: center;
 }
 .img {
@@ -17,15 +17,18 @@
 .title {
   /* display: flex;
   justify-content: center; */
-  margin-top: 50px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 5%;
   text-align: center;
+  color: #48546d !important;
 }
 .form {
   align-items: center;
   justify-content: center;
   text-align: center;
-  box-shadow: 2px 2px 2px rgba(212, 212, 212, 0.938);
-  background-color: white;
+  box-shadow: 5px 5px 5px rgba(212, 212, 212, 0.938);
+  background-color: rgb(255, 255, 255);
   border-radius: 15px;
   padding-top: 10px;
   width: 50%;
@@ -113,6 +116,59 @@
   );
   box-shadow: none;
 }
+.btngrad1 {
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: auto;
+
+  font-weight: bolder;
+  font-size: 15px;
+  background-image: linear-gradient(
+    to right,
+    rgb(10, 120, 178) 0%,
+    rgb(10, 120, 178) 51%,
+    rgb(10, 120, 178) 100%
+  );
+  border: none;
+  color: white;
+}
+
+.btngrad1:hover {
+  background-position: right center; /* change the direction of the change here */
+
+  text-decoration: none;
+  font-weight: bolder;
+  color: rgb(63, 69, 95);
+  cursor: pointer;
+  background-image: linear-gradient(
+    to right,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+}
+.btngrad1:focus {
+  /* background-position: right center; /* change the direction of the change here */
+  /* color: #fff;
+    text-decoration: none; */
+  border: none !important;
+  color: white;
+  font-weight: bolder;
+  background-image: linear-gradient(
+    to right,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  box-shadow: none;
+}
+.rows {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1%;
+}
 
 @media only screen and (max-width: 770px) {
   .form {
@@ -121,4 +177,121 @@
   .form1 {
     width: 100%;
   }
+  .rows {
+    width: 100%;
+  }
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+.bgImage {
+  background-image: url("./bgImage.png");
+  background-repeat: no-repeat;
+  height: 300px;
+  object-fit: cover;
+}
+.bgBlack {
+  background-color: #0c0c0c !important;
+}
+.textJustify {
+  text-align: justify !important;
+}
+.educationPhoto {
+  width: 100px !important;
+  height: 100px !important;
+  object-fit: cover;
+}
+.clear {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+.bg {
+  background-color: #0f1f26 !important;
+  color: #e8e9eb;
+}
+.background {
+  background-color: #010e42 !important;
+}
+.textMenu {
+  color: #e8e9eb !important;
+  font-size: 27px;
+  font-family: "Raleway", sans-serif;
+}
+.textMenu:hover {
+  color: #3eacff !important;
+  font-size: 27px;
+  font-family: "Raleway", sans-serif;
+}
+
+.quote {
+  color: #e8e9eb !important;
+  font-size: 43px;
+  font-family: "Raleway", sans-serif;
+}
+.subQuote {
+  color: #e8e9eb !important;
+  font-size: 33px;
+  font-family: "Raleway", sans-serif;
+}
+/* .title {
+  color: #e8e9eb !important;
+  font-size: 43px;
+  font-family: "Raleway", sans-serif;
+} */
+.mediumTitleW {
+  color: #e8e9eb !important;
+  font-size: 35px;
+  font-family: "Raleway", sans-serif;
+}
+.mediumTitle {
+  color: #3eacff !important;
+  font-size: 30px;
+  font-family: "Raleway", sans-serif;
+}
+.mediumSubTitle {
+  color: #394468 !important;
+  font-size: 23px;
+  font-family: "Raleway", sans-serif;
+}
+.text {
+  color: #e8e9eb !important;
+  font-size: 17px;
+  font-family: "Raleway", sans-serif;
+}
+.titleBlue {
+  color: #3eacff !important;
+  font-size: 43px;
+  font-family: "Raleway", sans-serif;
+}
+.subTitle {
+  color: #48546d !important;
+  font-size: 23px;
+  font-family: "Raleway", sans-serif;
+}
+.profileImage {
+  width: 70%;
+  height: auto;
+  background-color: rgb(255, 255, 255);
+  object-fit: cover;
+  box-shadow: 2px 2px 2px rgba(212, 212, 212, 0.938);
+  border-radius: 20px;
+}
+
+.icons {
+  width: 80px;
+  height: auto;
+  color: rgb(10, 120, 178);
+  align-items: center;
+}
+.icons1 {
+  width: 350px;
+  height: auto;
+  color: rgb(10, 120, 178);
+  font-weight: normal;
+}
+h6 {
+  font-size: 23px;
 }

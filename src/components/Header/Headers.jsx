@@ -46,7 +46,7 @@ function Headers(props) {
   }, [props.userNavBar, props.companyNavBar]);
 
   return (
-    <Navbar variant="dark" className={`${Styles.bar} w-100`} expand="lg">
+    <Navbar variant="dark" className={`${Styles.bar} `} expand="lg">
       <Navbar.Brand>
         <img src={Logo} style={{ width: "80px", height: "40px" }} />
       </Navbar.Brand>
