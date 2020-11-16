@@ -62,7 +62,7 @@ export default function Skills() {
       credentials: "include",
       headers: {
         "Access-Control-Allow-Origin": "*",
-        // "Content-Type": "application/json",
+        "Content-Type": "application/json",
       },
     });
     if (post.ok) {

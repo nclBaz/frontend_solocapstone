@@ -13,7 +13,10 @@ function Headers(props) {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(),
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
     });
     if (result.ok) {
       props.UserProfile();
@@ -30,7 +33,10 @@ function Headers(props) {
       credentials: "include",
       body: JSON.stringify(),
 
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
     });
     if (result.ok) {
       props.CompanyProfile();

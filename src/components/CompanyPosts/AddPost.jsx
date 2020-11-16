@@ -56,6 +56,7 @@ export default function AddPost(props) {
         credentials: "include",
         headers: {
           "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
         },
       });
 

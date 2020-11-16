@@ -104,6 +104,7 @@ export default function Profile() {
       credentials: "include",
       headers: {
         "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
       },
     });
 

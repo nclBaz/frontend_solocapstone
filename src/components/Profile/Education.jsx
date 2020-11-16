@@ -105,7 +105,7 @@ export default class Education extends Component {
         body: image,
         headers: {
           "Access-Control-Allow-Origin": "*",
-          // "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
       });
 
@@ -160,7 +160,7 @@ export default class Education extends Component {
           body: image,
           headers: {
             "Access-Control-Allow-Origin": "*",
-            // "Content-Type": "application/json",
+            "Content-Type": "application/json",
           },
         }
       );
@@ -190,7 +190,10 @@ export default class Education extends Component {
     const getEducation = await fetch(url + `education/delete/` + id, {
       method: "DELETE",
       credentials: "include",
-      headers: { "Access-Control-Allow-Origin": "*" },
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
     });
 
     if (getEducation.ok) {

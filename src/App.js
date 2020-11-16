@@ -24,6 +24,7 @@ function App() {
       credentials: "include",
       headers: {
         "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
       },
     });
     if (result.ok) {
@@ -43,6 +44,7 @@ function App() {
       credentials: "include",
       headers: {
         "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
       },
     });
     if (result.ok) {

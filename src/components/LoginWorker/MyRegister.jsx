@@ -64,8 +64,9 @@ function MyRegister(props) {
     const register = await fetch(url + "profile/register", {
       method: "POST",
       body: JSON.stringify(workerData),
-      // credentials: 'include',
+      credentials: "include",
       headers: new Headers({
+        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       }),
     });
@@ -78,8 +79,10 @@ function MyRegister(props) {
       {
         method: "POST",
         body: image,
+        credentials: "include",
         headers: {
           "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
         },
       });
 
@@ -99,8 +102,9 @@ function MyRegister(props) {
     const register = await fetch(url + "login/register", {
       method: "POST",
       body: JSON.stringify(companyData),
-      // credentials: 'include',
+      credentials: "include",
       headers: new Headers({
+        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       }),
     });
@@ -115,6 +119,7 @@ function MyRegister(props) {
         body: image,
         headers: {
           "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
         },
       });
 

@@ -12,6 +12,7 @@ export default function Carts(props) {
       credentials: "include",
       headers: {
         "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
       },
     })
       .then(function (response) {
