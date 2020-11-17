@@ -34,12 +34,11 @@ export default function AddPost(props) {
   };
 
   const AddNewPost = async () => {
-    const result = await fetch(url + "post/newPost", {
+    const result = await fetch(url + "/post/newPost", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(newPost),
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -50,13 +49,12 @@ export default function AddPost(props) {
       const uploadImage = imagePost;
       const image = new FormData();
       image.append("image", uploadImage);
-      const uploadPhoto = await fetch(url + "post/uploadImage/" + data._id, {
+      const uploadPhoto = await fetch(url + "/post/uploadImage/" + data._id, {
         method: "POST",
         body: image,
         credentials: "include",
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
         },
       });
 

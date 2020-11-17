@@ -52,7 +52,7 @@ export default class Education extends Component {
   editClose = () => this.setState({ editShow: false });
   editShow = (data) => {
     this.setState({ editShow: true });
-    console.log(data, "ipushihskjdkjhsdkj");
+
     this.setState({
       postEducation: {
         ...this.state.postEducation,
@@ -70,11 +70,10 @@ export default class Education extends Component {
     this.fetchData();
   };
   fetchData = async () => {
-    const getEducation = await fetch(url + `education/allEducation`, {
+    const getEducation = await fetch(url + `/education/allEducation`, {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -84,12 +83,11 @@ export default class Education extends Component {
   };
 
   postEducation = async () => {
-    const getEducation = await fetch(url + `education/postEducation`, {
+    const getEducation = await fetch(url + `/education/postEducation`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(this.state.postEducation),
       headers: new Headers({
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       }),
     });
@@ -99,13 +97,12 @@ export default class Education extends Component {
     if (id) {
       const image = new FormData();
       image.append("image", this.state.image);
-      const uploadPhoto = await fetch(url + `education/uploadImage/` + id, {
+      const uploadPhoto = await fetch(url + `/education/uploadImage/` + id, {
         method: "POST",
         credentials: "include",
         body: image,
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
         },
       });
 
@@ -136,13 +133,12 @@ export default class Education extends Component {
     console.log(this.state.postId, "kosdvsdojmsdm");
     console.log(this.state.ex, "kosdvsdojmsdm");
     const getEducation = await fetch(
-      url + `education/edit/` + this.state.postId,
+      url + `/education/edit/` + this.state.postId,
       {
         method: "PUT",
         credentials: "include",
         body: JSON.stringify({ ...this.state.postEducation }),
         headers: {
-          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
         },
       }
@@ -153,14 +149,13 @@ export default class Education extends Component {
       const image = new FormData();
       image.append("image", this.state.image);
       const uploadPhoto = await fetch(
-        url + `education/uploadImage/` + data._id,
+        url + `/education/uploadImage/` + data._id,
         {
           method: "POST",
           credentials: "include",
           body: image,
           headers: {
             "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
           },
         }
       );
@@ -187,11 +182,10 @@ export default class Education extends Component {
   };
 
   deleteEducation = async (id) => {
-    const getEducation = await fetch(url + `education/delete/` + id, {
+    const getEducation = await fetch(url + `/education/delete/` + id, {
       method: "DELETE",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });

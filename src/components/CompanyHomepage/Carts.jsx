@@ -7,11 +7,10 @@ import { FaRegFilePdf } from "react-icons/fa";
 export default function Carts(props) {
   const url = process.env.REACT_APP_URL;
   const getPDF = async (data) => {
-    fetch(url + `login/${data._id}/pdf`, {
+    fetch(url + `/login/${data._id}/pdf`, {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     })

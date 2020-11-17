@@ -32,11 +32,10 @@ export default function Posts() {
     fetchPost();
   }, []);
   const fetchPost = async () => {
-    const result = await fetch(url + "post/", {
+    const result = await fetch(url + "/post/", {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -48,11 +47,10 @@ export default function Posts() {
   };
 
   const deletePost = async (id) => {
-    const result = await fetch(url + "post/deletePost/" + id, {
+    const result = await fetch(url + "/post/deletePost/" + id, {
       method: "DELETE",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });

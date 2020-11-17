@@ -11,7 +11,7 @@ export default function AllPost(props) {
   }, []);
 
   const company = async () => {
-    const data = await fetch(url + "login/profile", {
+    const data = await fetch(url + "/login/profile", {
       method: "GET",
       credentials: "include",
       headers: {

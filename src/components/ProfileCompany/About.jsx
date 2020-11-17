@@ -33,11 +33,10 @@ export default function About(props) {
     }
   };
   const fetchProfile = async () => {
-    const result = await fetch(url + "login/profile", {
+    const result = await fetch(url + "/login/profile", {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -64,12 +63,11 @@ export default function About(props) {
     }
   };
   const editProfile = async () => {
-    const result = await fetch(url + "login/edit", {
+    const result = await fetch(url + "/login/edit", {
       method: "PUT",
       credentials: "include",
       body: JSON.stringify({ aboutMe: getAbout }),
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });

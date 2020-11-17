@@ -30,11 +30,10 @@ export default function Profile() {
   }, []);
 
   const fetchProfile = async () => {
-    const result = await fetch(url + "profile/profile", {
+    const result = await fetch(url + "/profile/profile", {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -64,12 +63,11 @@ export default function Profile() {
   };
 
   const editProfile = async () => {
-    const result = await fetch(url + "profile/edit", {
+    const result = await fetch(url + "/profile/edit", {
       method: "PUT",
       credentials: "include",
       body: JSON.stringify(data),
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -98,13 +96,12 @@ export default function Profile() {
     const uploadImage = e.target.files[0];
     const image = new FormData();
     image.append("image", uploadImage);
-    const uploadPhoto = await fetch(url + "profile/uploadImage", {
+    const uploadPhoto = await fetch(url + "/profile/uploadImage", {
       method: "POST",
       body: image,
       credentials: "include",
       headers: {
         "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
       },
     });
 

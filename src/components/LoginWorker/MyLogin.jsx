@@ -34,7 +34,7 @@ function MyLogin(props) {
   const showLogin = props.registerWorker;
 
   const worker = async () => {
-    const moreData = await fetch(url + "profile/login", {
+    const moreData = await fetch(url + "/profile/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       credential: "include",
@@ -53,7 +53,7 @@ function MyLogin(props) {
   };
 
   const company = async () => {
-    const result = await fetch(url + "login/login", {
+    const result = await fetch(url + "/login/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       credential: "include",

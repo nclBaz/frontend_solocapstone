@@ -32,11 +32,10 @@ function AllAplication(props) {
     fetchData();
   }, []);
   const fetchData = async () => {
-    const aplication = await fetch(url + `aplication/getAllAplication`, {
+    const aplication = await fetch(url + `/aplication/getAllAplication`, {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -47,11 +46,10 @@ function AllAplication(props) {
   };
 
   const deleteAplication = async (id) => {
-    const aplication = await fetch(url + `aplication/getAplication/` + id, {
+    const aplication = await fetch(url + `/aplication/getAplication/` + id, {
       method: "DELETE",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });

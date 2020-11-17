@@ -52,11 +52,10 @@ export default function WorkerProfile(props) {
     fetchWorker();
   }, [props.profile]);
   const fetchWorker = async () => {
-    const result = await fetch(url + "login/singleProfile/" + props.profile, {
+    const result = await fetch(url + "/login/singleProfile/" + props.profile, {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });

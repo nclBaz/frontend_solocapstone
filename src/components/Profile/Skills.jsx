@@ -24,11 +24,10 @@ export default function Skills() {
     getSkills();
   }, []);
   const getSkills = async () => {
-    const skills = await fetch(url + "skills/skill", {
+    const skills = await fetch(url + "/skills/skill", {
       method: "GET",
       credentilas: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -39,12 +38,11 @@ export default function Skills() {
   };
 
   const postskill = async () => {
-    const post = await fetch(url + "skills/postSkill", {
+    const post = await fetch(url + "/skills/postSkill", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ skillName: postSkill }),
       headers: new Headers({
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       }),
     });
@@ -57,11 +55,10 @@ export default function Skills() {
   };
 
   const deleteSkill = async (id) => {
-    const post = await fetch(url + "skills/delete/" + id, {
+    const post = await fetch(url + "/skills/delete/" + id, {
       method: "DELETE",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });

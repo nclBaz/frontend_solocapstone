@@ -1,112 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { InputGroup, FormControl, Row, Col } from "react-bootstrap";
-// import { FiEdit } from "react-icons/fi";
-// import { AiOutlineEdit } from "react-icons/ai";
-
-// import { connect } from "react-redux";
-// import Styles from "./Styles.module.css";
-// import { Modal, Button } from "react-bootstrap";
-// const mapStateToProps = (state) => state;
-// function About(props) {
-//   const url = process.env.REACT_APP_URL;
-//   const [about, setabout] = useState("");
-//   const [show, setShow] = useState(false);
-//   const handleClose = () => setShow(false);
-//   const handleShow = () => setShow(true);
-
-//   const data = async () => {
-//     if (props.profile.profileData && props.profile.profileData.aboutMe) {
-//       setabout(props.profile.profileData.aboutMe);
-//     }
-//   };
-//   const change = async () => {
-//     const editData = await fetch(url + "profile/edit", {
-//       method: "PUT",
-//       body: JSON.stringify({ aboutMe: about }),
-//       credential: "include",
-//       headers: new Headers({
-//         "Content-Type": "application/json",
-//       }),
-//     });
-
-//     const added = await editData.json();
-//     setabout(added.aboutMe);
-//     props.myProfile();
-//   };
-
-//   useEffect(() => {
-//     const hello = () => {
-//       console.log("he;lllllo");
-//     };
-//     hello();
-//   }, [about]);
-
-//   console.log(about, "what is doing");
-//   return (
-//     <>
-//       <div>
-//         <h5>About Me</h5>
-//         <AiOutlineEdit
-//           // onClick={hideText}
-//           className="mt-1"
-//           style={{
-//             marginLeft: "auto",
-//             fontSize: "20px",
-//           }}
-//           onClick={() => {
-//             data();
-//             handleShow();
-//           }}
-//         />
-//       </div>
-
-//       {props.profile.profileData && (
-//         <div>
-//           {props.profile.profileData.aboutMe ? (
-//             <p className={`${Styles.aboutMe}`}>
-//               {props.profile.profileData.aboutMe}
-//             </p>
-//           ) : (
-//             <p className={`${Styles.aboutMe}`}>About is empty </p>
-//           )}
-//         </div>
-//       )}
-
-//       <Modal show={show} onHide={handleClose}>
-//         <Modal.Header closeButton>
-//           <Modal.Title>Edit About</Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>
-//           <InputGroup>
-//             <FormControl
-//               id="aboutMe"
-//               as="textarea"
-//               aria-label="With textarea"
-//               value={about}
-//               onChange={(e) => setabout(e.currentTarget.value)}
-//             />
-//           </InputGroup>
-//         </Modal.Body>
-//         <Modal.Footer>
-//           <Button variant="secondary" onClick={handleClose}>
-//             Close
-//           </Button>
-//           <Button
-//             variant="primary"
-//             onClick={() => {
-//               change();
-//               handleClose();
-//             }}
-//           >
-//             Save Changes
-//           </Button>
-//         </Modal.Footer>
-//       </Modal>
-//     </>
-//   );
-// }
-// export default connect(mapStateToProps)(About);
-
 import React, { useEffect, useState } from "react";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -142,11 +33,10 @@ export default function About(props) {
     }
   };
   const fetchProfile = async () => {
-    const result = await fetch(url + "profile/profile", {
+    const result = await fetch(url + "/profile/profile", {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -178,7 +68,6 @@ export default function About(props) {
       credentials: "include",
       body: JSON.stringify({ aboutMe: getAbout }),
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });

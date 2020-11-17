@@ -12,11 +12,11 @@ export default function EditPost(props) {
   const url = process.env.REACT_APP_URL;
 
   const getSingelPost = async () => {
-    const data = await fetch(url + "post/singelPost/" + props.data, {
+    const data = await fetch(url + "/post/singelPost/" + props.data, {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
+    
         "Content-Type": "application/json",
       },
     });
@@ -43,12 +43,11 @@ export default function EditPost(props) {
     type,
   };
   const AddNewPost = async () => {
-    const result = await fetch(url + "post/editPost/" + props.data, {
+    const result = await fetch(url + "/post/editPost/" + props.data, {
       method: "PUT",
       credentials: "include",
       body: JSON.stringify(edited),
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -59,13 +58,12 @@ export default function EditPost(props) {
       const uploadImage = imagePost;
       const image = new FormData();
       image.append("image", uploadImage);
-      const uploadPhoto = await fetch(url + "post/uploadImage/" + props.data, {
+      const uploadPhoto = await fetch(url + "/post/uploadImage/" + props.data, {
         method: "POST",
         body: image,
         credentials: "include",
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
         },
       });
 

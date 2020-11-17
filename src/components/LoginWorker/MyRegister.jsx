@@ -61,12 +61,11 @@ function MyRegister(props) {
   };
 
   const workerRegister = async () => {
-    const register = await fetch(url + "profile/register", {
+    const register = await fetch(url + "/profile/register", {
       method: "POST",
       body: JSON.stringify(workerData),
       credentials: "include",
       headers: new Headers({
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       }),
     });
@@ -75,14 +74,13 @@ function MyRegister(props) {
       const image = new FormData();
       image.append("image", Image);
 
-      const uploadPhoto = await (url + "profile/workerImage" + data._id,
+      const uploadPhoto = await (url + "/profile/workerImage" + data._id,
       {
         method: "POST",
         body: image,
         credentials: "include",
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
         },
       });
 
@@ -99,12 +97,11 @@ function MyRegister(props) {
   };
 
   const companyRegister = async () => {
-    const register = await fetch(url + "login/register", {
+    const register = await fetch(url + "/login/register", {
       method: "POST",
       body: JSON.stringify(companyData),
       credentials: "include",
       headers: new Headers({
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       }),
     });
@@ -113,13 +110,12 @@ function MyRegister(props) {
       const image = new FormData();
       image.append("image", Image);
 
-      const uploadPhoto = await (url + "login/companyImage" + data._id,
+      const uploadPhoto = await (url + "/login/companyImage" + data._id,
       {
         method: "POST",
         body: image,
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
         },
       });
 

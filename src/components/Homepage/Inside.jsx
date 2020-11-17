@@ -32,11 +32,10 @@ class Inside extends Component {
   };
 
   componentDidMount = async () => {
-    const response = await fetch(url + "profile/allCompanies", {
+    const response = await fetch(url + "/profile/allCompanies", {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -45,11 +44,10 @@ class Inside extends Component {
     this.setState({ comp: fetchedUsers });
     this.setState({ companie: fetchedUsers[0] });
 
-    const result = await fetch(url + `profile/allPostJobs`, {
+    const result = await fetch(url + `/profile/allPostJobs`, {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -65,11 +63,10 @@ class Inside extends Component {
   };
 
   fetchProfile = async () => {
-    const result = await fetch(url + "profile/profile", {
+    const result = await fetch(url + "/profile/profile", {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });

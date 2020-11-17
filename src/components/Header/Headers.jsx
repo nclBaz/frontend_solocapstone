@@ -9,12 +9,11 @@ function Headers(props) {
   const url = process.env.REACT_APP_URL;
 
   const userLogout = async () => {
-    const result = await fetch(url + "profile/logout", {
+    const result = await fetch(url + "/profile/logout", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(),
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -28,13 +27,12 @@ function Headers(props) {
   };
 
   const companyLogout = async () => {
-    const result = await fetch(url + "login/logout", {
+    const result = await fetch(url + "/login/logout", {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(),
 
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });

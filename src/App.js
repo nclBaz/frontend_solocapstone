@@ -19,11 +19,10 @@ function App() {
   const [landingPageNavBar, setlandingPageNavBar] = useState(true);
   const url = process.env.REACT_APP_URL;
   const userProfile = async () => {
-    const result = await fetch(url + "profile/profile", {
+    const result = await fetch(url + "/profile/profile", {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -39,11 +38,10 @@ function App() {
   };
 
   const companyProfile = async () => {
-    const result = await fetch(url + "login/profile", {
+    const result = await fetch(url + "/login/profile", {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });

@@ -13,7 +13,7 @@ export default function Accept(props) {
   };
   const sendEmail = async () => {
     const result = await fetch(
-      url + "aplicationn/sendEmail/" + props.data._id,
+      url + "/aplicationn/sendEmail/" + props.data._id,
       {
         method: "POST",
         body: JSON.stringify({ subject, text }),
@@ -35,12 +35,11 @@ export default function Accept(props) {
 
   const acceptAplication = async () => {
     const result = await fetch(
-      url + "aplicationn/" + props.id + "/accept/" + props.data._id,
+      url + "/aplicationn/" + props.id + "/accept/" + props.data._id,
       {
         method: "GET",
         credentials: "include",
         headers: {
-          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
         },
       }

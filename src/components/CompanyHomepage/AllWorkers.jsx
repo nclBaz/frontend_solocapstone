@@ -40,11 +40,10 @@ export default function AllWorkers() {
   }, []);
 
   const allPost = async () => {
-    const data = await fetch(url + "post/", {
+    const data = await fetch(url + "/post/", {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -63,11 +62,10 @@ export default function AllWorkers() {
     setId(id);
   };
   const allPosts = async () => {
-    const data = await fetch(url + "post/singelPost/" + Id, {
+    const data = await fetch(url + "/post/singelPost/" + Id, {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });

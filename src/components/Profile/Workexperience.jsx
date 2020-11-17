@@ -70,11 +70,10 @@ export default class Workexperience extends Component {
     this.fetchData();
   };
   fetchData = async () => {
-    const getExperience = await fetch(url + `workExperience/workExperience`, {
+    const getExperience = await fetch(url + `/workExperience/workExperience`, {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -84,12 +83,11 @@ export default class Workexperience extends Component {
   };
 
   postExperience = async () => {
-    const getExperience = await fetch(url + `workExperience/postWork`, {
+    const getExperience = await fetch(url + `/workExperience/postWork`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify({ ...this.state.postExperience }),
       headers: new Headers({
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       }),
     });
@@ -100,14 +98,13 @@ export default class Workexperience extends Component {
       const image = new FormData();
       image.append("image", this.state.image);
       const uploadPhoto = await fetch(
-        url + `workExperience/uploadImage/` + id._id,
+        url + `/workExperience/uploadImage/` + id._id,
         {
           method: "POST",
           credentials: "include",
           body: image,
           headers: {
             "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
           },
         }
       );
@@ -145,13 +142,12 @@ export default class Workexperience extends Component {
     console.log(this.state.postId, "kosdvsdojmsdm");
     console.log(this.state.ex, "kosdvsdojmsdm");
     const getExperience = await fetch(
-      url + `workExperience/edit/` + this.state.postId,
+      url + `/workExperience/edit/` + this.state.postId,
       {
         method: "PUT",
         credentials: "include",
         body: JSON.stringify({ ...this.state.postExperience }),
         headers: {
-          "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
         },
       }
@@ -162,14 +158,13 @@ export default class Workexperience extends Component {
       const image = new FormData();
       image.append("image", this.state.image);
       const uploadPhoto = await fetch(
-        url + `workExperience/uploadImage/` + data._id,
+        url + `/workExperience/uploadImage/` + data._id,
         {
           method: "POST",
           credentials: "include",
           body: image,
           headers: {
             "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
           },
         }
       );
@@ -194,10 +189,10 @@ export default class Workexperience extends Component {
   };
 
   deleteExperience = async (id) => {
-    const getExperience = await fetch(url + `workExperience/delete/` + id, {
+    const getExperience = await fetch(url + `/workExperience/delete/` + id, {
       method: "DELETE",
       credentials: "include",
-      headers: { "Access-Control-Allow-Origin": "*" },
+      headers: { "Content-Type": "application/json" },
     });
 
     if (getExperience.ok) {
