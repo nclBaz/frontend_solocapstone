@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import {
-  Modal,
-  Button,
-  InputGroup,
-  FormControl,
-  Form,
-  Row,
-  Col,
-} from "react-bootstrap";
-import { BiAddToQueue } from "react-icons/bi";
+import { Modal, Button, InputGroup, Row, Col } from "react-bootstrap";
 import { BiUpload } from "react-icons/bi";
-import { AiFillDelete } from "react-icons/ai";
-import { FiEdit } from "react-icons/fi";
+import { RiImageAddFill } from "react-icons/ri";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+
 import { AiOutlineEdit } from "react-icons/ai";
 import Styles from "./Styles.module.css";
 const url = process.env.REACT_APP_URL;
@@ -147,6 +146,7 @@ export default class Education extends Component {
     if (data) {
       console.log(data, "what edit brings");
       const image = new FormData();
+      console.log(this.state.image, "image");
       image.append("image", this.state.image);
       const uploadPhoto = await fetch(
         url + `/education/uploadImage/` + data._id,
@@ -201,7 +201,7 @@ export default class Education extends Component {
     console.log(this.state.image, "ca ka mrena");
     return (
       <>
-        <Row>
+        <Row className={`${Styles.myPosts}`}>
           <Col xs={12} sm={12} md={12} lg={12} className="text-center ">
             <Button
               style={{
@@ -225,66 +225,124 @@ export default class Education extends Component {
                     <>
                       <Col xs={12} sm={12} md={6} lg={6}>
                         <div className={`${Styles.carts} mt-1`}>
-                          <div
+                          <Row
                             style={{
                               display: "flex",
                               justifyContent: "space-around",
                               boxShadow:
                                 "3px 3px 3px  rgba(212, 212, 212, 0.938)",
+                              marginLeft: "auto",
+                              marginRight: "auto",
                             }}
                           >
-                            <div>
+                            <Col xs={4} sm={4} md={4} lg={4}>
                               {data.image ? (
                                 <img
-                                  className="mt-3 mb-3"
                                   src={data.image}
-                                  style={{ width: "80px", height: "80px" }}
+                                  style={{
+                                    width: "100%",
+                                    height: "93%",
+                                    objectFit: "cover",
+                                    borderRadius: "10px",
+                                  }}
+                                  className="mt-1  ml-1"
                                 />
                               ) : (
                                 <img
-                                  className="mt-3 mb-3"
                                   src="https://ianmartin.com/wp-content/uploads/2017/10/WhatE28099s20the20Best20Day20of20the20Week20to20Post20a20Job20Ad-1030x687.jpg"
-                                  style={{ width: "80px", height: "80px" }}
+                                  style={{
+                                    width: "100%",
+                                    height: "93%",
+                                    objectFit: "cover",
+                                    borderRadius: "10px",
+                                  }}
+                                  className="mt-1  ml-1"
                                 />
                               )}
-                            </div>
-                            <div className="mt-1">
-                              <p>{data.schoolName}</p>
+                            </Col>
+                            <Col xs={6} sm={6} md={6} lg={6} className="mt-1">
+                              <h5 className={`${Styles.headTitle} mt-2 ml-2`}>
+                                {data.schoolName}
+                              </h5>
 
-                              <p>
+                              <h6 className={`${Styles.salary} ml-2`}>
                                 {data.startDate}-{data.endDate}
-                              </p>
-                            </div>
-                            <div className="mt-1">
-                              <RiDeleteBinLine
-                                onClick={() => this.deleteExperience(data._id)}
-                              />
-
-                              <AiOutlineEdit
-                                className="ml-2"
-                                onClick={() => this.editShow(data)}
-                              />
-                            </div>
-                          </div>
+                              </h6>
+                            </Col>
+                            <Col xs={2} sm={2} md={2} lg={2}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  justifyContent: "right",
+                                }}
+                              >
+                                <Button
+                                  variant="light"
+                                  style={{
+                                    backgroundColor: "transparent",
+                                    width: "70%",
+                                  }}
+                                  className={`${Styles.btngrad} mt-2`}
+                                  onClick={() =>
+                                    this.deleteExperience(data._id)
+                                  }
+                                >
+                                  <RiDeleteBinLine
+                                    className={`${Styles.icon} `}
+                                  />
+                                </Button>
+                                <Button
+                                  variant="light"
+                                  style={{
+                                    backgroundColor: "transparent",
+                                    width: "70%",
+                                  }}
+                                  onClick={() => this.editShow(data)}
+                                  className={`${Styles.btngrad} mt-2`}
+                                >
+                                  <AiOutlineEdit
+                                    className={`${Styles.icon} `}
+                                  />
+                                </Button>
+                              </div>
+                            </Col>
+                          </Row>
                           <div className={`${Styles.aboutCarts} ml-1 mr-1`}>
                             <div>
                               {data.about ? (
                                 <>
-                                  <h6>Education Description</h6>
-                                  <p>{data.about}</p>
+                                  <h6
+                                    className={`${Styles.headTitle} ml-2 mt-2`}
+                                  >
+                                    Education Description
+                                  </h6>
+                                  <p className={`${Styles.aboutMe}`}>
+                                    {data.about}
+                                  </p>
                                 </>
                               ) : (
-                                <h6>No Description Detail . </h6>
+                                <h6 className={`${Styles.headTitle} ml-2 mt-2`}>
+                                  No Description Detail .{" "}
+                                </h6>
                               )}
                             </div>
                             <div>
                               {data.skillsLearned ? (
                                 <>
-                                  <h6>Skills Learned</h6>
-                                  <p>{data.skillsLearned}</p>
+                                  <h6
+                                    className={`${Styles.headTitle} ml-2 mt-2`}
+                                  >
+                                    Skills Learned
+                                  </h6>
+                                  <p className={`${Styles.aboutMe}`}>
+                                    {data.skillsLearned}
+                                  </p>
                                 </>
                               ) : (
-                                <h6>No Skill Detail . </h6>
+                                <h6 className={`${Styles.headTitle} ml-2 mt-2`}>
+                                  No Skill Detail .{" "}
+                                </h6>
                               )}
                             </div>
                           </div>
@@ -322,113 +380,159 @@ export default class Education extends Component {
             <Modal.Title>Add Education</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h6 style={{ textAlign: "center" }}>SchoolName</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="name"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postEducation.schoolName}
-                onChange={(e) =>
-                  this.setState({
-                    postEducation: {
-                      ...this.state.postEducation,
-                      schoolName: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>SkillsLearned</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="surname"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postEducation.skillsLearned}
-                onChange={(e) =>
-                  this.setState({
-                    postEducation: {
-                      ...this.state.postEducation,
-                      skillsLearned: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>About Education</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="aboutMe"
-                as="textarea"
-                aria-label="With textarea"
-                value={this.state.postEducation.about}
-                onChange={(e) =>
-                  this.setState({
-                    postEducation: {
-                      ...this.state.postEducation,
-                      about: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>Started</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="position"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postEducation.startDate}
-                onChange={(e) =>
-                  this.setState({
-                    postEducation: {
-                      ...this.state.postEducation,
-                      startDate: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>End Date</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="dateOfBirth"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postEducation.endDate}
-                onChange={(e) =>
-                  this.setState({
-                    postEducation: {
-                      ...this.state.postEducation,
-                      endDate: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-
-            <InputGroup style={{ dispaly: "flex", justifyContent: "center" }}>
-              <InputGroup.Prepend>
+            <Row>
+              <Col
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                className={`${Styles.textStyle}`}
+                style={{ textAlign: "center" }}
+              >
                 <div>
-                  <h6> Upload Image</h6>
-                  <label
-                    for="file-input"
-                    aria-required="true"
-                    style={{
-                      paddingLeft: "30px",
-                      paddingRight: "30px",
-                    }}
-                  >
-                    <BiUpload
+                  <h6>School Name</h6>
+
+                  <form>
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="School Name"
+                      className="mb-2"
+                      type="text"
+                      variant="outlined"
                       style={{
-                        width: "50px",
-                        height: "50px",
+                        width: "100%",
                       }}
+                      type="text"
+                      value={this.state.postEducation.schoolName}
+                      onChange={(e) =>
+                        this.setState({
+                          postEducation: {
+                            ...this.state.postEducation,
+                            schoolName: e.currentTarget.value,
+                          },
+                        })
+                      }
                     />
+                  </form>
+                </div>
+                <div>
+                  <h6>Skill Learned </h6>
+                  <form>
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="Skill Learned"
+                      className="mb-2"
+                      type="text"
+                      variant="outlined"
+                      style={{
+                        width: "100%",
+                      }}
+                      type="text"
+                      value={this.state.postEducation.skillsLearned}
+                      onChange={(e) =>
+                        this.setState({
+                          postEducation: {
+                            ...this.state.postEducation,
+                            skillsLearned: e.currentTarget.value,
+                          },
+                        })
+                      }
+                    />
+                  </form>
+                </div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div>
+                    <h6>Started </h6>
+                    <form>
+                      <TextField
+                        id="filled-multiline-flexible"
+                        label="Started"
+                        className="mb-2"
+                        type="text"
+                        variant="outlined"
+                        style={{
+                          width: "100%",
+                        }}
+                        type="text"
+                        value={this.state.postEducation.startDate}
+                        onChange={(e) =>
+                          this.setState({
+                            postEducation: {
+                              ...this.state.postEducation,
+                              startDate: e.currentTarget.value,
+                            },
+                          })
+                        }
+                      />
+                    </form>
+                  </div>
+                  <div>
+                    <h6>Finished </h6>
+                    <form>
+                      <TextField
+                        id="filled-multiline-flexible"
+                        label="Finished"
+                        className="mb-2"
+                        type="text"
+                        variant="outlined"
+                        style={{
+                          width: "100%",
+                        }}
+                        type="text"
+                        value={this.state.postEducation.endDate}
+                        onChange={(e) =>
+                          this.setState({
+                            postEducation: {
+                              ...this.state.postEducation,
+                              endDate: e.currentTarget.value,
+                            },
+                          })
+                        }
+                      />
+                    </form>
+                  </div>
+                </div>
+
+                <div>
+                  <div>
+                    <h6>About </h6>
+
+                    <form>
+                      <TextField
+                        id="outlined-multiline-static"
+                        label="Job Description"
+                        multiline
+                        className="mb-2"
+                        rows={4}
+                        style={{
+                          width: "100%",
+                        }}
+                        variant="outlined"
+                        value={this.state.postEducation.about}
+                        onChange={(e) =>
+                          this.setState({
+                            postEducation: {
+                              ...this.state.postEducation,
+                              about: e.currentTarget.value,
+                            },
+                          })
+                        }
+                      />
+                    </form>
+                  </div>
+
+                  <h6 className="mt-2 mb-2">Upload Image</h6>
+                  <label
+                    htmlFor="file-input"
+                    aria-required="true"
+                    //   className={`${Style.uploadPhoto}`}
+                  >
+                    {/* <RiImageAddFill style={{ width: "50px", height: "50px" }} /> */}
                   </label>
                   <input
-                    className={`${Styles.input}`}
+                    style={{ alignItems: "center" }}
                     key="image"
                     id="file-input"
                     type="file"
@@ -440,15 +544,20 @@ export default class Education extends Component {
                     }
                   />
                 </div>
-              </InputGroup.Prepend>
-            </InputGroup>
+              </Col>
+            </Row>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
+            <Button
+              variant="light"
+              className={`${Styles.btngrad}`}
+              onClick={this.handleClose}
+            >
               Close
             </Button>
             <Button
-              variant="primary"
+              variant="light"
+              className={`${Styles.btngrad}`}
               onClick={() => {
                 this.postEducation();
               }}
@@ -467,113 +576,158 @@ export default class Education extends Component {
             <Modal.Title>Edit Eperience</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h6 style={{ textAlign: "center" }}>Company</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="name"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postEducation.schoolName}
-                onChange={(e) =>
-                  this.setState({
-                    postEducation: {
-                      ...this.state.postEducation,
-                      schoolName: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>Position</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="surname"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postEducation.skillsLearned}
-                onChange={(e) =>
-                  this.setState({
-                    postEducation: {
-                      ...this.state.postEducation,
-                      skillsLearned: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}> Description</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="aboutMe"
-                as="textarea"
-                aria-label="With textarea"
-                value={this.state.postEducation.about}
-                onChange={(e) =>
-                  this.setState({
-                    postEducation: {
-                      ...this.state.postEducation,
-                      about: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>Started</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="position"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postEducation.startDate}
-                onChange={(e) =>
-                  this.setState({
-                    postEducation: {
-                      ...this.state.postEducation,
-                      startDate: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>End Date</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="dateOfBirth"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postEducation.endDate}
-                onChange={(e) =>
-                  this.setState({
-                    postEducation: {
-                      ...this.state.postEducation,
-                      endDate: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-
-            <InputGroup style={{ dispaly: "flex", justifyContent: "center" }}>
-              <InputGroup.Prepend>
+            <Row>
+              <Col
+                xs={12}
+                sm={12}
+                md={12}
+                lg={12}
+                className={`${Styles.textStyle}`}
+                style={{ textAlign: "center" }}
+              >
                 <div>
-                  <h6> Upload Image</h6>
-                  <label
-                    for="file-input"
-                    aria-required="true"
-                    style={{
-                      paddingLeft: "30px",
-                      paddingRight: "30px",
-                    }}
-                  >
-                    <BiUpload
+                  <h6>School Name</h6>
+
+                  <form>
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="School Name"
+                      className="mb-2"
+                      type="text"
+                      variant="outlined"
                       style={{
-                        width: "50px",
-                        height: "50px",
+                        width: "100%",
                       }}
+                      type="text"
+                      value={this.state.postEducation.schoolName}
+                      onChange={(e) =>
+                        this.setState({
+                          postEducation: {
+                            ...this.state.postEducation,
+                            schoolName: e.currentTarget.value,
+                          },
+                        })
+                      }
                     />
+                  </form>
+                </div>
+                <div>
+                  <h6>Skill Learned </h6>
+                  <form>
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="Skill Learned"
+                      className="mb-2"
+                      type="text"
+                      variant="outlined"
+                      style={{
+                        width: "100%",
+                      }}
+                      type="text"
+                      value={this.state.postEducation.skillsLearned}
+                      onChange={(e) =>
+                        this.setState({
+                          postEducation: {
+                            ...this.state.postEducation,
+                            skillsLearned: e.currentTarget.value,
+                          },
+                        })
+                      }
+                    />
+                  </form>
+                </div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div>
+                    <h6>Started </h6>
+                    <form>
+                      <TextField
+                        id="filled-multiline-flexible"
+                        label="Started"
+                        className="mb-2"
+                        type="text"
+                        variant="outlined"
+                        style={{
+                          width: "100%",
+                        }}
+                        type="text"
+                        value={this.state.postEducation.startDate}
+                        onChange={(e) =>
+                          this.setState({
+                            postEducation: {
+                              ...this.state.postEducation,
+                              startDate: e.currentTarget.value,
+                            },
+                          })
+                        }
+                      />
+                    </form>
+                  </div>
+                  <div>
+                    <h6>Finished </h6>
+                    <form>
+                      <TextField
+                        id="filled-multiline-flexible"
+                        label="Finished"
+                        className="mb-2"
+                        type="text"
+                        variant="outlined"
+                        style={{
+                          width: "100%",
+                        }}
+                        type="text"
+                        value={this.state.postEducation.endDate}
+                        onChange={(e) =>
+                          this.setState({
+                            postEducation: {
+                              ...this.state.postEducation,
+                              endDate: e.currentTarget.value,
+                            },
+                          })
+                        }
+                      />
+                    </form>
+                  </div>
+                </div>
+
+                <div>
+                  <div>
+                    <h6>About </h6>
+
+                    <form>
+                      <TextField
+                        id="outlined-multiline-static"
+                        label="Job Description"
+                        multiline
+                        className="mb-2"
+                        rows={4}
+                        style={{
+                          width: "100%",
+                        }}
+                        variant="outlined"
+                        value={this.state.postEducation.about}
+                        onChange={(e) =>
+                          this.setState({
+                            postEducation: {
+                              ...this.state.postEducation,
+                              about: e.currentTarget.value,
+                            },
+                          })
+                        }
+                      />
+                    </form>
+                  </div>
+
+                  <h6 className="mt-2 mb-2">Upload Image</h6>
+                  <label
+                    htmlFor="file-input"
+                    aria-required="true"
+                    //   className={`${Style.uploadPhoto}`}
+                  >
+                    {/* <RiImageAddFill style={{ width: "50px", height: "50px" }} /> */}
                   </label>
                   <input
-                    className={`${Styles.input}`}
                     key="image"
                     id="file-input"
                     type="file"
@@ -585,15 +739,20 @@ export default class Education extends Component {
                     }
                   />
                 </div>
-              </InputGroup.Prepend>
-            </InputGroup>
+              </Col>
+            </Row>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.editClose}>
+            <Button
+              variant="light"
+              className={`${Styles.btngrad}`}
+              onClick={this.editClose}
+            >
               Close
             </Button>
             <Button
-              variant="primary"
+              variant="light"
+              className={`${Styles.btngrad}`}
               onClick={() => {
                 this.editEducation();
               }}

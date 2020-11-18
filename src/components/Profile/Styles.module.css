@@ -4,8 +4,8 @@
 }
 
 .profile {
-  margin: 0 !important;
-  padding: 0 !important;
+  height: 250px !important;
+  width: 80%;
 }
 
 .basicInfo {
@@ -79,21 +79,6 @@
   display: flex;
 }
 
-/* .uploadPhoto {
-  opacity: 0;
-  font-size: 300%;
-  position: absolute;
-  margin: 25% 0 0 10%;
-  color: white;
-}
-.uploadPhoto:hover {
-  opacity: 0.8;
-  font-size: 300%;
-  position: absolute;
-  margin: 25% 0 0 10%;
-  color: white;
-} */
-
 * {
   margin: 0;
   padding: 0;
@@ -111,7 +96,7 @@
   margin-right: auto !important;
   margin-top: 20px !important;
   box-shadow: 5px 5px 5px 5px rgba(206, 206, 206, 0.938);
-  background-image: url("https://res.cloudinary.com/dle6fzc1o/image/upload/v1604661577/backgroundimage/Untitled_design_1_aggaly.png");
+  background-image: url("https://res.cloudinary.com/dle6fzc1o/image/upload/v1605622564/backgroundimage/Untitled_design_2_okmnmp.png");
   background-size: cover;
 }
 .div {
@@ -120,6 +105,11 @@
   margin-right: auto !important;
 
   height: auto;
+}
+
+.titleAbout {
+  font-family: "Josefin Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 .about {
   width: 100% !important;
@@ -130,10 +120,11 @@
 }
 
 .imgProfile {
-  width: 120px;
+  width: 150px;
   margin-bottom: 0 !important;
-  margin-top: 45%;
-  height: 110px;
+  margin-top: 15%;
+  height: 140px;
+  box-shadow: 3px 3px 3px rgba(226, 226, 226, 0.938);
 }
 .nameProfile {
   width: 150px;
@@ -143,7 +134,7 @@
 .dataInfo {
   box-shadow: 3px 3px 3px 3px rgba(212, 212, 212, 0.938);
   background-color: white;
-  height: 260px;
+  height: 288px;
   color: rgb(63, 69, 95);
 }
 .dataInfo div {
@@ -152,6 +143,7 @@
   margin-top: 15px;
   margin-right: 15px;
   color: rgb(63, 69, 95);
+  font-family: "Raleway", sans-serif;
   /* box-shadow: 3px 3px 3px 3px rgba(212, 212, 212, 0.938); */
 }
 
@@ -177,7 +169,8 @@
   text-transform: uppercase;
   transition: 0.5s;
   background-size: auto;
-  color: rgb(63, 69, 95);
+
+  color: #ff512f;
   font-weight: bolder;
   font-size: 15px;
 
@@ -217,6 +210,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
+
+  text-align: justify;
+  font-family: "Raleway", sans-serif;
   /* -webkit-line-clamp: 6;
   -webkit-box-orient: vertical; */
 }
@@ -256,15 +252,26 @@
 .uploadPhoto {
   /* margin-top: 105%; */
   /* margin-left: 5%; */
+  margin-top: 80%;
+  margin-left: 5%;
   color: black;
-  margin-left: 5px;
+  z-index: 1000;
 }
 .icon {
-  width: 20px;
-  height: 20px;
-  margin-top: 140px;
-  background-color: white;
-  border-radius: 5px;
+  width: 25px;
+  height: 25px;
+
+  font-weight: bolder;
+}
+.textStyle div > h6 {
+  font-family: "Mukta", sans-serif;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.textStyle div > h5 {
+  font-family: "Mukta", sans-serif;
+  font-weight: bold;
+  margin-top: 5px;
 }
 .myPosts {
   margin: 0 !important;
@@ -274,13 +281,13 @@
 .carts {
   box-shadow: 3px 3px 3px 3px rgba(212, 212, 212, 0.938);
   background-color: white;
+  border-radius: 10px;
 }
 .aboutCarts {
   /* outline: solid 2px red; */
   height: 200px;
   overflow-y: auto;
   overflow-x: hidden;
-  display: block;
 }
 .aboutCarts::-webkit-scrollbar {
   display: none;
@@ -291,10 +298,71 @@
 .aboutCarts p {
   margin-left: 5px;
   margin-right: 5px;
+  text-align: justify;
 }
+.myPosts {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.salary {
+  font-family: "Exo", sans-serif;
+  color: #48546d;
+}
+.type {
+  font-family: "Exo", sans-serif;
+  color: #48546d;
+}
+.jobPosition {
+  font-weight: bolder;
+  font-family: "Mukta", sans-serif;
+  color: #48546d;
+}
+.headTitle {
+  font-family: "Mukta", sans-serif;
 
+  color: #48546d;
+}
+.paragraphs {
+  font-family: "Raleway", sans-serif;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: #48546d;
+}
+.icon {
+  width: 25px;
+  height: 25px;
+
+  font-weight: bolder;
+}
+.textStyle div > h5 {
+  font-family: "Mukta", sans-serif;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.tabs {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.tabs1 {
+  width: 77%;
+  margin-left: auto;
+  margin-right: auto;
+}
 @media only screen and (max-width: 768px) {
   .dataInfo {
     height: auto;
+  }
+  .tabs {
+    width: 100%;
+  }
+  .profile {
+    width: 100% !important;
+  }
+  .div {
+    width: 100% !important;
+  }
+  .header {
+    width: 100% !important;
   }
 }

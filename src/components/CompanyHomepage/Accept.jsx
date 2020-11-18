@@ -1,6 +1,14 @@
 import React, { useState } from "react";
-import { Modal, Button, InputGroup, FormControl, Alert } from "react-bootstrap";
+import { Modal, Button, InputGroup, Alert } from "react-bootstrap";
 import Styles from "./Styles.module.css";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 export default function Accept(props) {
   const [show, setShow] = useState(false);
   const [subject, setSubject] = useState("");
@@ -73,7 +81,8 @@ export default function Accept(props) {
             You are accepting this aplicant .Do you want to send an email?
           </h5>
           <Button
-            style={{ border: 0 }}
+            variant="light"
+            // style={{ border: 0 }}
             className={`  ${Styles.btngrad}`}
             onClick={showFields}
           >
@@ -82,35 +91,54 @@ export default function Accept(props) {
           {show && (
             <>
               <h6 className="mt-2">Recipient Email</h6>
-              <InputGroup className="mb-3">
-                <FormControl
-                  placeholder="Recipient Email"
-                  aria-label="Recipient Email"
-                  aria-describedby="basic-addon2"
+
+              <form>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="Email"
+                  className="mb-2"
+                  type="text"
+                  variant="outlined"
+                  style={{
+                    width: "100%",
+                  }}
+                  type="text"
                   value={props.data.email}
                 />
-              </InputGroup>
+              </form>
               <h6>Subject</h6>
-              <InputGroup className="mb-3">
-                <FormControl
-                  placeholder="Subject"
-                  aria-label="Subject"
-                  aria-describedby="basic-addon2"
+              <form>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="Subject"
+                  className="mb-2"
+                  type="text"
+                  variant="outlined"
+                  style={{
+                    width: "100%",
+                  }}
+                  type="text"
                   value={subject}
                   onChange={(e) => setSubject(e.currentTarget.value)}
                 />
-              </InputGroup>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text>Text</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  as="textarea"
-                  aria-label="Text"
+              </form>
+
+              <form>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Message"
+                  multiline
+                  className="mb-2"
+                  rows={4}
+                  style={{
+                    width: "100%",
+                  }}
+                  variant="outlined"
                   value={text}
                   onChange={(e) => setText(e.currentTarget.value)}
                 />
-              </InputGroup>
+              </form>
+
               <Button
                 style={{ border: 0 }}
                 className={` mt-2 ${Styles.btngrad}`}

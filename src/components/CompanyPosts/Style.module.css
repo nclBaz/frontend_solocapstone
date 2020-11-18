@@ -6,6 +6,7 @@
 .carts {
   box-shadow: 3px 3px 3px 3px rgba(212, 212, 212, 0.938);
   background-color: white;
+  border-radius: 10px;
 }
 .about {
   /* outline: solid 2px red; */
@@ -22,4 +23,90 @@
 .about p {
   margin-left: 5px;
   margin-right: 5px;
+  text-align: justify;
+}
+
+.btngrad {
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: auto;
+  color: #ff512f;
+  font-weight: bolder;
+  font-size: 15px;
+
+  border: none;
+}
+
+.btngrad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: white;
+  text-decoration: none;
+  font-weight: bolder;
+  background-image: linear-gradient(
+    to right,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  cursor: pointer;
+}
+.btngrad:focus {
+  /* background-position: right center; /* change the direction of the change here */
+  /* color: #fff;
+    text-decoration: none; */
+  border: none !important;
+  color: white;
+  font-weight: bolder;
+  background-image: linear-gradient(
+    to right,
+    #ff512f 0%,
+    #f09819 51%,
+    #ff512f 100%
+  );
+  box-shadow: none;
+}
+.salary {
+  font-family: "Exo", sans-serif;
+  color: #48546d;
+}
+.type {
+  font-family: "Exo", sans-serif;
+  color: #48546d;
+}
+.jobPosition {
+  font-weight: bolder;
+  font-family: "Mukta", sans-serif;
+  color: #48546d;
+}
+.headTitle {
+  font-family: "Mukta", sans-serif;
+
+  color: #48546d;
+}
+.paragraphs {
+  font-family: "Raleway", sans-serif;
+  margin-left: 20px;
+  margin-right: 20px;
+  color: #48546d;
+}
+.icon {
+  width: 25px;
+  height: 25px;
+
+  font-weight: bolder;
+}
+.textStyle div > h5 {
+  font-family: "Mukta", sans-serif;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+@media only screen and (max-width: 770px) {
+  .icon {
+    width: 15px;
+    height: 15px;
+    margin-left: 0;
+    text-align: center;
+  }
 }

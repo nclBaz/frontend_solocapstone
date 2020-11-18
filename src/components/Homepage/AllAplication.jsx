@@ -105,6 +105,7 @@ function AllAplication(props) {
                 >
                   Company
                 </Th>
+
                 <Th
                   style={{
                     textAlign: "center",
@@ -150,6 +151,7 @@ function AllAplication(props) {
                       >
                         {x.postId[0] && x.postId[0].companyName}
                       </Td>
+
                       <Td
                         style={{
                           borderRight: "solid grey 2px",

@@ -19,6 +19,7 @@ function Pagination(props) {
           <li key={number} className="page-item">
             <Button
               className={`${Style.btngrad} ml-1`}
+              variant="light"
               style={{
                 width: "20px",
                 padding: "1px",

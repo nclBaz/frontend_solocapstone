@@ -31,7 +31,7 @@ export default function AllPost(props) {
   return (
     <div
       style={{
-        boxShadow: "7px 7px 7px rgb(148, 148, 148)",
+        boxShadow: "3px 3px 3px rgb(148, 148, 148)",
         transition: "0.5s",
         backgroundColor: "rgb(255, 255, 255)",
       }}
@@ -50,44 +50,57 @@ export default function AllPost(props) {
           top: "0",
           height: "150px",
         }}
+        className="mt-2"
       >
         <div
           className={`${Styles.cartblock1} mt-2`}
           style={{
-            display: "flex",
-            justifyContent: "space-around",
+            // display: "flex",
+            // justifyContent: "space-around",
             height: "80%",
           }}
         >
-          {companyProfile[0] && companyProfile[0].image ? (
-            <img
-              src={companyProfile[0].image}
-              className={` mt-3`}
-              style={{
-                borderRadius: "none !important",
-              }}
-            />
-          ) : (
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9-Tom5eAUi7AaarN_g-WIkVxvRNhdHa8BrQ&usqp=CAU"
-              className={` mt-3`}
-              style={{
-                borderRadius: "none !important",
-              }}
-            />
-          )}
-          <div className="mt-4">
-            <h6>{companyProfile[0] && companyProfile[0].companyName}</h6>
-            <h6>{companyProfile[0] && companyProfile[0].email}</h6>{" "}
-            <h6>{companyProfile[0] && companyProfile[0].location}</h6>
-          </div>
+          <Row>
+            <Col xs={4} sm={4} md={4} lg={4}>
+              {companyProfile[0] && companyProfile[0].image ? (
+                <img
+                  src={companyProfile[0].image}
+                  className={` mt-3`}
+                  style={{
+                    borderRadius: "none !important",
+                  }}
+                />
+              ) : (
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS9-Tom5eAUi7AaarN_g-WIkVxvRNhdHa8BrQ&usqp=CAU"
+                  className={` mt-3`}
+                  style={{
+                    borderRadius: "none !important",
+                  }}
+                />
+              )}
+            </Col>
+            <Col xs={8} sm={8} md={8} lg={8}>
+              <div className="mt-4">
+                <h5 className={` text-left`}>
+                  {companyProfile[0] && companyProfile[0].companyName}
+                </h5>
+                <h6 className={` text-left`}>
+                  {companyProfile[0] && companyProfile[0].email}
+                </h6>{" "}
+                <h6 className={` text-left`}>
+                  {companyProfile[0] && companyProfile[0].location}
+                </h6>
+              </div>
+            </Col>
+          </Row>
         </div>
       </Col>
 
       <Col xs={12} sm={12} md={12} lg={12}>
         <Table className={`${Styles.custab}  pl-2 pr-2`}>
           <Thead>
-            <Tr>
+            <Tr className="text-center">
               <Th>Position</Th>
               <Th>Application</Th>
               <Th>Created</Th>
@@ -101,7 +114,7 @@ export default function AllPost(props) {
                 <>
                   <Tbody>
                     <Tr
-                      className={`${Styles.custab} `}
+                      className={`${Styles.custab} text-center`}
                       onClick={() => {
                         props.getPosts(data.allAplication, data._id);
                         props.hideButton();

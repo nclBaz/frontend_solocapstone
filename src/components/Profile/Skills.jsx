@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import {
-  Modal,
-  Button,
-  InputGroup,
-  FormControl,
-  Form,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Modal, Button, InputGroup, Form, Row, Col } from "react-bootstrap";
 import Styles from "./Styles.module.css";
 import { TiDelete } from "react-icons/ti";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import { BiUpload } from "react-icons/bi";
 export default function Skills() {
   const url = process.env.REACT_APP_URL;
@@ -98,7 +98,11 @@ export default function Skills() {
           {skills &&
             skills.map((skill) => {
               return (
-                <Button variant="light" style={{ marginLeft: "10px" }}>
+                <Button
+                  variant="light"
+                  className={`${Styles.aboutMe} mt-2  mb-2`}
+                  style={{ marginLeft: "10px" }}
+                >
                   {skill.skillName}
                   <TiDelete onClick={() => deleteSkill(skill._id)} />
                 </Button>
@@ -112,21 +116,36 @@ export default function Skills() {
         </Modal.Header>
         <Modal.Body>
           <h6 style={{ textAlign: "center" }}>Add Skill</h6>
-          <InputGroup size="sm" className="mb-3">
-            <FormControl
-              id="surname"
-              aria-label="Small"
-              aria-describedby="inputGroup-sizing-sm"
+
+          <form>
+            <TextField
+              id="filled-multiline-flexible"
+              label="Skill"
+              className="mb-2"
+              type="text"
+              variant="outlined"
+              style={{
+                width: "100%",
+              }}
+              type="text"
               value={postSkill}
               onChange={(e) => setPostSkill(e.currentTarget.value)}
             />
-          </InputGroup>
+          </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button
+            variant="light"
+            className={`${Styles.btngrad}`}
+            onClick={handleClose}
+          >
             Close
           </Button>
-          <Button variant="primary" onClick={() => postskill()}>
+          <Button
+            variant="light"
+            className={`${Styles.btngrad}`}
+            onClick={() => postskill()}
+          >
             Save Changes
           </Button>
         </Modal.Footer>

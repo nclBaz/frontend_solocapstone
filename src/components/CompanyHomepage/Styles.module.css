@@ -58,6 +58,15 @@
   display: none;
 }
 
+.data {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.data::-webkit-scrollbar {
+  display: none;
+}
+
 .card {
   display: flex !important;
   justify-content: space-around !important;
@@ -75,9 +84,10 @@
   margin-top: 50px;
 }
 .aplication {
-  box-shadow: 7px 7px 7px rgb(148, 148, 148);
-  height: auto;
-  background-color: rgb(255, 255, 255);
+  /* box-shadow: 7px 7px 7px rgb(148, 148, 148); */
+  /* height: auto; */
+  height: 85vh;
+  /* background-color: rgb(255, 255, 255); */
 }
 
 .btngrad {
@@ -95,9 +105,10 @@
   text-transform: uppercase;
   transition: 0.5s;
   background-size: auto;
-  color: rgb(63, 69, 95);
+  color: #ff512f;
   font-weight: bolder;
   font-size: 15px;
+  border: 2px solid #ff512f;
 
   /* border-radius: 10px; */
   /* display: block; */
@@ -193,6 +204,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  box-shadow: 3px 3px 3px rgb(148, 148, 148);
 }
 .imagesCard {
   width: auto;
@@ -238,7 +250,7 @@
 }
 
 .custab:hover {
-  box-shadow: 7px 7px 7px rgb(148, 148, 148);
+  /* box-shadow: 7px 7px 7px rgb(148, 148, 148); */
   transition: 0.5s;
   cursor: pointer;
 }
@@ -251,13 +263,13 @@
   /* padding: 30px 20px; */
   text-align: center;
 
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 3px rgb(202, 202, 202);
   margin: 0 0 28px;
 }
 .cartblock1 img {
   width: 80px;
   height: 80px;
-  border-radius: 100%;
+  /* border-radius: 100%; */
   padding-top: 0 !important;
   cursor: pointer;
 }
@@ -277,15 +289,29 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
-.cartblock1 h6 {
-  text-transform: uppercase;
+.cartblock1 h5 {
+  text-decoration: none;
+  overflow: hidden;
+
   text-overflow: ellipsis;
-  font-size: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-family: "Mukta", sans-serif;
+  color: #48546d;
+  font-weight: bolder;
+}
+.cartblock1 h6 {
+  text-overflow: ellipsis;
+  font-size: 13px;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   cursor: pointer;
+
+  font-family: "Mukta", sans-serif;
+  color: #48546d;
 }
 .cartblock:hover {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
@@ -410,16 +436,75 @@
   background: #fff;
   color: rgb(63, 69, 95);
 
-  height: 213px;
-  box-shadow: 3px 3px 3px 3px rgba(206, 206, 206, 0.938);
+  height: 280px;
+  box-shadow: 3px 3px 3px rgba(206, 206, 206, 0.938);
 }
+.aboutme div > h5 {
+  color: #48546d;
+}
+.aboutme p {
+  font-family: "Mukta", sans-serif;
+  color: #48546d;
+}
+.dataUser {
+  text-decoration: none;
+  overflow: hidden;
 
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+.dataUser1 {
+  text-decoration: none;
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.aboutme2 {
+  margin-right: 0;
+  background: #fff;
+  color: rgb(63, 69, 95);
+
+  height: auto;
+  box-shadow: 3px 3px 3px rgba(206, 206, 206, 0.938);
+}
+.dataUser p {
+  font-family: "Mukta", sans-serif;
+  color: #48546d;
+}
+.dataUser1 p {
+  font-family: "Mukta", sans-serif;
+  color: #48546d;
+}
+.dataUser h5 {
+  font-family: "Mukta", sans-serif;
+  color: #48546d;
+}
+.dataUser1 h5 {
+  font-family: "Mukta", sans-serif;
+  color: #48546d;
+}
+.userProfile {
+  box-shadow: 3px 3px 3px rgb(148, 148, 148);
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  height: 85vh;
+}
 @media only screen and (max-width: 640px) {
   .custab {
     height: auto;
   }
 }
 @media only screen and (max-width: 768px) {
+  .userProfile {
+    height: auto !important;
+  }
+
   .img {
     margin-left: 35%;
     margin-left: auto;
@@ -497,5 +582,11 @@
   }
   .tabnav {
     font-size: 10px !important;
+  }
+  .pdf {
+    margin-top: 85px;
+  }
+  .aboutme {
+    height: 290px;
   }
 }

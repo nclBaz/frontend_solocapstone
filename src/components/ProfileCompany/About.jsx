@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { InputGroup, FormControl, Button } from "react-bootstrap";
 import { AiOutlineEdit } from "react-icons/ai";
 import Style from "./Styles.module.css";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 
 export default function About(props) {
   const [hide, setHide] = useState(false);
@@ -13,6 +15,7 @@ export default function About(props) {
   const [getAbout, setGetAbout] = useState("");
   const [hideButton, sethideButton] = useState(true);
   const [showButton, setshowButton] = useState(false);
+
   const url = process.env.REACT_APP_URL;
   useEffect(() => {
     fetchProfile();
@@ -43,15 +46,15 @@ export default function About(props) {
     if (result.ok) {
       const data = await result.json();
       setGetAbout(data[0].aboutMe);
-      setInfo(data[0].aboutMe.slice(0, 480));
-      if (data[0].aboutMe.length > 480) {
+      setInfo(data[0].aboutMe.slice(0, 600) + "...");
+      if (data[0].aboutMe.length > 600) {
         setButton(true);
       }
     }
   };
   const data = () => {
     if (skip == true) {
-      setInfo(getAbout.slice(0, 481));
+      setInfo(getAbout.slice(0, 600));
       setskip(false);
       sethideButton(true);
       setshowButton(false);
@@ -82,14 +85,15 @@ export default function About(props) {
       {about && (
         <>
           <div>
-            <h5>About Company</h5>
+            <h5 className={`${Style.titleAbout} mt-4`}>About Company</h5>
             {icon && (
               <AiOutlineEdit
                 onClick={hideText}
                 className="mt-1"
                 style={{
                   marginLeft: "auto",
-                  fontSize: "20px",
+                  fontSize: "25px",
+                  color: "orangered",
                 }}
               />
             )}
@@ -103,7 +107,7 @@ export default function About(props) {
                 {hideButton && (
                   <Button
                     style={{ marginLeft: "auto" }}
-                    className={`${Style.btngrad} mr-3 mb-1`}
+                    className={`${Style.btngrad} mr-3 mb-2`}
                     variant="light"
                     onClick={() => data()}
                   >
@@ -128,29 +132,36 @@ export default function About(props) {
       {hide && (
         <>
           <div>
-            <h5>Edit About</h5>
+            <h5 className={`${Style.titleAbout} mt-2`}>Edit About</h5>
           </div>{" "}
           <div>
-            <FormControl
-              as="textarea"
-              aria-label="With textarea"
-              style={{ height: "160px" }}
-              value={getAbout}
-              onChange={(e) => setGetAbout(e.currentTarget.value)}
-            />
+            <form style={{ width: "100%" }}>
+              <TextField
+                id="outlined-multiline-static"
+                label="About Me"
+                multiline
+                rows={6}
+                style={{
+                  width: "95%",
+                }}
+                variant="outlined"
+                value={getAbout}
+                onChange={(e) => setGetAbout(e.currentTarget.value)}
+              />{" "}
+            </form>
           </div>
           <div>
             <Button
               style={{ marginLeft: "auto" }}
               variant="light"
-              className={`${Style.btngrad} mr-2`}
+              className={`${Style.btngrad} mr-2  mb-1`}
               onClick={() => editProfile()}
             >
               Save
             </Button>
             <Button
               variant="light"
-              className={`${Style.btngrad}`}
+              className={`${Style.btngrad} mb-1`}
               onClick={showText}
             >
               Cancel

@@ -1,19 +1,12 @@
 import React, { Component } from "react";
-import {
-  Modal,
-  Button,
-  InputGroup,
-  FormControl,
-  Row,
-  Col,
-} from "react-bootstrap";
-import { BiAddToQueue } from "react-icons/bi";
-import { BiUpload } from "react-icons/bi";
-import { AiFillDelete } from "react-icons/ai";
-import { FiEdit } from "react-icons/fi";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { Modal, Button, InputGroup, Row, Col } from "react-bootstrap";
+
+import { RiImageAddFill } from "react-icons/ri";
+
 import { RiDeleteBinLine } from "react-icons/ri";
 import { AiOutlineEdit } from "react-icons/ai";
+
+import TextField from "@material-ui/core/TextField";
 
 import Styles from "./Styles.module.css";
 const url = process.env.REACT_APP_URL;
@@ -206,7 +199,7 @@ export default class Workexperience extends Component {
     console.log(this.state.image, "ca ka mrena");
     return (
       <>
-        <Row>
+        <Row className={`${Styles.myPosts}`}>
           <Col xs={12} sm={12} md={12} lg={12} className="text-center ">
             <Button
               style={{
@@ -229,52 +222,102 @@ export default class Workexperience extends Component {
                   return (
                     <>
                       <Col xs={12} sm={12} md={6} lg={6}>
-                        <div className={`${Styles.carts} mt-1`}>
-                          <div
+                        <div className={`${Styles.carts} mt-3`}>
+                          <Row
                             style={{
                               display: "flex",
                               justifyContent: "space-around",
                               boxShadow:
                                 "3px 3px 3px  rgba(212, 212, 212, 0.938)",
+
+                              marginLeft: "auto",
+                              marginRight: "auto",
                             }}
                           >
-                            <div>
+                            <Col xs={4} sm={4} md={4} lg={4}>
                               {data.image ? (
                                 <img
-                                  className="mt-"
                                   src={data.image}
-                                  style={{ width: "80px", height: "80px" }}
+                                  style={{
+                                    width: "100%",
+                                    height: "93%",
+                                    objectFit: "cover",
+                                    borderRadius: "10px",
+                                  }}
+                                  className="mt-1  ml-1"
                                 />
                               ) : (
                                 <img
-                                  className="mt-3"
                                   src="https://ianmartin.com/wp-content/uploads/2017/10/WhatE28099s20the20Best20Day20of20the20Week20to20Post20a20Job20Ad-1030x687.jpg"
-                                  style={{ width: "80px", height: "80px" }}
+                                  style={{
+                                    width: "100%",
+                                    height: "93%",
+                                    objectFit: "cover",
+                                    borderRadius: "10px",
+                                  }}
+                                  className="mt-1 ml-1"
                                 />
                               )}
-                            </div>
-                            <div className="mt-1">
-                              <p>{data.workExperience}</p>
-                              <p>{data.workPosition}</p>
-                              <p>
+                            </Col>
+                            <Col xs={6} sm={6} md={6} lg={6} className="mt-1">
+                              <h5 className={`${Styles.headTitle} mt-2 ml-2`}>
+                                {data.workExperience}
+                              </h5>
+                              <h5 className={`${Styles.jobPosition} ml-2`}>
+                                {data.workPosition}
+                              </h5>
+                              <h6 className={`${Styles.salary} ml-2`}>
                                 {data.started}-{data.finished}
-                              </p>
-                            </div>
-                            <div className="mt-1">
-                              <RiDeleteBinLine
-                                onClick={() => this.deleteExperience(data._id)}
-                              />
+                              </h6>
+                            </Col>
+                            <Col xs={2} sm={2} md={2} lg={2}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  justifyContent: "right",
+                                }}
+                              >
+                                <Button
+                                  variant="light"
+                                  style={{
+                                    backgroundColor: "transparent",
+                                    width: "70%",
+                                  }}
+                                  className={`${Styles.btngrad} mt-2`}
+                                  onClick={() =>
+                                    this.deleteExperience(data._id)
+                                  }
+                                >
+                                  <RiDeleteBinLine
+                                    className={`${Styles.icon} `}
+                                  />
+                                </Button>
+                                <Button
+                                  variant="light"
+                                  style={{
+                                    backgroundColor: "transparent",
+                                    width: "70%",
+                                  }}
+                                  onClick={() => this.editShow(data)}
+                                  className={`${Styles.btngrad} mt-2`}
+                                >
+                                  <AiOutlineEdit
+                                    className={`${Styles.icon} `}
+                                  />
+                                </Button>
+                              </div>
+                            </Col>
+                          </Row>
 
-                              <AiOutlineEdit
-                                className="ml-2"
-                                onClick={() => this.editShow(data)}
-                              />
-                            </div>
-                          </div>
                           <div className={`${Styles.aboutCarts} ml-1 mr-1`}>
-                            <h6>Experience Description</h6>
+                            <h5 className={`${Styles.headTitle} ml-2 mt-2`}>
+                              Experience Description
+                            </h5>
                             {data.description ? (
-                              <p>{data.description}</p>
+                              <p className={`${Styles.aboutMe}`}>
+                                {data.description}
+                              </p>
                             ) : (
                               <p>No Description Detail . </p>
                             )}
@@ -313,133 +356,194 @@ export default class Workexperience extends Component {
             <Modal.Title>Add New Work Eperience</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h6 style={{ textAlign: "center" }}>Company</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="name"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postExperience.workExperience}
-                onChange={(e) =>
-                  this.setState({
-                    postExperience: {
-                      ...this.state.postExperience,
-                      workExperience: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>Position</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="surname"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postExperience.workPosition}
-                onChange={(e) =>
-                  this.setState({
-                    postExperience: {
-                      ...this.state.postExperience,
-                      workPosition: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>Work Description</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="aboutMe"
-                as="textarea"
-                aria-label="With textarea"
-                value={this.state.postExperience.description}
-                onChange={(e) =>
-                  this.setState({
-                    postExperience: {
-                      ...this.state.postExperience,
-                      description: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>Started</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="position"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postExperience.started}
-                onChange={(e) =>
-                  this.setState({
-                    postExperience: {
-                      ...this.state.postExperience,
-                      started: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>End Date</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="dateOfBirth"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postExperience.finished}
-                onChange={(e) =>
-                  this.setState({
-                    postExperience: {
-                      ...this.state.postExperience,
-                      finished: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
+            <div className={`${Styles.textStyle}`}>
+              <h6
+                style={{ textAlign: "center" }}
+                className={`${Styles.textStyle}`}
+              >
+                Company
+              </h6>
 
-            <InputGroup style={{ dispaly: "flex", justifyContent: "center" }}>
-              <InputGroup.Prepend>
+              <form>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="Company"
+                  className="mb-2"
+                  type="text"
+                  variant="outlined"
+                  style={{
+                    width: "100%",
+                  }}
+                  type="text"
+                  value={this.state.postExperience.workExperience}
+                  onChange={(e) =>
+                    this.setState({
+                      postExperience: {
+                        ...this.state.postExperience,
+                        workExperience: e.currentTarget.value,
+                      },
+                    })
+                  }
+                />
+              </form>
+              <h6
+                style={{ textAlign: "center" }}
+                className={`${Styles.textStyle}`}
+              >
+                Position
+              </h6>
+
+              <form>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="Position"
+                  className="mb-2"
+                  type="text"
+                  variant="outlined"
+                  style={{
+                    width: "100%",
+                  }}
+                  type="text"
+                  value={this.state.postExperience.workPosition}
+                  onChange={(e) =>
+                    this.setState({
+                      postExperience: {
+                        ...this.state.postExperience,
+                        workPosition: e.currentTarget.value,
+                      },
+                    })
+                  }
+                />
+              </form>
+
+              <h6
+                style={{ textAlign: "center" }}
+                className={`${Styles.textStyle}`}
+              >
+                Work Description
+              </h6>
+
+              <form>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Work Description"
+                  multiline
+                  className="mb-2"
+                  rows={4}
+                  style={{
+                    width: "100%",
+                  }}
+                  variant="outlined"
+                  value={this.state.postExperience.description}
+                  onChange={(e) =>
+                    this.setState({
+                      postExperience: {
+                        ...this.state.postExperience,
+                        description: e.currentTarget.value,
+                      },
+                    })
+                  }
+                />
+              </form>
+              <div
+                style={{ display: "flex", justifyContent: "space-between" }}
+                className={`${Styles.textStyle}`}
+              >
                 <div>
-                  <h6> Upload Image</h6>
-                  <label
-                    for="file-input"
-                    aria-required="true"
-                    style={{
-                      paddingLeft: "30px",
-                      paddingRight: "30px",
-                    }}
-                  >
-                    <BiUpload
+                  {" "}
+                  <h6 style={{ textAlign: "center" }}>Started</h6>
+                  <form>
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="Started"
+                      className="mb-2"
+                      type="date"
+                      variant="outlined"
                       style={{
-                        width: "50px",
-                        height: "50px",
+                        width: "100%",
                       }}
+                      type="text"
+                      value={this.state.postExperience.started}
+                      onChange={(e) =>
+                        this.setState({
+                          postExperience: {
+                            ...this.state.postExperience,
+                            started: e.currentTarget.value,
+                          },
+                        })
+                      }
                     />
-                  </label>
-                  <input
-                    className={`${Styles.input}`}
-                    key="image"
-                    id="file-input"
-                    type="file"
-                    accept="image/*"
-                    profile="file"
-                    // value={this.state.image}
-                    onChange={(e) =>
-                      this.setState({ image: e.target.files[0] })
-                    }
-                  />
+                  </form>
                 </div>
-              </InputGroup.Prepend>
-            </InputGroup>
+                <div className={`${Styles.textStyle}`}>
+                  <h6 style={{ textAlign: "center" }}>End Date</h6>
+
+                  <form>
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="Started"
+                      className="mb-2"
+                      type="date"
+                      variant="outlined"
+                      style={{
+                        width: "100%",
+                      }}
+                      type="text"
+                      value={this.state.postExperience.finished}
+                      onChange={(e) =>
+                        this.setState({
+                          postExperience: {
+                            ...this.state.postExperience,
+                            finished: e.currentTarget.value,
+                          },
+                        })
+                      }
+                    />
+                  </form>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                className={`${Styles.textStyle}`}
+              >
+                <h6> Upload Image</h6>
+
+                <label
+                  htmlFor="file-input"
+                  aria-required="true"
+                  //   className={`${Style.uploadPhoto}`}
+                >
+                  {/* <RiImageAddFill style={{ width: "50px", height: "50px" }} /> */}
+                </label>
+                <input
+                  key="image"
+                  id="file-input"
+                  type="file"
+                  accept="image/*"
+                  profile="file"
+                  // value={this.state.image}
+                  onChange={(e) => this.setState({ image: e.target.files[0] })}
+                />
+              </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
+            <Button
+              variant="light"
+              className={`${Styles.btngrad}`}
+              onClick={this.handleClose}
+            >
               Close
             </Button>
             <Button
-              variant="primary"
+              variant="light"
+              className={`${Styles.btngrad}`}
               onClick={() => {
                 this.postExperience();
 
@@ -460,133 +564,195 @@ export default class Workexperience extends Component {
             <Modal.Title>Edit Eperience</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h6 style={{ textAlign: "center" }}>Company</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="name"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postExperience.workExperience}
-                onChange={(e) =>
-                  this.setState({
-                    postExperience: {
-                      ...this.state.postExperience,
-                      workExperience: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>Position</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="surname"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postExperience.workPosition}
-                onChange={(e) =>
-                  this.setState({
-                    postExperience: {
-                      ...this.state.postExperience,
-                      workPosition: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>Work Description</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="aboutMe"
-                as="textarea"
-                aria-label="With textarea"
-                value={this.state.postExperience.description}
-                onChange={(e) =>
-                  this.setState({
-                    postExperience: {
-                      ...this.state.postExperience,
-                      description: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>Started</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="position"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postExperience.started}
-                onChange={(e) =>
-                  this.setState({
-                    postExperience: {
-                      ...this.state.postExperience,
-                      started: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
-            <h6 style={{ textAlign: "center" }}>End Date</h6>
-            <InputGroup size="sm" className="mb-3">
-              <FormControl
-                id="dateOfBirth"
-                aria-label="Small"
-                aria-describedby="inputGroup-sizing-sm"
-                value={this.state.postExperience.finished}
-                onChange={(e) =>
-                  this.setState({
-                    postExperience: {
-                      ...this.state.postExperience,
-                      finished: e.currentTarget.value,
-                    },
-                  })
-                }
-              />
-            </InputGroup>
+            <div className={`${Styles.textStyle}`}>
+              <h6
+                style={{ textAlign: "center" }}
+                className={`${Styles.textStyle}`}
+              >
+                Company
+              </h6>
 
-            <InputGroup style={{ dispaly: "flex", justifyContent: "center" }}>
-              <InputGroup.Prepend>
+              <form>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="Company"
+                  className="mb-2"
+                  type="text"
+                  variant="outlined"
+                  style={{
+                    width: "100%",
+                  }}
+                  type="text"
+                  value={this.state.postExperience.workExperience}
+                  onChange={(e) =>
+                    this.setState({
+                      postExperience: {
+                        ...this.state.postExperience,
+                        workExperience: e.currentTarget.value,
+                      },
+                    })
+                  }
+                />
+              </form>
+              <h6
+                style={{ textAlign: "center" }}
+                className={`${Styles.textStyle}`}
+              >
+                Position
+              </h6>
+
+              <form>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="Position"
+                  className="mb-2"
+                  type="text"
+                  variant="outlined"
+                  style={{
+                    width: "100%",
+                  }}
+                  type="text"
+                  value={this.state.postExperience.workPosition}
+                  onChange={(e) =>
+                    this.setState({
+                      postExperience: {
+                        ...this.state.postExperience,
+                        workPosition: e.currentTarget.value,
+                      },
+                    })
+                  }
+                />
+              </form>
+
+              <h6
+                style={{ textAlign: "center" }}
+                className={`${Styles.textStyle}`}
+              >
+                Work Description
+              </h6>
+
+              <form>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Work Description"
+                  multiline
+                  className="mb-2"
+                  rows={4}
+                  style={{
+                    width: "100%",
+                  }}
+                  variant="outlined"
+                  value={this.state.postExperience.description}
+                  onChange={(e) =>
+                    this.setState({
+                      postExperience: {
+                        ...this.state.postExperience,
+                        description: e.currentTarget.value,
+                      },
+                    })
+                  }
+                />
+              </form>
+              <div
+                style={{ display: "flex", justifyContent: "space-between" }}
+                className={`${Styles.textStyle}`}
+              >
                 <div>
-                  <h6> Upload Image</h6>
-                  <label
-                    for="file-input"
-                    aria-required="true"
-                    style={{
-                      paddingLeft: "30px",
-                      paddingRight: "30px",
-                    }}
-                  >
-                    <BiUpload
+                  {" "}
+                  <h6 style={{ textAlign: "center" }}>Started</h6>
+                  <form>
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="Started"
+                      className="mb-2"
+                      type="date"
+                      variant="outlined"
                       style={{
-                        width: "50px",
-                        height: "50px",
+                        width: "100%",
                       }}
+                      type="text"
+                      value={this.state.postExperience.started}
+                      onChange={(e) =>
+                        this.setState({
+                          postExperience: {
+                            ...this.state.postExperience,
+                            started: e.currentTarget.value,
+                          },
+                        })
+                      }
                     />
-                  </label>
-                  <input
-                    className={`${Styles.input}`}
-                    key="image"
-                    id="file-input"
-                    type="file"
-                    accept="image/*"
-                    profile="file"
-                    // value={this.state.image}
-                    onChange={(e) =>
-                      this.setState({ image: e.target.files[0] })
-                    }
-                  />
+                  </form>
                 </div>
-              </InputGroup.Prepend>
-            </InputGroup>
+                <div className={`${Styles.textStyle}`}>
+                  <h6 style={{ textAlign: "center" }}>End Date</h6>
+
+                  <form>
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="Started"
+                      className="mb-2"
+                      type="date"
+                      variant="outlined"
+                      style={{
+                        width: "100%",
+                      }}
+                      type="text"
+                      value={this.state.postExperience.finished}
+                      onChange={(e) =>
+                        this.setState({
+                          postExperience: {
+                            ...this.state.postExperience,
+                            finished: e.currentTarget.value,
+                          },
+                        })
+                      }
+                    />
+                  </form>
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                className={`${Styles.textStyle}`}
+              >
+                <h6> Upload Image</h6>
+
+                <label
+                  htmlFor="file-input"
+                  aria-required="true"
+                  // className={`${Style.uploadPhoto}`}
+                >
+                  {/* <RiImageAddFill style={{ width: "50px", height: "50px" }} /> */}
+                </label>
+
+                <input
+                  key="image"
+                  id="file-input"
+                  type="file"
+                  accept="image/*"
+                  profile="file"
+                  // value={this.state.image}
+                  onChange={(e) => this.setState({ image: e.target.files[0] })}
+                />
+              </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.editClose}>
+            <Button
+              variant="light"
+              className={`${Styles.btngrad}`}
+              onClick={this.editClose}
+            >
               Close
             </Button>
             <Button
-              variant="primary"
+              variant="light"
+              className={`${Styles.btngrad}`}
               onClick={() => {
                 this.editExperience();
 

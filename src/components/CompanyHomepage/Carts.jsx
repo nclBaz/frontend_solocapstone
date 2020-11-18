@@ -34,12 +34,18 @@ export default function Carts(props) {
         props.currentAplicant.map((data) => {
           return (
             <>
-              <Col xs={4} sm={4} md={4} lg={4} className={`${Styles.users}`}>
-                <div className={`${Styles.cartblock}`}>
+              <Col
+                xs={4}
+                sm={4}
+                md={4}
+                lg={4}
+                className={`${Styles.users} mt-2`}
+              >
+                <div className={`${Styles.cartblock} `}>
                   {data.image ? (
                     <img
                       src={data.image}
-                      className="img-responsive"
+                      className="img-responsive "
                       alt=""
                       onClick={() => {
                         props.setProfile(data._id);
@@ -50,7 +56,7 @@ export default function Carts(props) {
                   ) : (
                     <img
                       src="https://w7.pngwing.com/pngs/613/636/png-transparent-computer-icons-user-profile-male-avatar-avatar-heroes-logo-black.png"
-                      className="img-responsive"
+                      className="img-responsive "
                       alt=""
                       onClick={() => {
                         props.setProfile(data._id);
@@ -90,10 +96,10 @@ export default function Carts(props) {
             lg={12}
             style={{ alignItems: "center", textAlign: "center" }}
           >
-            <div className="mt-2">
-              <h6>No Applicants. </h6>
+            <div>
+              <h6 className="mt-2">Select Post To show Aplicants </h6>
               <img
-                className="mt-0"
+                className="mt-1"
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSQB7MbKExx-gXWGSlkmjXpGnbOgDUm8dTWPw&usqp=CAU"
                 style={{ width: "180px", height: "180px" }}
               />

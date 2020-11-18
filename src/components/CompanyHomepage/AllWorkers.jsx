@@ -80,7 +80,7 @@ export default function AllWorkers() {
   return (
     <>
       <Row className={`${Styles.company}`}>
-        <Col xs={12} sm={12} md={5} lg={5} className="mt-1">
+        <Col xs={12} sm={12} md={5} lg={5} className="mt-3">
           <AllPost
             getPosts={getPosts}
             allJob={allJob}
@@ -92,48 +92,41 @@ export default function AllWorkers() {
           sm={12}
           md={7}
           lg={7}
-          className={` ${Styles.aplication}  mt-1 `}
+          className={` ${Styles.aplication}  mt-3 `}
         >
-          <Col
-            xs={12}
-            sm={12}
-            md={12}
-            lg={12}
-            className="mt-1"
-            style={{
-              boxShadow: "0px 5px 5px  0px rgb(148, 148, 148)",
-            }}
-          >
-            <Row>
-              <Carts
-                currentAplicant={currentAplicant}
-                setProfile={setProfile}
-                showButton={showButton}
-              />
-              <Col xs={12} sm={12} md={12} lg={12} className="mt-1 ">
-                <Pagination
-                  aplicantPerPage={aplicantPerPage}
-                  totalAplicant={aplicant.length}
-                  paginate={paginate}
+          <Row className={`${Styles.userProfile}`}>
+            <Col xs={12} sm={12} md={12} lg={12}>
+              <Row className="mt-1">
+                <Carts
+                  currentAplicant={currentAplicant}
+                  setProfile={setProfile}
+                  showButton={showButton}
                 />
-              </Col>
-            </Row>
-          </Col>
+                <Col xs={12} sm={12} md={12} lg={12} className="mt-1 ">
+                  <Pagination
+                    aplicantPerPage={aplicantPerPage}
+                    totalAplicant={aplicant.length}
+                    paginate={paginate}
+                  />
+                </Col>
+              </Row>
+            </Col>
 
-          <Col
-            xs={12}
-            sm={12}
-            md={12}
-            lg={12}
-            className={`${Styles.dropDown123}`}
-          >
-            <WorkerProfile
-              profile={profile}
-              id={Id}
-              allPost={allPost}
-              allPosts={allPosts}
-            />
-          </Col>
+            <Col
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              className={`${Styles.dropDown123}`}
+            >
+              <WorkerProfile
+                profile={profile}
+                id={Id}
+                allPost={allPost}
+                allPosts={allPosts}
+              />
+            </Col>
+          </Row>
         </Col>
       </Row>
     </>

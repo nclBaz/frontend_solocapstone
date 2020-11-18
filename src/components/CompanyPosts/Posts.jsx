@@ -4,6 +4,8 @@ import Style from "./Style.module.css";
 import Pagination from "./Pagination";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { AiOutlineEdit } from "react-icons/ai";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import AddPost from "./AddPost";
 import EditPost from "./EditPost";
 
@@ -78,26 +80,31 @@ export default function Posts() {
       <Row className={`${Style.myPosts}`}>
         <Col xs={12} sm={12} md={12} lg={12}>
           {" "}
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div className="mt-2">
               <AddPost fetchPost={fetchPost} />
             </div>
             <div
-            //   style={{
-            //     marginLeft: "auto",
-            //     marginRight: "auto",
-            //   }}
+              className="mt-2"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
             >
-              {" "}
-              <input
-                className="mt-2 mb-1"
-                type="text"
-                style={{
-                  height: "40px",
-                }}
-                placeholder="Search by Job Position"
-                onChange={(e) => filterPost(e.currentTarget.value)}
-              />
+              <form>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="Search by Job Position"
+                  type="text"
+                  variant="outlined"
+                  style={{
+                    width: "100%",
+                    backgroundColor: "white",
+                  }}
+                  type="text"
+                  onChange={(e) => filterPost(e.currentTarget.value)}
+                />
+              </form>{" "}
             </div>
           </div>
         </Col>
@@ -105,70 +112,124 @@ export default function Posts() {
         {currentAplicant &&
           currentAplicant.map((data) => {
             return (
-              <Col xs={12} sm={12} md={4} lg={4}>
-                <div className={`${Style.carts} mt-1`}>
-                  <div
+              <Col xs={12} sm={12} md={6} lg={6}>
+                <div className={`${Style.carts} mt-3`}>
+                  <Row
                     style={{
-                      display: "flex",
-                      justifyContent: "space-around",
                       boxShadow: "3px 3px 3px  rgba(212, 212, 212, 0.938)",
+
+                      marginLeft: "auto",
+                      marginRight: "auto",
                     }}
                   >
-                    <div>
+                    <Col xs={4} sm={4} md={4} lg={4}>
                       {data.image ? (
                         <img
-                          className="mt-5"
                           src={data.image}
-                          style={{ width: "80px", height: "80px" }}
+                          style={{
+                            width: "100%",
+                            height: "93%",
+                            objectFit: "cover",
+                            borderRadius: "10px",
+                          }}
+                          className="mt-1"
                         />
                       ) : (
                         <img
-                          className="mt-5"
+                          className="mt-1"
                           src="https://ianmartin.com/wp-content/uploads/2017/10/WhatE28099s20the20Best20Day20of20the20Week20to20Post20a20Job20Ad-1030x687.jpg"
-                          style={{ width: "80px", height: "80px" }}
+                          style={{
+                            width: "100%",
+                            height: "93%",
+                            objectFit: "cover",
+                            borderRadius: "10px",
+                          }}
                         />
                       )}
-                    </div>
-                    <div className="mt-1">
-                      <p>{data.companyName}</p>
-                      <p>{data.jobPosition}</p>
-                      <p>{data.salary}</p>
-                      <p>{data.type}</p>
-                    </div>
-                    <div className="mt-1">
-                      <RiDeleteBinLine onClick={() => deletePost(data._id)} />
-
-                      <AiOutlineEdit
-                        className="ml-2"
-                        onClick={() => {
-                          handleShow1(data._id);
+                    </Col>
+                    <Col xs={6} sm={6} md={6} lg={6} className="mt-1">
+                      <h5 className={`${Style.headTitle} mt-2 ml-2`}>
+                        {data.companyName}
+                      </h5>
+                      <h5 className={`${Style.jobPosition} ml-2`}>
+                        {data.jobPosition}
+                      </h5>
+                      <h6 className={`${Style.salary} ml-2`}>{data.salary}</h6>
+                      <h6 className={`${Style.salary} ml-2`}>{data.type}</h6>
+                    </Col>
+                    <Col xs={2} sm={2} md={2} lg={2}>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "right",
                         }}
-                      />
-                    </div>
-                  </div>
-                  <div className={`${Style.about} ml-1 mr-1`}>
+                      >
+                        <Button
+                          variant="light"
+                          style={{
+                            backgroundColor: "transparent",
+                            width: "70%",
+                          }}
+                          className={`${Style.btngrad} mt-2`}
+                          onClick={() => {
+                            handleShow1(data._id);
+                          }}
+                        >
+                          {" "}
+                          <AiOutlineEdit className={`${Style.icon} `} />
+                        </Button>
+                        <Button
+                          onClick={() => deletePost(data._id)}
+                          variant="light"
+                          style={{
+                            backgroundColor: "transparent",
+                            width: "70%",
+                          }}
+                          className={`${Style.btngrad} mt-2`}
+                        >
+                          <RiDeleteBinLine className={`${Style.icon} `} />
+                        </Button>
+                      </div>
+                    </Col>
+                    {/* </div> */}
+                  </Row>
+                  <div className={`${Style.about} ml-2 mr-2 mt-2 mb-5`}>
                     <div>
-                      <h6>Job Description</h6>
+                      <h5 className={`${Style.headTitle} ml-2 mt-2`}>
+                        {" "}
+                        Job Description
+                      </h5>
                       {data.jobDescription ? (
-                        <p>{data.jobDescription}</p>
+                        <p className={`${Style.paragraphs} `}>
+                          {data.jobDescription}
+                        </p>
                       ) : (
-                        <p>No Description Detail . </p>
+                        <p className={`mt-3`}>No Description Detail </p>
                       )}
                     </div>
                     <div>
-                      <h6>Job Requirments</h6>
+                      <h5 className={`${Style.headTitle} ml-2 `}>
+                        Job Requirments
+                      </h5>
                       {data.requirments ? (
-                        <p>{data.requirments}</p>
+                        <p className={`${Style.paragraphs}`}>
+                          {data.requirments}
+                        </p>
                       ) : (
-                        <p>No Requirments Detail </p>
+                        <p className={`mt-3 `}>No Requirments Detail </p>
                       )}
                     </div>
-                    <div>
-                      <h6>Job Benefites</h6>
+                    <div className="mb-2">
+                      <h5 className={`${Style.headTitle} ml-2 `}>
+                        Job Benefites
+                      </h5>
                       {data.benefites ? (
-                        <p>{data.benefites}</p>
+                        <p className={`${Style.paragraphs}`}>
+                          {data.benefites}
+                        </p>
                       ) : (
-                        <p>No Befenefites Detail</p>
+                        <p className={`mt-3 ml-1`}>No Benefites Detail</p>
                       )}
                     </div>
                   </div>

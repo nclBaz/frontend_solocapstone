@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Row, Col, Form } from "react-bootstrap";
 import { RiImageAddFill } from "react-icons/ri";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Styles from "./Style.module.css";
 export default function EditPost(props) {
   const [jobPosition, setjobPosition] = useState("");
   const [jobDescription, setjobDescription] = useState("");
@@ -16,7 +25,6 @@ export default function EditPost(props) {
       method: "GET",
       credentials: "include",
       headers: {
-    
         "Content-Type": "application/json",
       },
     });
@@ -94,122 +102,185 @@ export default function EditPost(props) {
         <Modal.Title>Edit Post</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form style={{ textAlign: "center" }}>
-          <Form.Group>
-            <h6>Add Job Position</h6>
-            <Form.Control
-              size="sm"
-              className="mb-2"
-              type="text"
-              placeholder="Add Job  Position"
-              style={{
-                boxShadow: "2px 2px 2px  rgba(212, 212, 212, 0.938)",
-              }}
-              value={jobPosition}
-              onChange={(e) => {
-                setjobPosition(e.currentTarget.value);
-              }}
-            />
-          </Form.Group>
-          <Form.Group>
-            <h6>Add Job Salary </h6>
-            <Form.Control
-              className="mb-2"
-              size="sm"
-              type="text"
-              placeholder="Add Job Salary"
-              style={{
-                boxShadow: "2px 2px 2px  rgba(212, 212, 212, 0.938)",
-              }}
-              value={salary}
-              onChange={(e) => {
-                setsalary(e.currentTarget.value);
-              }}
-            />
-          </Form.Group>
-          <Form.Group>
-            <h6> Job Type </h6>
-            <Form.Control
-              as="select"
-              onChange={(e) => {
-                settype(e.target.value);
-              }}
-            >
-              <option>Full Time </option>
-              <option>Part Time</option>
-            </Form.Control>
-          </Form.Group>
+        <Row>
+          <Col
+            xs={12}
+            sm={12}
+            md={12}
+            lg={12}
+            className={`${Styles.textStyle}`}
+            style={{ textAlign: "center" }}
+          >
+            <div>
+              <h6>Add Job Position</h6>
 
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <h6>Add Position Responsibilities </h6>
+              <form>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="Position"
+                  className="mb-2"
+                  type="text"
+                  variant="outlined"
+                  style={{
+                    width: "100%",
+                  }}
+                  type="text"
+                  value={jobPosition}
+                  onChange={(e) => {
+                    setjobPosition(e.currentTarget.value);
+                  }}
+                />
+              </form>
+            </div>
+            <div>
+              <h6>Add Job Salary </h6>
+              <form>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="Position"
+                  className="mb-2"
+                  type="text"
+                  variant="outlined"
+                  style={{
+                    width: "100%",
+                  }}
+                  type="text"
+                  value={salary}
+                  onChange={(e) => {
+                    setsalary(e.currentTarget.value);
+                  }}
+                />
+              </form>
+            </div>
+            <div>
+              {" "}
+              <h6> Job Type </h6>
+              {/* <Form.Group controlId="exampleForm.ControlSelect1"> */}
+              <FormControl
+                variant="outlined"
+                style={{
+                  width: "100%",
+                }}
+                className="mb-2"
+              >
+                <InputLabel id="demo-simple-select-outlined-label">
+                  Job Type
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label"
+                  id="demo-simple-select-outlined"
+                  label="Job Type"
+                  onChange={(e) => {
+                    settype(e.target.value);
+                  }}
+                >
+                  <MenuItem value="">
+                    <em>Type</em>
+                  </MenuItem>
+                  <MenuItem value={"Full Time"}>Full Time</MenuItem>
+                  <MenuItem value={"Part Time"}>Part Time</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
 
-            <Form.Control
-              as="textarea"
-              placeholder="Add Job Description"
-              rows={5}
-              style={{
-                boxShadow: "2px 2px 2px  rgba(212, 212, 212, 0.938)",
-              }}
-              value={jobDescription}
-              onChange={(e) => {
-                setjobDescription(e.currentTarget.value);
-              }}
-            />
-          </Form.Group>
+            <div>
+              <div>
+                <h6>Add Position Responsibilities </h6>
 
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <h6>Add Job Requirments </h6>
+                <form>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Job Description"
+                    multiline
+                    className="mb-2"
+                    rows={4}
+                    style={{
+                      width: "100%",
+                    }}
+                    variant="outlined"
+                    value={jobDescription}
+                    onChange={(e) => {
+                      setjobDescription(e.currentTarget.value);
+                    }}
+                  />
+                </form>
+              </div>
+              <div>
+                <h6>Add Job Requirments </h6>
+                <form>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Requirments"
+                    multiline
+                    className="mb-2"
+                    rows={4}
+                    style={{
+                      width: "100%",
+                    }}
+                    variant="outlined"
+                    value={requirments}
+                    onChange={(e) => {
+                      setRequirments(e.currentTarget.value);
+                    }}
+                  />
+                </form>
+              </div>
+              <div>
+                <h6>Add Job Benefites </h6>
 
-            <Form.Control
-              as="textarea"
-              placeholder="Add Job Requirments"
-              rows={5}
-              style={{
-                boxShadow: "2px 2px 2px  rgba(212, 212, 212, 0.938)",
-              }}
-              value={requirments}
-              onChange={(e) => {
-                setRequirments(e.currentTarget.value);
-              }}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="exampleForm.ControlTextarea1">
-            <h6>Add Job Benefites </h6>
-
-            <Form.Control
-              as="textarea"
-              placeholder="Add Job Benefites"
-              rows={5}
-              style={{
-                boxShadow: "2px 2px 2px  rgba(212, 212, 212, 0.938)",
-              }}
-              value={benefites}
-              onChange={(e) => {
-                setBenefites(e.currentTarget.value);
-              }}
-            />
-          </Form.Group>
-
-          <label htmlFor="file-input" aria-required="true">
-            <RiImageAddFill style={{ width: "50px", height: "50px" }} />
-          </label>
-          <input
-            style={{ display: "none" }}
-            key="image"
-            id="file-input"
-            type="file"
-            accept="image/*"
-            profile="file"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        </Form>
+                <form>
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Benefites"
+                    multiline
+                    className="mb-2"
+                    rows={4}
+                    style={{
+                      width: "100%",
+                    }}
+                    variant="outlined"
+                    value={benefites}
+                    onChange={(e) => {
+                      setBenefites(e.currentTarget.value);
+                    }}
+                  />
+                </form>
+              </div>
+              <h6 className="mt-2 mb-2">Upload Image</h6>
+              <label
+                htmlFor="file-input"
+                aria-required="true"
+                //   className={`${Style.uploadPhoto}`}
+              >
+                <RiImageAddFill style={{ width: "50px", height: "50px" }} />
+              </label>
+              <input
+                style={{ display: "none" }}
+                key="image"
+                id="file-input"
+                type="file"
+                accept="image/*"
+                profile="file"
+                // value={this.state.image}
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
+          </Col>
+        </Row>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={props.handleClose}>
+        <Button
+          variant="light"
+          className={`${Styles.btngrad}`}
+          onClick={props.handleClose}
+        >
           Cancel
         </Button>
-        <Button variant="primary" onClick={() => AddNewPost()}>
+        <Button
+          variant="light"
+          className={`${Styles.btngrad}`}
+          onClick={() => AddNewPost()}
+        >
           Save Changes
         </Button>
       </Modal.Footer>

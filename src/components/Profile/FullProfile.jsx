@@ -17,22 +17,18 @@ export default function FullProfile() {
         <Tab
           eventKey="workexperiences"
           title="Work Experiences"
-          style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}
+          className={`${Styles.tabs}`}
         >
           <WorkExperience />
         </Tab>
         <Tab
           eventKey="education"
           title="Education"
-          style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}
+          className={`${Styles.tabs}`}
         >
           <Education />
         </Tab>
-        <Tab
-          eventKey="skills"
-          title="Skills"
-          style={{ width: "60%", marginLeft: "auto", marginRight: "auto" }}
-        >
+        <Tab eventKey="skills" title="Skills" className={`${Styles.tabs1}`}>
           <Skills />
         </Tab>
       </Tabs>

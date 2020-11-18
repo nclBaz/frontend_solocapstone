@@ -107,7 +107,7 @@ export default function Profile() {
                 sm={12}
                 md={12}
                 lg={12}
-                className={`${Styles.profile}`}
+                className={`${Styles.profile} mt-4`}
               >
                 <div
                   className={`${Styles.header} `}
@@ -174,19 +174,20 @@ export default function Profile() {
               <Col xs={12} sm={12} md={12} lg={12}>
                 <div className={`${Styles.div}`}>
                   <Row>
-                    <Col xs={12} sm={12} md={4} lg={4}>
+                    <Col xs={12} sm={12} md={12} lg={4}>
                       {hideProfile && (
                         <>
                           <div className={`${Style.dataInfo} mt-1`}>
                             <div>
-                              <h5>Personal Info</h5>
+                              <h5 className="mt-4">Personal Info</h5>
                               {hideIcon && (
                                 <AiOutlineEdit
                                   onClick={hideData}
                                   className="mt-1"
                                   style={{
                                     marginLeft: "auto",
-                                    fontSize: "20px",
+                                    fontSize: "25px",
+                                    color: "orangered",
                                   }}
                                 />
                               )}
@@ -225,7 +226,7 @@ export default function Profile() {
                                 <h6>No Website</h6>
                               )}
                             </div>
-                            <div>
+                            <div className="mb-2">
                               <GrUserWorker />
 
                               {data.personel ? (
@@ -239,9 +240,9 @@ export default function Profile() {
                       )}
                       {hideEdit && (
                         <>
-                          <div className={`${Style.dataInfo} mt-1`}>
+                          <div className={`${Style.dataInfo}`}>
                             <div>
-                              <h5>Edit Info</h5>
+                              <h5 className="mt-2">Edit Info</h5>
                             </div>
 
                             <div>
@@ -345,7 +346,7 @@ export default function Profile() {
                       )}
                     </Col>
 
-                    <Col xs={12} sm={12} md={8} lg={8}>
+                    <Col xs={12} sm={12} md={12} lg={8}>
                       <div className={`${Style.dataAbout} m-0 p-0`}>
                         <About />
                       </div>

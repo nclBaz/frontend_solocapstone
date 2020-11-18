@@ -121,11 +121,10 @@ class Inside extends Component {
     this.setState({ showModal: !this.state.showModal });
   };
   fetchData = async () => {
-    const aplication = await fetch(url + `aplication/getAllAplication`, {
+    const aplication = await fetch(url + `/aplication/getAllAplication`, {
       method: "GET",
       credentials: "include",
       headers: {
-        "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
       },
     });
@@ -151,26 +150,19 @@ class Inside extends Component {
       this.setState({ hideButton: false });
       this.setState({ showButton: true });
       console.log(" nuk bohe ,nuk kry");
-      // console.log(
-      //   this.props.allAplication.allAplication &&
-      //     this.props.allAplication.allAplication.userID === userId &&
-      //     this.props.allAplication.allAplication.postId &&
-      //     this.props.allAplication.allAplication.postId.map(
-      //       (x) => x.psotId[0]._id === postId
-      //     ),
-      //   "helllo"
-      // );
     }
   };
   aplyForJob = async () => {
-    const aply = await fetch(url + "aplication/aply/" + this.state.filter._id, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    });
+    const aply = await fetch(
+      url + "/aplication/aply/" + this.state.filter._id,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     if (aply.ok) {
       alert("Your Aplication  Was Ok");
       console.log("u kry me sukses");
@@ -207,7 +199,6 @@ class Inside extends Component {
                     style={{
                       display: "flex",
                       justifyContent: "space-around",
-                      // height: "80%",
                     }}
                   >
                     {this.state.myProfile && this.state.myProfile.image ? (
@@ -285,9 +276,6 @@ class Inside extends Component {
                                 <div className="e-card-header-caption">
                                   <div className="e-card-header-title">
                                     <div style={{ display: "flex" }}>
-                                      <HiOfficeBuilding
-                                        className={`${Styles.icons}`}
-                                      />
                                       <h6>{data.companyName}</h6>
                                     </div>
                                   </div>
@@ -296,18 +284,13 @@ class Inside extends Component {
                               <div className="e-card-content ml-2">
                                 <div style={{ display: "flex" }}>
                                   {" "}
-                                  <MdWork className={`${Styles.icons}`} />{" "}
                                   <h5 className="ml-1">{data.jobPosition}</h5>
                                 </div>
 
                                 <div style={{ display: "flex" }}>
-                                  <TiLocation className={`${Styles.icons}`} />{" "}
                                   <p>{data.location}</p>
                                 </div>
                                 <div style={{ display: "flex" }}>
-                                  <MdAttachMoney
-                                    className={`${Styles.icons}`}
-                                  />
                                   <p>{data.salary}</p>
                                 </div>
                               </div>
@@ -348,18 +331,15 @@ class Inside extends Component {
                           <div className="e-card-content ml-2">
                             <div style={{ display: "flex" }}>
                               {" "}
-                              <MdWork className={`${Styles.icons}`} />{" "}
                               <h5 className="ml-1">
                                 {this.state.filter.jobPosition}
                               </h5>
                             </div>
 
                             <div style={{ display: "flex" }}>
-                              <TiLocation className={`${Styles.icons}`} />{" "}
                               <p>{this.state.filter.location}</p>
                             </div>
                             <div style={{ display: "flex" }}>
-                              <MdAttachMoney className={`${Styles.icons}`} />
                               <p>{this.state.filter.salary}</p>
                             </div>
                           </div>
@@ -454,9 +434,6 @@ class Inside extends Component {
                                         <div className="e-card-header-caption">
                                           <div className="e-card-header-title">
                                             <div style={{ display: "flex" }}>
-                                              <HiOfficeBuilding
-                                                className={`${Styles.icons} mr-1`}
-                                              />
                                               <h6>
                                                 {
                                                   this.state.companie
@@ -470,32 +447,20 @@ class Inside extends Component {
                                       <div className="e-card-content ml-2">
                                         <div style={{ display: "flex" }}>
                                           {" "}
-                                          <CgWebsite
-                                            className={`${Styles.icons} mr-1`}
-                                          />{" "}
                                           <h6 className="ml-1">
                                             {this.state.companie.website}
                                           </h6>
                                         </div>
 
                                         <div style={{ display: "flex" }}>
-                                          <TiLocation
-                                            className={`${Styles.icons} mr-1`}
-                                          />{" "}
                                           <h6>
                                             {this.state.companie.location}
                                           </h6>
                                         </div>
                                         <div style={{ display: "flex" }}>
-                                          <AiOutlineMail
-                                            className={`${Styles.icons} mr-1`}
-                                          />{" "}
                                           <h6>{this.state.companie.email}</h6>
                                         </div>
                                         <div style={{ display: "flex" }}>
-                                          <GrUserWorker
-                                            className={`${Styles.icons} mr-1`}
-                                          />
                                           <h6>
                                             {this.state.companie.personel}-Hired
                                           </h6>
