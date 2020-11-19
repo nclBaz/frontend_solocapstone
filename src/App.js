@@ -18,43 +18,43 @@ function App() {
   const [userNavBar, setuserNavBar] = useState(false)
   const [landingPageNavBar, setlandingPageNavBar] = useState(true)
   const url = process.env.REACT_APP_URL
-  // const userProfile = async () => {
-  //   const result = await fetch(url + "/profile/profile", {
-  //     method: "GET",
-  //     credentials: "include",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //   if (result.ok) {
-  //     setuserNavBar(true)
-  //     setlandingPageNavBar(false)
-  //     console.log("it is coming here")
-  //   } else {
-  //     setuserNavBar(false)
-  //     setlandingPageNavBar(true)
-  //     console.log("it is not coming here")
-  //   }
-  // }
+  const userProfile = async () => {
+    const result = await fetch(url + "/profile/profile", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (result.ok) {
+      setuserNavBar(true)
+      setlandingPageNavBar(false)
+      console.log("it is coming here")
+    } else {
+      setuserNavBar(false)
+      setlandingPageNavBar(true)
+      console.log("it is not coming here")
+    }
+  }
 
-  // const companyProfile = async () => {
-  //   const result = await fetch(url + "/login/profile", {
-  //     method: "GET",
-  //     credentials: "include",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //   if (result.ok) {
-  //     setcompanyNavBar(true)
-  //     setlandingPageNavBar(false)
-  //     console.log("it is coming here")
-  //   } else {
-  //     setcompanyNavBar(false)
-  //     setlandingPageNavBar(true)
-  //     console.log("it is not coming here")
-  //   }
-  // }
+  const companyProfile = async () => {
+    const result = await fetch(url + "/login/profile", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (result.ok) {
+      setcompanyNavBar(true)
+      setlandingPageNavBar(false)
+      console.log("it is coming here")
+    } else {
+      setcompanyNavBar(false)
+      setlandingPageNavBar(true)
+      console.log("it is not coming here")
+    }
+  }
 
   const logOut = () => {
     setcompanyNavBar(false)
@@ -67,12 +67,12 @@ function App() {
     setcompanyNavBar(true)
   }
 
-  // useEffect(() => {
-  //   companyProfile();
-  // }, []);
-  // useEffect(() => {
-  //   userProfile();
-  // }, []);
+  useEffect(() => {
+    companyProfile()
+  }, [])
+  useEffect(() => {
+    userProfile()
+  }, [])
 
   return (
     <div>
@@ -81,15 +81,15 @@ function App() {
           companyNavBar={companyNavBar}
           userNavBar={userNavBar}
           landingPageNavBar={landingPageNavBar}
-          // UserProfile={userProfile}
-          // CompanyProfile={companyProfile}
+          UserProfile={userProfile}
+          CompanyProfile={companyProfile}
           logOut={logOut}
         />
         <Switch>
           <Route path="/" exact>
             <Login
-              // UserProfile={userProfile}
-              // CompanyProfile={companyProfile}
+              UserProfile={userProfile}
+              CompanyProfile={companyProfile}
               logInWorker={logInWorker}
               loginCompany={loginCompany}
             />
